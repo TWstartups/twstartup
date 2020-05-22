@@ -21,7 +21,7 @@ $ ./scripts/setup.sh
 ```
 $ cd client
 $ npm run dev
-<!-- go to http://localhost:8080/ -->
+<!-- go to http://localhost:3000/ -->
 ```
 
 ```
