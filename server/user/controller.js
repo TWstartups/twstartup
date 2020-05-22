@@ -14,9 +14,6 @@ export default {
     if (!userData.email || !userData.password) {
       return res.status(400).json({ message: "All fileds are required" });
     }
-
-    
-
     //check for existing user account
     try {
       const foundUser = await User.findOne({ email: userData.email });
@@ -67,29 +64,25 @@ export default {
       if (!foundUser) {
         return res.status(400).json({status: 400,errors: [{ message: "Username or password is incorrect" }],});
       }
-      bcrypt.compare(req.body.password, foundUser.password, async(err, isMatch) => {
-        if (err)
+      const isMatch = bcrypt.compare(req.body.password, foundUser.password);
+      if (isMatch) {
+        try {
+          const token = await JWT.generateToken(foundUser);
+          return res.status(200).json({ token, userId: foundUser._id });
+        }catch {
           return res.status(500).json({
-            status: 500,
-            errors: [{ message: "Something went wrong. Please try again" }],
-          });
-        if (isMatch) {
-          try {
-            const token = await jwt.sign({ foo: foundUser._id },`${process.env.JWT_SECRET}`,{ expiresIn: "10h" });
-            return res.status(200).json({ token, userId: foundUser._id });
-          }catch {
-            return res.status(500).json({
-              status: 503,
-              errors: [{ message: "access forbidden" }],
-            });
-          }
-        } else {
-          return res.json({
-            status: 400,
-            errors: [{ message: "Username or password is incorrect" }],
+            status: 503,
+            errors: [{ message: "access forbidden" }],
           });
         }
-      });
+      } else {
+        return res.json({
+          status: 400,
+          errors: [{ message: "Username or password is incorrect" }],
+        });
+      }
+      
+    
     }catch {
       return res.status(500).json({status: 500,errors: [{ message: "Something went wrong. Please try again" }],});
     }
