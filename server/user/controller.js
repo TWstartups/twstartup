@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
 import User from './model';
-import jwt from 'jsonwebtoken';
 require("dotenv").config();
 import JWT from './jwt';
 
@@ -22,7 +21,7 @@ export default {
         return res
           .status(400)
           .json({
-            message: "Email is already been registered, please try again",
+            message: "Email has already been registered, please try again.",
           });
       }
     } catch {
@@ -48,10 +47,14 @@ export default {
     try {
     
       const token = await JWT.generateToken(createdUser);
-    
-      res.status(200).json({ token, user: createdUser.email });
-    }catch {
-      return res.status(200).json({ error: err });
+      const {_id,email} = createdUser;
+      const userToSend = {
+        _id,
+        email
+      }
+      res.status(200).json({ token, user: userToSend });
+    }catch(err) {
+      return res.status(400).json({ message: 'Somthing went wrong, try again later.' });
     }
       
   },
@@ -59,39 +62,51 @@ export default {
     const userData = req.body.formValues;
     console.log(userData);
     if (!userData.email || !userData.password) {
-      return res.status(400).json({
-        status: 400,
-        errors: [{ message: "Please enter your email and password" }],
-      });
+      return res.status(400).json({ message: "Please enter your email and password"});
     }
     try {
       const foundUser = await User.findOne({ email: userData.email });
       if (!foundUser) {
-        return res.status(400).json({status: 400,errors: [{ message: "Username or password is incorrect" }],});
+        return res.status(400).json({ message: "Username or password is incorrect" });
       }
-      const isMatch = bcrypt.compare(userData.password, foundUser.password);
+      const isMatch = await bcrypt.compare(userData.password, foundUser.password);
+      console.log('0',isMatch);
       if (isMatch) {
+        console.log('1',isMatch);
         try {
           const token = await JWT.generateToken(foundUser);
-          return res.status(200).json({ token, user: foundUser.email });
+          const { _id, email } = foundUser;
+          const userToSend = {
+            _id,
+            email
+          }
+          return res.status(200).json({ token, user: userToSend });
         }catch {
-          return res.status(500).json({
-            status: 503,
-            errors: [{ message: "access forbidden" }],
-          });
+          return res.status(500).json({ message: "access forbidden" });
         }
       } else {
-        return res.json({
-          status: 400,
-          errors: [{ message: "Username or password is incorrect" }],
-        });
+        console.log('2',isMatch);
+        return res.status(400).json({message: "Username or password is incorrect"});
       }
-      
-    
-    }catch {
-      return res.status(500).json({status: 500,errors: [{ message: "Something went wrong. Please try again" }],});
+    }catch(err) {
+      return res.status(500).json({message: "Something went wrong. Please try again" });
     }
-      
-    
   },
+  profile: async (req, res) => {
+    try {
+      const token = req.params.jwt;
+      const decoded = await JWT.verifyToken(token);
+      const foundUser = await User.findById(decoded.foo)
+      const {_id,email} = foundUser;
+      const userToSend = {
+        _id,
+        email
+      }
+      console.log(token);
+      res.status(200).json({message: 'success', user:userToSend})
+    } catch(err) {
+      console.log(err)
+      res.status(500).json({message:err})
+    }
+  }
 };
