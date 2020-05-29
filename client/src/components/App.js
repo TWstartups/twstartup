@@ -3,53 +3,40 @@ import Signup from "./Signup";
 import Login from "./Login";
 import DashBoard from "./DashBoard";
 import CompanyList from "./CompanyList";
-import { logOut } from "../actions";
-import { Switch, Route, Link } from "react-router-dom";
+import Nav from './Nav';
+import { fetchUser } from "../actions";
+import { Switch, Route} from "react-router-dom";
 import { connect } from "react-redux";
 class App extends React.Component {
   //fetch current user from local storage jwt
   //if jwt -> fetch user
   componentDidMount() {
-    if (localStorage.getItem('token')) {
-      
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.props.fetchUser(token);
     }
   }
-
-  handleLogOut = () => {
-    this.props.logOut();
-  };
   render() {
-    console.log('props in app',this.props)
+    console.log('props in app',this.props.email)
     return (
       <>
-        <h2>Welcome {this.props.user.user}</h2>
+      <Nav/>
+        <h2>Welcome {this.props.email}</h2>
         <Switch>
           <Route exact path="/" component={CompanyList} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/dashboard" component={DashBoard} />
         </Switch>
-        
-        <Link className="ui button primary" to="/signup">
-          Sign Up
-        </Link>
-        <Link className="ui button primary" to="/login">
-          Log in
-        </Link>
-        <div className="ui button secondary" onClick={this.handleLogOut}>
-          Log out
-        </div>
-        <Link to="/dashboard" className="ui button secondary">
-          DashBoard
-        </Link>
       </>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state)
-  return {user: state.user}
+const mapStateToProps = ({user}) => {
+
+  
+  return {email:user.email}
 }
 
-export default connect(mapStateToProps, { logOut })(App);
+export default connect(mapStateToProps, { fetchUser })(App);
