@@ -22,11 +22,20 @@ mongoose.connect(config.mongoose.uri, {
   .catch((err) => console.log(`MongoDB connection error: ${err}`))
 
 
-  const coresOptions = {
-    origin: ['http://localhost:3000','https://twstartups.github.io/'],
-    credentials: true,
-    optionsSuccessStatus: 200
+
+const originList = ['http://localhost:3000','https://twstartups.github.io/']
+const coresOptions = {
+  origin: function(origin, callback) {
+      if (originList.indexOf(origin) !== -1) {
+          callback(null, true)
+      } else {
+          callback(new Error('Not allow by cors'))
+      }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200
 }
+
 
 app.use(morgan('dev'));
 app.use(cors(coresOptions));
