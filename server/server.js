@@ -23,7 +23,7 @@ mongoose.connect(config.mongoose.uri, {
 
 
 
-const originList = ['http://localhost:3000','https://twstartups.github.io/']
+const originList = ['http://localhost:3000','https://twstartups.github.io']
 const coresOptions = {
   origin: function(origin, callback) {
       if (originList.indexOf(origin) !== -1) {
