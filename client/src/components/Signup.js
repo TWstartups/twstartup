@@ -1,74 +1,99 @@
 import React from "react";
-import GoogleAuth from './GoogleAuth';
-import { connect } from 'react-redux';
-import { signUp } from '../actions';
-
+import GoogleAuth from "./GoogleAuth";
+import { connect } from "react-redux";
+import { signUp, errMsgReset } from "../actions";
+import { Field, reduxForm } from "redux-form";
 
 class Signup extends React.Component {
+  componentWillUnmount() {
 
-  state = {
-    email:null,
-    password:null,
+    this.props.errMsgReset();
   }
-
+  onSubmit = (formValues) => {
  
+    this.props.signUp(formValues);
+  };
 
-  onInputChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-  
-  onSubmit = (e) => {
-    e.preventDefault();
-    
-    this.props.signUp(this.state)
-    
+  renderError = ({error,touched,active}) => {
+   if (touched && error) {
+     if (!active && error.confirmPassword) {
+      return (
+        <div className="ui error message">
+          <div className="header">{error}</div>
+        </div>
+      )
+     }
+     return (
+       <div className="ui error message">
+         <div className="header">{error}</div>
+       </div>
+     )
+   }
+  };
+
+  renderServerErr = () => {
+    if (this.props.errMsg) {
+      return (
+        <div className="ui error message">
+          <div className="header">{this.props.errMsg}</div>
+        </div>
+      )
+    }
   }
 
+  renderInput = ({ input, label, placeholder, meta, type }) => {
+    const className = `required field ${meta.error && meta.touched ? 'error': ''}`;
+    
+    return (
+      <div className={className}>
+        <label>{label}</label>
+        <input {...input} placeholder={placeholder} autoComplete='off' type={type} />
+        {this.renderError(meta)}
+      </div>
+    );
+  };
 
   render() {
-    
     return (
       <div className="signup">
         <div className="ui grid container ">
           <div className="three column row">
             <div className="column"></div>
             <div className="column">
-              <form className="ui form" onSubmit={this.onSubmit}>
+              <form
+                className="ui form error"
+                onSubmit={this.props.handleSubmit(this.onSubmit)}
+              >
                 <div className="ui header">Signup</div>
-                <div className="field">
-                  <label>Email</label>
-                  <input type="text" name="email" placeholder="Email" onChange={this.onInputChange} />
-                </div>
-                <div className="field">
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    onChange={this.onInputChange} 
-                  />
-                </div>
-                <div className="field">
-                  <label>Comfirm Password</label>
-                  <input
-                    type="password"
-                    name="confirm password"
-                    placeholder="Comfirm Password"
-                    onChange={this.onInputChange} 
-                  />
-                </div>
-                <div className="field">
-                  <div className="ui checkbox">
-                    <input type="checkbox" tabIndex="0" className="hidden" />
-                    <label>I agree to the Terms and Conditions</label>
-                  </div>
-                </div>
+
+                <Field
+                  name="email"
+                  component={this.renderInput}
+                  label="Email"
+                  placeholder="Email"
+                  type="email"
+                />
+                <Field
+                  name="password"
+                  component={this.renderInput}
+                  label="Password"
+                  placeholder="Password"
+                  type="password"
+                />
+                <Field
+                  name="confirmPassword"
+                  component={this.renderInput}
+                  label="Confirm Password"
+                  placeholder="Confirm Password"
+                  type="password"
+                />
+
                 <button className="ui button" type="submit">
                   Sign up
                 </button>
+                {this.renderServerErr()}
               </form>
+             
             </div>
             <div className="column"></div>
           </div>
@@ -87,8 +112,38 @@ class Signup extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { user: state.user}
-}
+const validate = (formValues) => {
+  const errors = {};
+  if (!formValues.email) {
+    errors.email = "You must enter an email.";
+  }
+  if (!formValues.password) {
+    errors.password = "You must enter an password.";
+  }
+  if (!formValues.confirmPassword) {
+    errors.confirmPassword = "Please confirm the password above.";
+  }
+  if (formValues.password && formValues.confirmPassword) {
+   
+     
+      if (formValues.password !== formValues.confirmPassword) {
+        errors.confirmPassword = "Please make sure your password match."
+      }
+    
+  }
+ 
+  return errors;
+};
 
-export default connect(mapStateToProps,{signUp})(Signup);
+const mapStateToProps = ({ user }) => {
+  return { user, errMsg: user.errMsg };
+};
+
+
+
+const formWrapped =  reduxForm({
+  form: "signUp",
+  validate,
+})(Signup);
+
+export default connect(mapStateToProps,{signUp, errMsgReset})(formWrapped);
