@@ -23,7 +23,7 @@ mongoose.connect(config.mongoose.uri, {
 
 
   const coresOptions = {
-    origin: ['http://localhost:3000','https://amazingshellyyy.com'],
+    origin: ['http://localhost:3000','https://twstartups.github.io/'],
     credentials: true,
     optionsSuccessStatus: 200
 }
