@@ -13,5 +13,5 @@ git push origin master
 
 echo ">>frontend deploy successfully"
 
-echo "|| client-> https://amazingshellyyy.com/covid-notifier"
-echo "|| server-> https://dashboard.heroku.com/apps/covid-notifier/logs"
+echo "|| client-> https://twstartups.github.io/twstartups/#/"
+echo "|| server-> https://dashboard.heroku.com/apps/twstartups/logs"
