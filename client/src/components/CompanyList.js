@@ -2,15 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-const CompanyList = () => {
-  return (
-    <div>
-      <h2>This is CompanyList</h2>
-    </div>
-  );
+class CompanyList extends React.Component {
+  render(){
+    return (
+      <div>
+        <h2>This is CompanyList</h2>
+        <div>{this.props.email? this.props.email: 'no email'}</div>
+      </div>
+    );
+  }
+  
 };
 
-const mapStateToProps = state => {
-  console.log('state in companylist',state)
+const mapStateToProps = ({user}) => {
+  return {email: user.email}
 }
 export default connect(mapStateToProps)(CompanyList);
