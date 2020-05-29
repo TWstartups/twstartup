@@ -11,7 +11,7 @@ export const signUp = formValues => async dispatch => {
       payload: response.data
     })
     //implement programmatic navigation
-    // history.push('/');
+    history.push('/');
   } catch (err) {
     dispatch({
       type: SIGN_UP,
