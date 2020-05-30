@@ -7,6 +7,7 @@ import Nav from './Nav';
 import { fetchUser } from "../actions";
 import { Switch, Route} from "react-router-dom";
 import { connect } from "react-redux";
+import CompanyForm from "./CompanyForm";
 class App extends React.Component {
   //fetch current user from local storage jwt
   //if jwt -> fetch user
@@ -15,6 +16,7 @@ class App extends React.Component {
     if (token) {
       this.props.fetchUser(token);
     }
+    console.log('api url',`${process.env.REACT_APP_API_URL}`)
   }
   render() {
     console.log('props in app',this.props.email)
@@ -27,6 +29,7 @@ class App extends React.Component {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/dashboard" component={DashBoard} />
+          <Route path="/apply" component={CompanyForm} />
         </Switch>
       </>
     );

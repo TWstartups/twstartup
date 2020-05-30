@@ -12,6 +12,22 @@ class Nav extends React.Component {
       return(
         <React.Fragment>
         <div className="item">
+        <Link className="ui button primary" to="/apply">
+          Add a Company
+        </Link>
+      </div>
+      <div className="item">
+        <div className="ui button secondary" onClick={this.handleLogOut}>
+          Log out
+        </div>
+      </div>
+      </React.Fragment>
+      )
+      
+    } else if (this.props.company){
+      return (
+        <React.Fragment>
+        <div className="item">
         <Link className="ui button primary" to="/dashboard">
           Dashboard
         </Link>
@@ -23,8 +39,7 @@ class Nav extends React.Component {
       </div>
       </React.Fragment>
       )
-      
-    } else {
+    }else {
       return (
         <React.Fragment>
         <div className="item">
