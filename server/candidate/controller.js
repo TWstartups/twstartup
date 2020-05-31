@@ -5,13 +5,15 @@ export default {
     console.log(req.body.formValues)
     const data = req.body.formValues;
     try {
-      const foundCandi = await Candidate.find({website: data.website})
+      const foundCandi = await Candidate.findOne({website: data.website})
+      console.log('foundCandi',foundCandi);
       if (foundCandi) {
         res.status(500).json({message: 'This company already exists. Please contact the customer service for more detail.'})
       }
     } catch(err) {
       res.status(500).json({message: 'Something went wrong'})
     }
+    
     try{
       const createdComp = await Candidate.create({...data,approve_status:false});
       res.status(200).json({candidate:createdComp})

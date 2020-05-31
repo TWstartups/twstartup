@@ -11,7 +11,7 @@ router.post('/signup',User.signup)
 router.post('/login', User.login)
 router.get('/user/:jwt', User.profile)
 router.post('/candidate', Candidate.create )
-router.get('/candidate', Candidate.showAll )
+router.get('/candidate/all', Candidate.showAll )
 
 
 export default router;
