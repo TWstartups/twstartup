@@ -6,3 +6,17 @@
 .confirm-text {
   padding:10px 0px 15px 0px;
 }
+
+.admin-dashboard {
+  width:100%;
+  padding: 100px 50px;
+  @media screen and (max-width:580px){
+    overflow:scroll ;
+  }
+}
+
+.admin-dashboard td {
+  max-width: 250px;
+  word-wrap: break-word;
+  
+}
