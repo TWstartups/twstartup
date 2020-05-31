@@ -50,7 +50,8 @@ class CandidateForm extends React.Component {
 
   onSubmit = (formValues) => {
     console.log(formValues);
-    this.props.createCandi(formValues);
+    const bodyToSend = {...formValues,applicant:this.props.user._id }
+    this.props.createCandi(bodyToSend);
   }
 
   
@@ -156,8 +157,8 @@ const formWrapped = reduxForm({
   validate
 })(CandidateForm);
 
-const mapStateToProps = ({ form, candidate }) => {
-  return { formValues: form.candidateForm, errMsg: candidate.errMsg };
+const mapStateToProps = ({ form, candidate, user }) => {
+  return { user,formValues: form.candidateForm, errMsg: candidate.errMsg };
 };
 
 export default connect(mapStateToProps, {createCandi})(formWrapped);
