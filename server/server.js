@@ -25,9 +25,11 @@ mongoose.connect(config.mongoose.uri, {
 
 const originList = ['http://localhost:3000','https://twstartups.github.io']
 const coresOptions = {
-  origin: function(origin, callback) {
+  origin: function(origin, callback) { 
       if (originList.indexOf(origin) !== -1) {
           callback(null, true)
+      } else if(origin === undefined) {
+        callback(null, true)//assume is postman
       } else {
           callback(new Error('Not allow by cors'))
       }
