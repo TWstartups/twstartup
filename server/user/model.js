@@ -24,6 +24,9 @@ const UserSchema = new mongoose.Schema({
   company: {
     type: Schema.Types.ObjectId,
     ref: 'Company'
+  },
+  type: {
+    type:String
   }
 });
 

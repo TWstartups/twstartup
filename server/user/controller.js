@@ -35,11 +35,9 @@ export default {
     const hash = await bcrypt.hash(userData.password, salt);
     
     
-    const { email } = userData;
-    const newUser = {
-      email: email,
-      password:hash
-    };
+  
+    const newUser = {...userData, password:hash};
+    
     
     const createdUser = await User.create(newUser);
     
@@ -47,10 +45,11 @@ export default {
     try {
     
       const token = await JWT.generateToken(createdUser);
-      const {_id,email} = createdUser;
+      const {_id,email,type,} = createdUser;
       const userToSend = {
         _id,
-        email
+        email,
+        type
       }
       res.status(200).json({ token, user: userToSend });
     }catch(err) {
