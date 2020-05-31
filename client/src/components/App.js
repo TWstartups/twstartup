@@ -3,11 +3,12 @@ import Signup from "./Signup";
 import Login from "./Login";
 import DashBoard from "./DashBoard";
 import CompanyList from "./CompanyList";
+import ApplyConfirm from './ApplyConfirm'
 import Nav from './Nav';
 import { fetchUser } from "../actions";
 import { Switch, Route} from "react-router-dom";
 import { connect } from "react-redux";
-import CompanyForm from "./CompanyForm";
+import CandidateForm from "./CandidateForm";
 class App extends React.Component {
   //fetch current user from local storage jwt
   //if jwt -> fetch user
@@ -23,13 +24,14 @@ class App extends React.Component {
     return (
       <>
       <Nav/>
-        <h2>Welcome {this.props.email}</h2>
+       
         <Switch>
           <Route exact path="/" component={CompanyList} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/dashboard" component={DashBoard} />
-          <Route path="/apply" component={CompanyForm} />
+          <Route exact path="/apply" component={CandidateForm} />
+          <Route path="/apply/success" component={ApplyConfirm} />
         </Switch>
       </>
     );
