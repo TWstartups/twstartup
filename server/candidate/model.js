@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const CandidateSchema = mongoose.Schema({
   company_name_en: {
@@ -25,6 +26,10 @@ const CandidateSchema = mongoose.Schema({
   },
   approve_status:{
     type: String
+  },
+  applicant:{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
 

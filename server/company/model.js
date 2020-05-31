@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const CompanySchema = mongoose.Schema({
   company_name_en: {
