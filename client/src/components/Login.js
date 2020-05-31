@@ -1,5 +1,4 @@
 import React from "react";
-import GoogleAuth from "./GoogleAuth";
 import { connect } from "react-redux";
 import { logIn, errMsgReset } from "../actions";
 import { Field, reduxForm } from "redux-form";
@@ -64,7 +63,7 @@ class Login extends React.Component {
                 className="ui form error"
                 onSubmit={this.props.handleSubmit(this.onSubmit)}
               >
-                <div className="ui header">Log in</div>
+                <div className="ui huge header">Log in</div>
                 <Field
                   name="email"
                   component={this.renderInput}

@@ -1,34 +1,34 @@
 import React from "react";
-import GoogleAuth from "./GoogleAuth";
 import { connect } from "react-redux";
 import { signUp, errMsgReset } from "../actions";
 import { Field, reduxForm } from "redux-form";
 
 class Signup extends React.Component {
   componentWillUnmount() {
-
     this.props.errMsgReset();
   }
   onSubmit = (formValues) => {
- 
+    console.log(formValues);
+    const toSend = { ...formValues, type: "normal" };
+    console.log(toSend);
     this.props.signUp(formValues);
   };
 
-  renderError = ({error,touched,active}) => {
-   if (touched && error) {
-     if (!active && error.confirmPassword) {
+  renderError = ({ error, touched, active }) => {
+    if (touched && error) {
+      if (!active && error.confirmPassword) {
+        return (
+          <div className="ui error message">
+            <div className="header">{error}</div>
+          </div>
+        );
+      }
       return (
         <div className="ui error message">
           <div className="header">{error}</div>
         </div>
-      )
-     }
-     return (
-       <div className="ui error message">
-         <div className="header">{error}</div>
-       </div>
-     )
-   }
+      );
+    }
   };
 
   renderServerErr = () => {
@@ -37,22 +37,117 @@ class Signup extends React.Component {
         <div className="ui error message">
           <div className="header">{this.props.errMsg}</div>
         </div>
-      )
+      );
     }
-  }
+  };
 
-  renderInput = ({ input, label, placeholder, meta, type }) => {
-    const className = `required field ${meta.error && meta.touched ? 'error': ''}`;
+  renderInput = ({tag, input, label, placeholder, meta, type }) => {
+    let className = `required field`;
+    if (meta.error && meta.touched) {
+      className = `field error`
+    }
     
+    if (tag === "refer") {
+      className = `field`;
+    }
+    console.log(className)
     return (
       <div className={className}>
         <label>{label}</label>
-        <input {...input} placeholder={placeholder} autoComplete='off' type={type} />
+        <input
+          {...input}
+          placeholder={placeholder}
+          autoComplete="off"
+          type={type}
+        />
         {this.renderError(meta)}
       </div>
     );
   };
-
+  renderOptions = () => {
+    if (this.props.formValues && this.props.formValues.values) {
+      const referType = this.props.formValues.values.referral;
+      if (referType === "social_media") {
+        return (
+          <React.Fragment>
+            <label>
+              <Field
+                name="referral_notes"
+                component="input"
+                type="radio"
+                value="Facebook"
+                tag="refer"
+              />{" "}
+              Facebook
+            </label>
+            <label>
+              <Field
+                name="referral_notes"
+                component="input"
+                type="radio"
+                value="LinkedIn"
+                tag="refer"
+              />{" "}
+              LinkedIn
+            </label>
+            <label>
+              <Field
+                name="referral_notes"
+                component="input"
+                type="radio"
+                value="Other"
+                tag="refer"
+              />{" "}
+              Other
+            </label>
+          </React.Fragment>
+        );
+      } else if (referType === "accelerator") {
+        return (
+          <React.Fragment>
+            <Field
+              name="referral_notes"
+              component={this.renderInput}
+              type="text"
+              label="please put the name of the accelerator"
+              tag="refer"
+            />
+          </React.Fragment>
+        );
+      } else if (referType === "VC") {
+        return (
+          <React.Fragment>
+            <Field
+              name="referral_notes"
+              component={this.renderInput}
+              type="text"
+              tag="refer"
+              label="please put the name of the VC"
+            />
+          </React.Fragment>
+        );
+      } else if (referType === "friend") {
+        return (
+          <React.Fragment>
+            <Field
+              name="referral_notes"
+              component={this.renderInput}
+              type="text"
+              label="please put the name"
+              tag="refer"
+            />
+          </React.Fragment>
+        );
+      } else {
+        return (
+          <React.Fragment>
+            <Field name="referral_notes" component="textarea" tag="refer" />
+            
+          </React.Fragment>
+        );
+      }
+    }
+  };
   render() {
     return (
       <div className="signup">
@@ -64,7 +159,7 @@ class Signup extends React.Component {
                 className="ui form error"
                 onSubmit={this.props.handleSubmit(this.onSubmit)}
               >
-                <div className="ui header">Signup</div>
+                <div className="ui huge header">Signup</div>
 
                 <Field
                   name="email"
@@ -87,13 +182,21 @@ class Signup extends React.Component {
                   placeholder="Confirm Password"
                   type="password"
                 />
-
+                <div className="ui small header">Referrals (optional)</div>
+                <Field name="referral" component="select">
+                  <option />
+                  <option value="social_media">Social Media</option>
+                  <option value="accelerator">Accelerator</option>
+                  <option value="VC">VC</option>
+                  <option value="friend">Friend</option>
+                  <option value="other">Other</option>
+                </Field>
+                {this.renderOptions()}
                 <button className="ui button" type="submit">
                   Sign up
                 </button>
                 {this.renderServerErr()}
               </form>
-             
             </div>
             <div className="column"></div>
           </div>
@@ -124,26 +227,21 @@ const validate = (formValues) => {
     errors.confirmPassword = "Please confirm the password above.";
   }
   if (formValues.password && formValues.confirmPassword) {
-   
-     
-      if (formValues.password !== formValues.confirmPassword) {
-        errors.confirmPassword = "Please make sure your password match."
-      }
-    
+    if (formValues.password !== formValues.confirmPassword) {
+      errors.confirmPassword = "Please make sure your password match.";
+    }
   }
- 
+
   return errors;
 };
 
-const mapStateToProps = ({ user }) => {
-  return { user, errMsg: user.errMsg };
+const mapStateToProps = ({ user, form }) => {
+  return { user, errMsg: user.errMsg, formValues: form.signUp };
 };
 
-
-
-const formWrapped =  reduxForm({
+const formWrapped = reduxForm({
   form: "signUp",
   validate,
 })(Signup);
 
-export default connect(mapStateToProps,{signUp, errMsgReset})(formWrapped);
+export default connect(mapStateToProps, { signUp, errMsgReset })(formWrapped);

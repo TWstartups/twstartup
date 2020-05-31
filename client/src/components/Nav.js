@@ -61,7 +61,7 @@ class Nav extends React.Component {
     return (
       <div className="ui menu">
       <Link to='/'>
-        <img src={require("../assets/images/logo.svg")} style={{}}></img>
+        <img alt="twstartups logo" src={require("../assets/images/logo.svg")} style={{}}></img>
         </Link>
         <div className="right menu">
           {this.renderNav()}
