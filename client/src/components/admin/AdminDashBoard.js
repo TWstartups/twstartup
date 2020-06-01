@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCandis } from '../../actions';
+import { Link } from 'react-router-dom';
 
 
 class AdminDashBoard extends React.Component {
@@ -16,9 +17,9 @@ class AdminDashBoard extends React.Component {
         <tr>
       <td>{candidate.company_name_en}</td>
       <td>{candidate.company_name_chi}</td>
-      <td><a target="_blank" href={candidate.website} style={{cursor:'pointer'}}>{candidate.website}</a></td>
-      <td><a target="_blank" href={candidate.news} style={{cursor:'pointer'}}>{candidate.news}</a></td>
-      <td><a target="_blank" href={candidate.other} style={{cursor:'pointer'}}>{candidate.other}</a></td>
+      <td><a target="_blank" rel="noopener noreferrer" href={candidate.website} style={{cursor:'pointer'}}>{candidate.website}</a></td>
+      <td><a target="_blank" rel="noopener noreferrer" href={candidate.news} style={{cursor:'pointer'}}>{candidate.news}</a></td>
+      <td><a target="_blank" rel="noopener noreferrer" href={candidate.other} style={{cursor:'pointer'}}>{candidate.other}</a></td>
       <td>{candidate.applicant_email}</td>
       {candidate.approve_status ? <td><div class="ui small button">
       Approve
@@ -32,7 +33,7 @@ class AdminDashBoard extends React.Component {
   renderCandidates = () => {
     console.log(this.props.candidates)
     return (
-      <table class="ui collapsing unstackable table">
+      <table className="ui collapsing unstackable table">
   <thead>
     <tr>
       <th>Company Name</th>
@@ -51,13 +52,29 @@ class AdminDashBoard extends React.Component {
     )
     
   }
+
+  renderReturnBtn = () => {
+    return (
+      <React.Fragment>
+      <div className="ui container">
+      <div className="ui medium header">This page required admin access. Please log in as admin or go back to home page.
+      </div>
+      <Link to='/' className="ui button primary">Back to home</Link>
+      </div>
+
+      </React.Fragment>
+    )
+  }
   render(){
     return (
       <div className="admin-dashboard">
+      {this.props.errMsg ? this.renderReturnBtn():
+     
       <div className="ui">
       {this.renderCandidates()}
       </div>
-      </div>
+      }</div>
+      
      
     )
   }
@@ -65,7 +82,7 @@ class AdminDashBoard extends React.Component {
 
 const mapStateToProps = ({ candidate }) => {
   
-  return {candidates: candidate.candidates};
+  return {candidates: candidate.candidates, errMsg: candidate.errMsg};
 }
 
 

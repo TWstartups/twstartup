@@ -31,7 +31,7 @@ class CandidateForm extends React.Component {
     if (meta.error && meta.touched) {
       className = `required field error`
     }
-    if (label == "Other support meterial") {
+    if (label === "Other support meterial") {
       className = "field"
     }
     return (
