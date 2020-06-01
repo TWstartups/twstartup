@@ -11,7 +11,7 @@ class Signup extends React.Component {
     console.log(formValues);
     const toSend = { ...formValues, type: "normal" };
     console.log(toSend);
-    this.props.signUp(formValues);
+    this.props.signUp(toSend);
   };
 
   renderError = ({ error, touched, active }) => {
@@ -138,10 +138,10 @@ class Signup extends React.Component {
             />
           </React.Fragment>
         );
-      } else {
+      } else if (referType === "other"){
         return (
           <React.Fragment>
-            <Field name="referral_notes" component="textarea" tag="refer" />
+            <Field name="referral_notes" component="textarea" tag="refer" label="Please specific the information."/>
             
           </React.Fragment>
         );

@@ -82,17 +82,20 @@ export const createCandi = formValues => async dispatch => {
 
 export const fetchCandis = () => async dispatch => {
   try {
-    const response = await candidate.get('/all');
+    const token = localStorage.getItem('token');
+    const response = await candidate.get(`/all/${token}`);
     console.log(response);
     dispatch({
       type: FETCH_CANDIS,
       payload: response.data
     })
   } catch (err) {
+    
     dispatch({
       type: FETCH_CANDIS,
       payload: {err:err.response.data.message}
     })
+    
   }
 }
 

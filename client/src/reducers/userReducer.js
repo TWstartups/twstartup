@@ -3,6 +3,7 @@ import { SIGN_UP, LOG_IN, LOG_OUT, FETCH_USER, ERR_MSG_RESET } from "../actions/
 const INITIAL_STATE = {
   email: null,
   _id: null,
+  type: null,
   errMsg:null
 };
 
