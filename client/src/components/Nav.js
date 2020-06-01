@@ -8,12 +8,27 @@ class Nav extends React.Component {
     this.props.logOut();
   };
   renderNav = () => {
-    if (this.props.email) {
+    if (this.props.user.company) {
       return(
         <React.Fragment>
         <div className="item">
-        <Link className="ui button primary" to="/apply">
-          Add a Company
+        <Link className="ui button primary" to="/dashboard">
+          Dashboard
+        </Link>
+      </div>
+      <div className="item">
+        <div className="ui button secondary" onClick={this.handleLogOut}>
+          Log out
+        </div>
+      </div>
+      </React.Fragment>
+      )
+    } else if (this.props.user.candidate || this.props.candidate.candidate) {
+      return(
+        <React.Fragment>
+        <div className="item">
+        <Link className="ui button primary" to="/application">
+          See my application
         </Link>
       </div>
       <div className="item">
@@ -24,12 +39,12 @@ class Nav extends React.Component {
       </React.Fragment>
       )
       
-    } else if (this.props.company){
+    } else if (this.props.user._id && !this.props.user.candidate){
       return (
         <React.Fragment>
         <div className="item">
-        <Link className="ui button primary" to="/dashboard">
-          Dashboard
+        <Link className="ui button primary" to="/apply">
+          Add a Company
         </Link>
       </div>
       <div className="item">
@@ -71,9 +86,9 @@ class Nav extends React.Component {
   }
 }
 
-const mapStateToProp = ({user}) =>{
+const mapStateToProp = ({user, candidate}) =>{
   
-  return {email: user.email};
+  return {user, candidate};
 }
 
 export default connect(mapStateToProp,{logOut})(Nav);
