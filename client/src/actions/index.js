@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDIS } from './types';
+import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS } from './types';
 import user from '../apis/user';
 import candidate from '../apis/candidate'
 import history from '../history';
@@ -77,6 +77,24 @@ export const createCandi = formValues => async dispatch => {
       type: CREATE_CANDI,
       payload: {err:err.response.data.message}
     })
+  }
+}
+
+export const fetchCandi = (candidateId) => async dispatch => {
+  const token = localStorage.getItem('token');
+  try {
+    const response = await candidate.get(`/${candidateId}/${token}`);
+    dispatch({
+      type: FETCH_CANDI,
+      payload: response.data
+    })
+    
+  } catch(err) {
+    dispatch({
+      type: FETCH_CANDI,
+      payload: {err:err.response.data.message}
+    })
+
   }
 }
 
