@@ -5,6 +5,7 @@ import DashBoard from "./DashBoard";
 import CompanyList from "./CompanyList";
 import ApplyConfirm from './ApplyConfirm';
 import AdminDashBoard from './admin/AdminDashBoard';
+import ShowApplication from './ShowApplication';
 import Nav from './Nav';
 import { fetchUser } from "../actions";
 import { Switch, Route} from "react-router-dom";
@@ -34,6 +35,7 @@ class App extends React.Component {
           <Route exact path="/admin/dashboard" component={AdminDashBoard}/>      
           <Route exact path="/apply" component={CandidateForm} />
           <Route path="/apply/success" component={ApplyConfirm} />
+          <Route path="/application" component={ShowApplication}/>
         </Switch>
       </>
     );
