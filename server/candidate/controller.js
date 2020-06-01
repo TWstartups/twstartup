@@ -1,4 +1,6 @@
 import Candidate from './model';
+import JWT from '../user/jwt';
+import User from '../user/model'
 
 export default {
   create: async (req, res) => {
@@ -22,6 +24,12 @@ export default {
     }
   },
   showAll: async (req, res) => {
+    const token = req.params.jwt;
+    const decoded = await JWT.verifyToken(token);
+    const foundUser = await User.findById(decoded.foo);
+    if (foundUser.type === 'normal') {
+     res.status(500).json({message:'You are not an admin'})
+    }
     
     try {
       const allCandidate= await Candidate.find({approve_status:false})
