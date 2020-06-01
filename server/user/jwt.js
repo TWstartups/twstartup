@@ -9,7 +9,7 @@ const JWT = {
   },
   verifyToken: async(token) => {
     const decoded = jwt.verify(token,`${config.jwt_secret}`);
-    return decoded
+    return decoded.foo
   }
 }
 

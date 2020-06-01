@@ -27,6 +27,10 @@ const UserSchema = new mongoose.Schema({
   },
   type: {
     type:String
+  },
+  candidate: {
+    type: Schema.Types.ObjectId,
+    ref: 'Candidate'
   }
 });
 

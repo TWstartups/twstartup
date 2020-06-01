@@ -76,11 +76,12 @@ export default {
           console.log('in here',foundUser)
           const token = await JWT.generateToken(foundUser);
           console.log('tokennnn',token);
-          const { _id, email,type } = foundUser;
+          const { _id, email,type,candidate } = foundUser;
           const userToSend = {
             _id,
             email,
-            type
+            type,
+            candidate
           }
           console.log(userToSend);
           return res.status(200).json({ token, user: userToSend });
@@ -98,14 +99,16 @@ export default {
   profile: async (req, res) => {
     try {
       const token = req.params.jwt;
-      const decoded = await JWT.verifyToken(token);
-      const foundUser = await User.findById(decoded.foo)
-      const {_id,email} = foundUser;
+      const user_id = await JWT.verifyToken(token);
+      const foundUser = await User.findById(user_id)
+      const {_id,email, type, candidate} = foundUser;
       const userToSend = {
         _id,
-        email
+        email,
+        type,
+        candidate
       }
-      console.log(token);
+      
       res.status(200).json({message: 'success', user:userToSend})
     } catch(err) {
       console.log(err)
