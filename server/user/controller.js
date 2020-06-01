@@ -73,13 +73,16 @@ export default {
       if (isMatch) {
         console.log('1',isMatch);
         try {
+          console.log('in here',foundUser)
           const token = await JWT.generateToken(foundUser);
-          const { _id, email } = foundUser;
+          console.log('tokennnn',token);
+          const { _id, email,type } = foundUser;
           const userToSend = {
             _id,
             email,
             type
           }
+          console.log(userToSend);
           return res.status(200).json({ token, user: userToSend });
         }catch {
           return res.status(500).json({ message: "access forbidden" });
