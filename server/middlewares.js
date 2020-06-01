@@ -4,8 +4,8 @@ import JWT from './user/jwt'
 export default {
   adminRequired: async (req, res, next) => {
     const token = req.params.jwt;
-    const decoded = await JWT.verifyToken(token);
-    const foundUser = await User.findById(decoded.foo);
+    const user_id = await JWT.verifyToken(token);
+    const foundUser = await User.findById(user_id);
     if (foundUser.type === 'super') {
       next();
     } else {
