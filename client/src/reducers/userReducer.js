@@ -4,7 +4,8 @@ const INITIAL_STATE = {
   email: null,
   _id: null,
   type: null,
-  errMsg:null
+  errMsg:null,
+  candidate: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -29,6 +30,7 @@ export default (state = INITIAL_STATE, action) => {
     case ERR_MSG_RESET:
       return {...state, errMsg:null}
     case FETCH_USER:
+      console.log(action.payload.user)
       return { ...state, ...action.payload.user };
     default:
       return state;
