@@ -35,9 +35,9 @@ export default {
     const hash = await bcrypt.hash(userData.password, salt);
     
     
-  
-    const newUser = {...userData, password:hash};
     
+    const newUser = {...userData, password:hash};
+    console.log('newUser',newUser);
     
     const createdUser = await User.create(newUser);
     
@@ -77,7 +77,8 @@ export default {
           const { _id, email } = foundUser;
           const userToSend = {
             _id,
-            email
+            email,
+            type
           }
           return res.status(200).json({ token, user: userToSend });
         }catch {
