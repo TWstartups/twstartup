@@ -27,17 +27,21 @@ export default {
   },
   show: async ( req,res ) => {
     console.log('hii there')
-    const token = req.params.jwt;
-    const CandiId = req.params.Cid;
-    const user_id = await JWT.verifyToken(token);
-    console.log(user_id);
+    
+    const CandiId = req.params.cId;
+    
+    console.log(CandiId)
+    
     try {
-      const foundCandi = await Candidate.find({_id:CandiId, applicant: user_id});
+      const foundCandi = await Candidate.findById(CandiId)
       console.log(foundCandi);
       if (!foundCandi) {
-        res.status(500).json({message: 'There is no applucation under this user.'})
+        res.status(500).json({message: 'There is no application under this user.'})
       }
+      
+      console.log('yesss')
       res.status(200).json({candidate:foundCandi})
+
     } catch {
       res.status(500).json({message:'Something went wrong.'})
     }
@@ -57,5 +61,21 @@ export default {
     } catch(err) {
       res.status(500).json({message:"something went wrong"})
     }
+  },
+  edit: async (req, res) => {
+    console.log('in edit candidtate')
+    const token = req.params.jwt;
+    const user_id = await JWT.verifyToken(token);
+    const candi_id = req.params.cId;
+    res.status(200);
+  },
+  show:async(req, res) => {
+    res.status(200);
+  },
+  showAll: async(req, res) => {
+    res.status(200);
+  },
+  approve: async (req,res) => {
+    res.status(200);
   }
 }
