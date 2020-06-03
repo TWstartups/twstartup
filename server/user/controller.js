@@ -98,10 +98,9 @@ export default {
   },
   profile: async (req, res) => {
     try {
-      const token = req.params.jwt;
-      const user_id = await JWT.verifyToken(token);
-      const foundUser = await User.findById(user_id)
-      const {_id,email, type, candidate} = foundUser;
+      // console.log(req)
+      
+      const {_id,email, type, candidate} = req.user;
       const userToSend = {
         _id,
         email,

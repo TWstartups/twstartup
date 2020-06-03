@@ -30,7 +30,6 @@ export default (state = INITIAL_STATE, action) => {
     case ERR_MSG_RESET:
       return {...state, errMsg:null}
     case FETCH_USER:
-      console.log(action.payload.user)
       return { ...state, ...action.payload.user };
     default:
       return state;
