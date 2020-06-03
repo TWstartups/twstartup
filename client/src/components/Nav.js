@@ -24,10 +24,11 @@ class Nav extends React.Component {
       </React.Fragment>
       )
     } else if (this.props.user.candidate || this.props.candidate.candidate) {
+      const candiId = this.props.user.candidate? this.props.user.candidate : this.props.candidate.candidate._id;
       return(
         <React.Fragment>
         <div className="item">
-        <Link className="ui button primary" to="/application">
+        <Link className="ui button primary" to={`/application/${candiId}`}>
           See my application
         </Link>
       </div>
@@ -43,7 +44,7 @@ class Nav extends React.Component {
       return (
         <React.Fragment>
         <div className="item">
-        <Link className="ui button primary" to="/apply">
+        <Link className="ui button primary" to={`/apply/${this.props.user._id}`}>
           Add a Company
         </Link>
       </div>

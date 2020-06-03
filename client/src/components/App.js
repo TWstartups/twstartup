@@ -11,6 +11,7 @@ import { fetchUser } from "../actions";
 import { Switch, Route} from "react-router-dom";
 import { connect } from "react-redux";
 import CandidateForm from "./CandidateForm";
+import CandidateCreate from "./CandidateCreate";
 class App extends React.Component {
   //fetch current user from local storage jwt
   //if jwt -> fetch user
@@ -19,10 +20,10 @@ class App extends React.Component {
     if (token) {
       this.props.fetchUser(token);
     }
-    console.log('api url',`${process.env.REACT_APP_API_URL}`)
+    
   }
   render() {
-    console.log('props in app',this.props.email)
+    
     return (
       <>
       <Nav/>
@@ -33,9 +34,9 @@ class App extends React.Component {
           <Route path="/login" component={Login} />
           <Route path="/dashboard" component={DashBoard} />
           <Route exact path="/admin/dashboard" component={AdminDashBoard}/>      
-          <Route exact path="/apply" component={CandidateForm} />
           <Route path="/apply/success" component={ApplyConfirm} />
-          <Route path="/application" component={ShowApplication}/>
+          <Route exact path="/apply/:id" component={CandidateCreate} />
+          <Route path="/application/:id" component={ShowApplication}/>
         </Switch>
       </>
     );
