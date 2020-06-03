@@ -1,7 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import { createCandi } from '../actions'
+
 
 class CandidateForm extends React.Component {
  
@@ -49,9 +48,8 @@ class CandidateForm extends React.Component {
   };
 
   onSubmit = (formValues) => {
-    console.log(formValues);
-    const bodyToSend = {...formValues,applicant:this.props.user._id }
-    this.props.createCandi(bodyToSend);
+    
+    this.props.onSubmit(formValues);
   }
 
   
@@ -152,13 +150,9 @@ const validate = (formValues) => {
 }
 
 
-const formWrapped = reduxForm({
+
+
+export default reduxForm({
   form: "candidateForm",
   validate
 })(CandidateForm);
-
-const mapStateToProps = ({ form, candidate, user }) => {
-  return { user,formValues: form.candidateForm, errMsg: candidate.errMsg };
-};
-
-export default connect(mapStateToProps, {createCandi})(formWrapped);
