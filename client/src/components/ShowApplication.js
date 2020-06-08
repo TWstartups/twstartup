@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCandi, editCandi } from "../actions";
+import { fetchCandi } from "../actions";
 import CandidateForm from "./CandidateForm";
 import _ from "lodash";
 import history from "../history";
@@ -13,7 +13,7 @@ class ShowApplication extends React.Component {
   onSubmit = (formValues) => {
     console.log(formValues);
 
-    this.props.editCandi(this.props.match.params.id, formValues);
+    
   };
 
   renderStatus = () => {
@@ -76,6 +76,6 @@ const mapStateToProps = ({ user, candidate, form }) => {
   return { candidateId: user.candidate, candidate: candidate.candidate };
 };
 
-export default connect(mapStateToProps, { fetchCandi, editCandi })(
+export default connect(mapStateToProps, { fetchCandi})(
   ShowApplication
 );
