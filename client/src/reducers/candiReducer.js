@@ -1,4 +1,4 @@
-import { CREATE_CANDI, FETCH_CANDIS, FETCH_CANDI } from '../actions/types';
+import { CREATE_CANDI, FETCH_CANDIS, FETCH_CANDI, EDIT_CANDI } from '../actions/types';
 
 const INITIAL_STATE = {
   errMsg: null,
@@ -23,7 +23,7 @@ export default (state = INITIAL_STATE, action) => {
       if (action.payload.err){
         return {...state, errMsg: action.payload.err}
       }
-      console.log('in reducer', action.payload.candidates)
+      
       return {...state, candidates:action.payload.candidates}
     default:
       return state;
