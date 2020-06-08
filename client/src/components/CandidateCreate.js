@@ -20,7 +20,7 @@ class CandidateCreate extends React.Component {
       
         <div className="ui grid container">
           
-            <CandidateForm onSubmit={this.onSubmit}/>
+            <CandidateForm onSubmit={this.onSubmit} header="About your company..."/>
         </div>
     
     );

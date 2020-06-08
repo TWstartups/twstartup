@@ -30,7 +30,7 @@ class CandidateForm extends React.Component {
     if (meta.error && meta.touched) {
       className = `required field error`
     }
-    if (label === "Other support meterial") {
+    if (label === "Additional support items"  || label === "Company Name in Chinese" || label === "News/Media link") {
       className = "field"
     }
     return (
@@ -41,6 +41,7 @@ class CandidateForm extends React.Component {
           plazceholder={placeholder}
           autoComplete="off"
           type={type}
+          className={this.props.classForInput ? this.props.classForInput: ''}
         />
         {this.renderError(meta)}
       </div>
@@ -62,7 +63,7 @@ class CandidateForm extends React.Component {
           <div className="six wide column">
             
             <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-              <div className="ui huge header">About your company...</div>
+              <div className="ui huge header">{this.props.header}</div>
               <div className="ui medium header">Basic Information</div>
               <Field
                 name="company_name_en"
@@ -105,12 +106,13 @@ class CandidateForm extends React.Component {
               <Field
                 name="other"
                 component={this.renderInput}
-                label="Other support meterial"
+                label="Additional support items "
                 placeholder=""
                 type="text"
               />
               
-              <button className="ui button" type="submit">Submit</button>
+              <button className='ui button' type="submit">Submit</button>
+              
               {this.renderServerErr()}
             </form>
           </div>
