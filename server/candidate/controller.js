@@ -58,10 +58,15 @@ export default {
   },
   edit: async (req, res) => {
     console.log('in edit candidtate')
-    const token = req.params.jwt;
-    const user_id = await JWT.verifyToken(token);
-    const candi_id = req.params.cId;
-    res.status(200);
+    const candi_id = req.params.id;
+    const CandiData = req.body.formValues
+    try {
+      const editedCandi = await Candidate.findByIdAndUpdate(candi_id,CandiData )
+      res.status(200).json({candidate: editedCandi})
+    }catch(err) {
+      res.status(500).json({message:"something went wrong"})
+    }
+    
   },
   approve: async (req,res) => {
     res.status(200);
