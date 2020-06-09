@@ -118,9 +118,9 @@ export const fetchCandi = (candidateId) => async dispatch => {
 }
 
 export const fetchCandis = () => async dispatch => {
-  if (!token) {
-    history.push('/login')
-  }
+  // if (!token) {
+  //   history.push('/login')
+  // }
   try {
     console.log('fetchCandis')
     const response = await candidate.get(`/all`);
@@ -130,15 +130,25 @@ export const fetchCandis = () => async dispatch => {
       payload: response.data
     })
   } catch (err) {
-    if (err.response.status === 403) {
-      window.location = '#/login';
-    }
+    // if (err.response.status === 403) {
+    //   window.location = '#/login';
+    // }
     console.log(err.response.data.message)
     dispatch({
       type: FETCH_CANDIS,
       payload: {err:err.response.data.message}
     })
     
+  }
+}
+
+
+export const approveCandi = (candiId) => {
+  try {
+    const response = await candidate.post(`/approve/${candiId}`)
+    
+  }catch(err) {
+
   }
 }
 
