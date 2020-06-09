@@ -7,55 +7,24 @@ class Nav extends React.Component {
   handleLogOut = () => {
     this.props.logOut();
   };
+  renderBtn = (firstTo, firstText) => {
+    return (
+      <React.Fragment>
+        <div className="item">
+        <Link className="ui button primary" to={firstTo}>
+          {firstText}
+        </Link>
+      </div>
+      <div className="item">
+        <div className="ui button secondary" onClick={this.handleLogOut}>
+          Log out
+        </div>
+      </div>
+      </React.Fragment>
+    )
+  }
   renderNav = () => {
-    if (this.props.user.company) {
-      return(
-        <React.Fragment>
-        <div className="item">
-        <Link className="ui button primary" to="/dashboard">
-          Dashboard
-        </Link>
-      </div>
-      <div className="item">
-        <div className="ui button secondary" onClick={this.handleLogOut}>
-          Log out
-        </div>
-      </div>
-      </React.Fragment>
-      )
-    } else if (this.props.user.candidate || this.props.candidate.candidate) {
-      const candiId = this.props.user.candidate? this.props.user.candidate : this.props.candidate.candidate._id;
-      return(
-        <React.Fragment>
-        <div className="item">
-        <Link className="ui button primary" to={`/application/${candiId}`}>
-          See my application
-        </Link>
-      </div>
-      <div className="item">
-        <div className="ui button secondary" onClick={this.handleLogOut}>
-          Log out
-        </div>
-      </div>
-      </React.Fragment>
-      )
-      
-    } else if (this.props.user._id && !this.props.user.candidate){
-      return (
-        <React.Fragment>
-        <div className="item">
-        <Link className="ui button primary" to={`/apply/${this.props.user._id}`}>
-          Add a Company
-        </Link>
-      </div>
-      <div className="item">
-        <div className="ui button secondary" onClick={this.handleLogOut}>
-          Log out
-        </div>
-      </div>
-      </React.Fragment>
-      )
-    }else {
+    if (!this.props.user.isLogIn) {
       return (
         <React.Fragment>
         <div className="item">
@@ -70,8 +39,17 @@ class Nav extends React.Component {
       </div>
       </React.Fragment>
       )
-      
-    }
+    } else if (this.props.user.type === 'normal' && !this.props.user.candidate && !this.props.candidate.candidate._id) {
+      return this.renderBtn(`/apply/${this.props.user._id}`, 'Add a company')
+    } else if (this.props.user.type === 'normal' && !this.props.user.company) {
+      const candiId = this.props.user.candidate? this.props.user.candidate : this.props.candidate.candidate._id;
+      return this.renderBtn(`/application/${candiId}`, 'See your application')
+    } else if (this.props.user.type === 'normal') {
+      return this.renderBtn(`/dashboard`, 'Dashboard')
+    } else  {
+      return this.renderBtn(`/admin/dashboard`, 'Admin Dashboard')
+    } 
+    
   }
   render() {
     return (
