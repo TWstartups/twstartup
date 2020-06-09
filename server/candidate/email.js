@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk';
 import config from '../config';
+import template from './emailTemplate';
 
 
 AWS.config.update({
@@ -10,7 +11,8 @@ AWS.config.update({
 
 
 export default {
-  send: (toEmail, subject, content) => {
+  send: (toEmail, name) => {
+    const html = template.getHTML(name);
     return new AWS.SES({apiVersion: '2010-12-01'}).sendEmail({
       Destination: { /* required */
         ToAddresses: [
@@ -22,23 +24,16 @@ export default {
         Body: { /* required */
           Html: {
            Charset: "UTF-8",
-           Data: `<html>
-           <head>
-             <title></title>
-             <link href="https://svc.webspellchecker.net/spellcheck31/lf/scayt3/ckscayt/css/wsc.css" rel="stylesheet" type="text/css" />
-           </head>
-           <body aria-readonly="false">You are approved!</body>
-           </html>
-           `
+           Data: html
           },
           Text: {
            Charset: "UTF-8",
-           Data: content
+           Data: 'showw text'
           }
          },
          Subject: {
           Charset: 'UTF-8',
-          Data: subject
+          Data: 'You are approved'
          }
         },
       Source: 'twstartups.service@gmail.com', /* required */

@@ -72,11 +72,13 @@ export default {
   approve: async (req,res) => {
     console.log('hii in approve')
     try {
-      await Email.send('amazingshellyyy@gmail.com','testtttt','yayyyy')
+      const foundCandi = await Candidate.findById(req.params.id).populate('applicant');
+      const sendToName = foundCandi.applicant.name;
+      await Email.send('amazingshellyyy@gmail.com',sendToName)
       res.status(200).json({message:'email is sent'});
     } catch(err){
       console.log(err)
-      res.status(500).json({message:'soomething is wrong sending email'})
+      res.status(500).json({message:'something is wrong sending email'})
     }
     
   }
