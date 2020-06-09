@@ -8,8 +8,9 @@ const router = express.Router();
 router.get('/', (req, res)=> res.json({message:"/api/candidate connected"}))
 router.post('/create', Controller.create);
 router.put('/edit/:id', Controller.edit);
-router.post('/appove/:id', Controller.approve);
+router.post('/approve', Controller.approve);
 router.get('/:id', Controller.show);
+
 
 
 

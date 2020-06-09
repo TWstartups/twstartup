@@ -1,43 +1,59 @@
 import AWS from 'aws-sdk';
+import config from '../config';
 
-AWS.config.update({region: 'us-west-2'});
 
-let params = {
-  Destination: { /* required */
-    ToAddresses: [
-      'amazingshellyyy@gmail.com',
-      /* more items */
-    ]
-  },
-  Message: { /* required */
-    Body: { /* required */
-      Html: {
-       Charset: "UTF-8",
-       Data: "HTML_FORMAT_BODY"
+AWS.config.update({
+  region: config.aws.ses.region,
+  accessKeyId: config.aws.ses.accessKeyId,
+  secretAccessKey: config.aws.ses.secretKey
+});
+
+
+export default {
+  send: (toEmail, subject, content) => {
+    return new AWS.SES({apiVersion: '2010-12-01'}).sendEmail({
+      Destination: { /* required */
+        ToAddresses: [
+          toEmail,
+          /* more items */
+        ]
       },
-      Text: {
-       Charset: "UTF-8",
-       Data: "TEXT_FORMAT_BODY"
-      }
-     },
-     Subject: {
-      Charset: 'UTF-8',
-      Data: 'Test email from twstartups'
-     }
-    },
-  Source: 'twstartups.service@gmail.com', /* required */
-  ReplyToAddresses: [
-     'twstartups.service@gmail.com',
-    /* more items */
-  ],
+      Message: { /* required */
+        Body: { /* required */
+          Html: {
+           Charset: "UTF-8",
+           Data: `<html>
+           <head>
+             <title></title>
+             <link href="https://svc.webspellchecker.net/spellcheck31/lf/scayt3/ckscayt/css/wsc.css" rel="stylesheet" type="text/css" />
+           </head>
+           <body aria-readonly="false">You are approved!</body>
+           </html>
+           `
+          },
+          Text: {
+           Charset: "UTF-8",
+           Data: content
+          }
+         },
+         Subject: {
+          Charset: 'UTF-8',
+          Data: subject
+         }
+        },
+      Source: 'twstartups.service@gmail.com', /* required */
+      ReplyToAddresses: [
+         'twstartups.service@gmail.com',
+        /* more items */
+      ],
+    }).promise()
+  } 
 }
 
-let sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendTemplatedEmail(params).promise();
-
-sendPromise
-  .then(data => {
-    console.log(data.MessageId)
-  })
-  .catch(err => {
-    console.error(err, err.statck);
-  })
+// sendPromise
+//   .then(data => {
+//     console.log('emailsent!',data.MessageId)
+//   })
+//   .catch(err => {
+//     console.error(err, err.statck);
+//   })

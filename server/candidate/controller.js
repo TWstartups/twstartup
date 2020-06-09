@@ -1,6 +1,7 @@
 import Candidate from './model';
 import JWT from '../user/jwt';
 import User from '../user/model'
+import Email from './email';
 
 export default {
   create: async (req, res) => {
@@ -69,6 +70,14 @@ export default {
     
   },
   approve: async (req,res) => {
-    res.status(200);
+    console.log('hii in approve')
+    try {
+      await Email.send('amazingshellyyy@gmail.com','testtttt','yayyyy')
+      res.status(200).json({message:'email is sent'});
+    } catch(err){
+      console.log(err)
+      res.status(500).json({message:'soomething is wrong sending email'})
+    }
+    
   }
 }
