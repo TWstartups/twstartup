@@ -10,7 +10,7 @@ export default {
     const userData = req.body.formValues;
     console.log(userData);
     /* Validating Sign up Form */
-    if (!userData.email || !userData.password) {
+    if (!userData.name || !userData.email || !userData.password) {
       return res.status(400).json({ message: "All fileds are required" });
     }
     //check for existing user account
@@ -49,7 +49,8 @@ export default {
       const userToSend = {
         _id,
         email,
-        type
+        type,
+        name
       }
       res.status(200).json({ token, user: userToSend });
     }catch(err) {

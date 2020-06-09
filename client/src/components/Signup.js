@@ -162,6 +162,13 @@ class Signup extends React.Component {
                 <div className="ui huge header">Signup</div>
 
                 <Field
+                  name="name"
+                  component={this.renderInput}
+                  label="Your Name"
+                  placeholder="Your Name"
+                  type="text"
+                />
+                <Field
                   name="email"
                   component={this.renderInput}
                   label="Email"
