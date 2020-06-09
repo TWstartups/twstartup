@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   _id: null,
   type: null,
   errMsg:null,
-  candidate: null
+  candidate: null,
+  isLogIn: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -17,20 +18,20 @@ export default (state = INITIAL_STATE, action) => {
       //put jwt in local storage for future verify login
       localStorage.setItem("token", action.payload.token);
       //return userObj
-      return { ...state, ...action.payload.user };
+      return { ...state, ...action.payload.user,isLogIn: true };
     case LOG_IN:
       if (action.payload.err) {
         return {...state, errMsg:action.payload.err}
       }
       localStorage.setItem("token", action.payload.token);
-      return { ...state, ...action.payload.user };
+      return { ...state, ...action.payload.user,isLogIn: true };
     case LOG_OUT:
       localStorage.removeItem("token");
       return { ...INITIAL_STATE };
     case ERR_MSG_RESET:
       return {...state, errMsg:null}
     case FETCH_USER:
-      return { ...state, ...action.payload.user };
+      return { ...state, ...action.payload.user, isLogIn: true };
     default:
       return state;
   }
