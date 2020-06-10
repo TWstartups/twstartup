@@ -44,10 +44,11 @@ export const logIn = formValues => async dispatch => {
   
 }
 
-export const logOut = () => {
-  return {
+export const logOut = () => dispatch =>{
+  history.push('/')
+  dispatch({
     type: LOG_OUT
-  }
+  })
 }
 
 export const errMsgReset = () => {

@@ -39,7 +39,7 @@ class Nav extends React.Component {
       </div>
       </React.Fragment>
       )
-    } else if (this.props.user.type === 'normal' && !this.props.user.candidate && !this.props.candidate.candidate._id) {
+    } else if (this.props.user.type === 'normal' && !this.props.user.candidate && !this.props.candidate.candidate) {
       return this.renderBtn(`/apply/${this.props.user._id}`, 'Add a company')
     } else if (this.props.user.type === 'normal' && !this.props.user.company) {
       const candiId = this.props.user.candidate? this.props.user.candidate : this.props.candidate.candidate._id;

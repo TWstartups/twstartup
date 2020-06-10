@@ -13,10 +13,11 @@ export default {
     if (!userData.name || !userData.email || !userData.password) {
       return res.status(400).json({ message: "All fileds are required" });
     }
+    console.log('pass basic check')
     //check for existing user account
     try {
       const foundUser = await User.findOne({ email: userData.email });
-      
+      console.log(foundUser);
       if (foundUser) {
         return res
           .status(400)
@@ -34,7 +35,7 @@ export default {
    
     const hash = await bcrypt.hash(userData.password, salt);
     
-    
+    console.log('hash',hash)
     
     const newUser = {...userData, password:hash};
     console.log('newUser',newUser);
@@ -45,15 +46,17 @@ export default {
     try {
     
       const token = await JWT.generateToken(createdUser);
-      const {_id,email,type,} = createdUser;
+      const {_id,email,type,name} = createdUser;
       const userToSend = {
         _id,
         email,
         type,
         name
       }
+      console.log("userToSend",userToSend);
       res.status(200).json({ token, user: userToSend });
     }catch(err) {
+      console.log(err);
       return res.status(400).json({ message: 'Somthing went wrong, try again later.' });
     }
       
