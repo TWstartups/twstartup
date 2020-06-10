@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCandis } from '../../actions';
+import { fetchCandis, approveCandi } from '../../actions';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 
 class AdminDashBoard extends React.Component {
@@ -10,20 +11,30 @@ class AdminDashBoard extends React.Component {
     this.props.fetchCandis();
   }
 
+  approve = (e) => {
+    console.log(e.target.getAttribute("value"))
+    const candiId = e.target.getAttribute("value");
+    this.props.approveCandi(candiId, this.props.user._id);
+  }
+
   renderCandiRow = () => {
     const Arr = this.props.candidates;
     return Arr.map(candidate => {
       return (
-        <tr>
+        <tr key={candidate._id}>
+      <td>{moment(candidate.createdAt).format('l')}</td>
       <td>{candidate.company_name_en}</td>
       <td>{candidate.company_name_chi}</td>
       <td><a target="_blank" rel="noopener noreferrer" href={candidate.website} style={{cursor:'pointer'}}>{candidate.website}</a></td>
       <td><a target="_blank" rel="noopener noreferrer" href={candidate.news} style={{cursor:'pointer'}}>{candidate.news}</a></td>
       <td><a target="_blank" rel="noopener noreferrer" href={candidate.other} style={{cursor:'pointer'}}>{candidate.other}</a></td>
       <td>{candidate.applicant_email}</td>
-      {candidate.approve_status ? <td><div class="ui small button">
+      <td>{candidate.approver? candidate.approver.name: ''}</td>
+      {!candidate.approve_status ? <td><div  value={`${candidate._id}`} className="ui small button" onClick={this.approve}>
       Approve
-    </div></td>:<td>Approved</td>}
+    </div></td>:<td><div className="ui small button disabled">
+    Approved
+  </div></td>}
       
     </tr>
       )
@@ -36,12 +47,14 @@ class AdminDashBoard extends React.Component {
       <table className="ui collapsing unstackable table">
   <thead>
     <tr>
+      <th>Apply At</th>
       <th>Company Name</th>
       <th>公司名稱</th>
       <th>Website</th>
       <th>News/Media</th>
       <th>Other Material</th>
       <th>Contact Email</th>
+      <th>Approve by</th>
       <th>Status</th>
     </tr>
   </thead>
@@ -80,10 +93,10 @@ class AdminDashBoard extends React.Component {
   }
 }
 
-const mapStateToProps = ({ candidate }) => {
+const mapStateToProps = ({ candidate, user }) => {
   
-  return {candidates: candidate.candidates, errMsg: candidate.errMsg};
+  return {user,candidates: candidate.candidates, errMsg: candidate.errMsg};
 }
 
 
-export default connect(mapStateToProps, {fetchCandis})(AdminDashBoard);
+export default connect(mapStateToProps, {fetchCandis, approveCandi})(AdminDashBoard);
