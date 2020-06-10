@@ -1,4 +1,4 @@
-import { CREATE_CANDI, FETCH_CANDIS, FETCH_CANDI, EDIT_CANDI } from '../actions/types';
+import { CREATE_CANDI, FETCH_CANDIS, FETCH_CANDI, APPROVE_CANDI } from '../actions/types';
 
 const INITIAL_STATE = {
   errMsg: null,
@@ -25,6 +25,11 @@ export default (state = INITIAL_STATE, action) => {
       }
       
       return {...state, candidates:action.payload.candidates}
+    case APPROVE_CANDI:
+      if (action.payload.err){
+        return {...state, errMsg: action.payload.err}
+      }
+      return {...state, candidate:action.payload.candidate, candidates: action.payload.candidates}
     default:
       return state;
   }
