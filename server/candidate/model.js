@@ -25,9 +25,13 @@ const CandidateSchema = mongoose.Schema({
     default: Date.now,
   },
   approve_status:{
-    type: String
+    type: Boolean
   },
   applicant:{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  approver: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   }

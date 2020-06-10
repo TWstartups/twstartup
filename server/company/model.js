@@ -12,10 +12,6 @@ const CompanySchema = mongoose.Schema({
   website: {
     type: String,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
   company_email: {
     type: String,
   },
@@ -31,6 +27,14 @@ const CompanySchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  candidate: {
+    type: Schema.Types.ObjectId,
+    ref: 'Candidate'
+  }
 });
 
 const Company = mongoose.model("Company", CompanySchema);
