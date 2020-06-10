@@ -6,3 +6,4 @@ export const ERR_MSG_RESET = 'ERR_MSG_RESET';
 export const CREATE_CANDI = 'CREATE_CANDI';
 export const FETCH_CANDI = 'FETCH_CANDI';
 export const FETCH_CANDIS = 'FETCH_CANDIS';
+export const APPROVE_CANDI = 'APPROVE_CANDI';

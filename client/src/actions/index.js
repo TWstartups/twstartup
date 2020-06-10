@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS } from './types';
+import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS, APPROVE_CANDI } from './types';
 import user from '../apis/user';
 import candidate from '../apis/candidate'
 import history from '../history';
@@ -118,13 +118,9 @@ export const fetchCandi = (candidateId) => async dispatch => {
 }
 
 export const fetchCandis = () => async dispatch => {
-  // if (!token) {
-  //   history.push('/login')
-  // }
   try {
     console.log('fetchCandis')
     const response = await candidate.get(`/all`);
-    console.log(response);
     dispatch({
       type: FETCH_CANDIS,
       payload: response.data
@@ -133,7 +129,7 @@ export const fetchCandis = () => async dispatch => {
     // if (err.response.status === 403) {
     //   window.location = '#/login';
     // }
-    console.log(err.response.data.message)
+    console.log('err for fetchCandis',err)
     dispatch({
       type: FETCH_CANDIS,
       payload: {err:err.response.data.message}
@@ -143,12 +139,18 @@ export const fetchCandis = () => async dispatch => {
 }
 
 
-export const approveCandi = (candiId) => {
+export const approveCandi = (candiId, approverId) => async dispatch => {
   try {
-    const response = await candidate.post(`/approve/${candiId}`)
-    
+    const response = await candidate.post(`/approve/${candiId}`,{approverId})
+    dispatch({
+      type: APPROVE_CANDI,
+      payload: response.data
+    })
   }catch(err) {
-
+    dispatch({
+      type: APPROVE_CANDI,
+      payload: {err:err.response.data.message}
+    })
   }
 }
 
