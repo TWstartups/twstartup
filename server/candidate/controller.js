@@ -1,7 +1,8 @@
 import Candidate from './model';
-import JWT from '../user/jwt';
 import User from '../user/model'
 import Email from './email';
+import Company from '../company/model';
+import _ from 'lodash';
 
 export default {
   create: async (req, res) => {
@@ -50,7 +51,7 @@ export default {
     console.log(req.user)
     console.log('in showall')
     try {
-      const allCandidate= await Candidate.find({approve_status:false})
+      const allCandidate= await Candidate.find().populate('approver')
       console.log(allCandidate)
       res.status(200).json({candidates:allCandidate})
     } catch(err) {
@@ -73,9 +74,23 @@ export default {
     console.log('hii in approve')
     try {
       const foundCandi = await Candidate.findById(req.params.id).populate('applicant');
+      
       const sendToName = foundCandi.applicant.name;
       await Email.send('amazingshellyyy@gmail.com',sendToName)
-      res.status(200).json({message:'email is sent'});
+      try {
+        const updatedCandi = await Candidate.findByIdAndUpdate(req.params.id, {approve_status:true,approver:req.body.approverId},{new: true});
+        const allCandidate = await Candidate.find().populate('approver');
+        const newCompany = _.pick(updatedCandi, ['company_name_en','company_name_chi','company_email','website']);
+        const createdComp = await Company.create(newCompany);
+        createdComp.owners.push(updatedCandi.applicant);
+        createdComp.candidate = updatedCandi._id;
+        await createdComp.save();
+        res.status(200).json({candidates: allCandidate,candidate:updatedCandi});
+      }catch(err) {
+        console.log(err)
+        res.status(500).json({message:'something is wrong when updating Candidate'});
+      }
+      
     } catch(err){
       console.log(err)
       res.status(500).json({message:'something is wrong sending email'})
