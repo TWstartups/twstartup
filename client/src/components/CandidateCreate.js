@@ -9,7 +9,6 @@ class CandidateCreate extends React.Component {
 
   onSubmit = (formValues) => {
     console.log(formValues);
-    const bodyToSend = {...formValues,applicant:this.props.match.params.id }
     this.props.createCandi(formValues);
   }
 

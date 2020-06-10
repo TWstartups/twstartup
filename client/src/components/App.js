@@ -10,7 +10,6 @@ import Nav from './Nav';
 import { fetchUser } from "../actions";
 import { Switch, Route} from "react-router-dom";
 import { connect } from "react-redux";
-import CandidateForm from "./CandidateForm";
 import CandidateCreate from "./CandidateCreate";
 class App extends React.Component {
   //fetch current user from local storage jwt

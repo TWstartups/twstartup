@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCandi } from "../actions";
-import CandidateForm from "./CandidateForm";
 import _ from "lodash";
-import history from "../history";
 
 class ShowApplication extends React.Component {
   componentDidMount() {
