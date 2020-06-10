@@ -12,7 +12,7 @@ export default {
       const foundCompany = await Company.findById(req.params.id);
       res.status(200).json({company:foundCompany});
     } catch(err) {
-      res.status(200);
+      res.status(500).json({message: "something went wrong when getting the company info"});
     }
   },
   showAll: async (req, res) => {
