@@ -81,7 +81,7 @@ class AdminDashBoard extends React.Component {
   render(){
     return (
       <div className="admin-dashboard">
-      {this.props.errMsg ? this.renderReturnBtn():
+      {this.props.user.type !== 'super' ? this.renderReturnBtn():
      
       <div className="ui">
       {this.renderCandidates()}
