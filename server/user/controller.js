@@ -80,12 +80,13 @@ export default {
           console.log('in here',foundUser)
           const token = await JWT.generateToken(foundUser);
           console.log('tokennnn',token);
-          const { _id, email,type,candidate } = foundUser;
+          const { _id, email,type,candidate, company } = foundUser;
           const userToSend = {
             _id,
             email,
             type,
-            candidate
+            candidate,
+            company
           }
           console.log(userToSend);
           return res.status(200).json({ token, user: userToSend });
@@ -104,12 +105,13 @@ export default {
     try {
       // console.log(req)
       
-      const {_id,email, type, candidate} = req.user;
+      const {_id,email, type, candidate, company} = req.user;
       const userToSend = {
         _id,
         email,
         type,
-        candidate
+        candidate,
+        company
       }
       
       res.status(200).json({message: 'success', user:userToSend})
