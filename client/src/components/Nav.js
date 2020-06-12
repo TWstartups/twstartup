@@ -45,7 +45,7 @@ class Nav extends React.Component {
       const candiId = this.props.user.candidate? this.props.user.candidate : this.props.candidate.candidate._id;
       return this.renderBtn(`/application/${candiId}`, 'See your application')
     } else if (this.props.user.type === 'normal') {
-      return this.renderBtn(`/dashboard`, 'Dashboard')
+      return this.renderBtn(`/dashboard/${this.props.user.company}`, 'Dashboard')
     } else  {
       return this.renderBtn(`/admin/dashboard`, 'Admin Dashboard')
     } 

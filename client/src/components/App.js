@@ -32,7 +32,7 @@ class App extends React.Component {
           <Route exact path="/" component={CompanyList} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
-          <Route path="/dashboard" component={DashBoard} />
+          <Route path="/dashboard/:id" component={DashBoard} />
           <Route exact path="/admin/dashboard" component={AdminDashBoard}/>      
           <Route path="/apply/success" component={ApplyConfirm} />
           <Route exact path="/apply/:id" component={CandidateCreate} />
