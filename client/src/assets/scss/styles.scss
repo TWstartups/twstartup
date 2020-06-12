@@ -21,3 +21,20 @@
   
 }
 
+
+.company-container {
+  margin-top: 150px;
+  .company-info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    .company-name {
+      font-size: 40px;
+    }
+  }
+  
+  .company-img {
+    width: 200px;
+  }
+}
