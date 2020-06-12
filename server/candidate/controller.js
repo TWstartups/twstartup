@@ -76,7 +76,9 @@ export default {
       const foundCandi = await Candidate.findById(req.params.id).populate('applicant');
       
       const sendToName = foundCandi.applicant.name;
-      await Email.send('amazingshellyyy@gmail.com',sendToName)
+      const email = foundCandi.applicant.email;
+      await Email.send(email,sendToName)
+      
       try {
         const updatedCandi = await Candidate.findByIdAndUpdate(req.params.id, {approve_status:true,approver:req.body.approverId},{new: true});
         const allCandidate = await Candidate.find().populate('approver');
@@ -85,7 +87,15 @@ export default {
         createdComp.owners.push(updatedCandi.applicant);
         createdComp.candidate = updatedCandi._id;
         await createdComp.save();
-        res.status(200).json({candidates: allCandidate,candidate:updatedCandi});
+        try {
+          console.log('applicantId',foundCandi.applicant._id)
+          const foundUser = await User.findByIdAndUpdate(foundCandi.applicant._id, {company:createdComp._id})
+          res.status(200).json({candidates: allCandidate,candidate:updatedCandi});
+        } catch(err) {
+          console.log(err)
+        res.status(500).json({message:'something is wrong when updating User'});
+        }
+       
       }catch(err) {
         console.log(err)
         res.status(500).json({message:'something is wrong when updating Candidate'});
