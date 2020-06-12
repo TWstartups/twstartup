@@ -2,10 +2,11 @@ import React from "react";
 import Signup from "./Signup";
 import Login from "./Login";
 import DashBoard from "./DashBoard";
-import CompanyList from "./CompanyList";
+import CompanyList from "./company/CompanyList";
 import ApplyConfirm from './ApplyConfirm';
 import AdminDashBoard from './admin/AdminDashBoard';
 import ShowApplication from './ShowApplication';
+import Company from './company/Company';
 import Nav from './Nav';
 import { fetchUser } from "../actions";
 import { Switch, Route} from "react-router-dom";
@@ -36,6 +37,7 @@ class App extends React.Component {
           <Route path="/apply/success" component={ApplyConfirm} />
           <Route exact path="/apply/:id" component={CandidateCreate} />
           <Route path="/application/:id" component={ShowApplication}/>
+          <Route path="/company/:id" component={Company}/>
         </Switch>
       </>
     );
