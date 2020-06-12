@@ -6,7 +6,8 @@ const INITIAL_STATE = {
   type: null,
   errMsg:null,
   candidate: null,
-  isLogIn: false
+  isLogIn: false,
+  company:null
 };
 
 export default (state = INITIAL_STATE, action) => {
