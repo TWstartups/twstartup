@@ -1,7 +1,7 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS, APPROVE_CANDI, FETCH_COMPS } from './types';
+import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS, APPROVE_CANDI, FETCH_COMPS, FETCH_COMP } from './types';
 import user from '../apis/user';
 import candidate from '../apis/candidate';
-import public from '../apis/public';
+import publicApi from '../apis/public';
 import history from '../history';
 
 const token = localStorage.getItem('token');
@@ -158,7 +158,7 @@ export const approveCandi = (candiId, approverId) => async dispatch => {
 
 export const fetchComps = () => async dispatch =>{
   try {
-    const response = await public.get('/company/all')
+    const response = await publicApi.get('/company/all')
     dispatch({
       type: FETCH_COMPS,
       payload: response.data
@@ -166,6 +166,21 @@ export const fetchComps = () => async dispatch =>{
   } catch(err) {
     dispatch({
       type:FETCH_COMPS,
+      payload: {err: err.response.data.message}
+    })
+  }
+}
+
+export const fetchComp = (id) => async dispatch => {
+  try {
+    const response = await publicApi.get(`/company/${id}`);
+    dispatch({
+      type: FETCH_COMP,
+      payload: response.data
+    })
+  } catch(err) {
+    dispatch({
+      type: FETCH_COMP,
       payload: {err: err.response.data.message}
     })
   }
