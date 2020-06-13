@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCandi } from "../actions";
-import _ from "lodash";
 
 class ShowApplication extends React.Component {
   componentDidMount() {

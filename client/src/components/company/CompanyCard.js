@@ -7,29 +7,29 @@ const CompanyCard = (props) => {
     <div className="ui card" onClick={()=>props.clickToCompany(props.compId)}>
    
       <div className="image">
-      {props.image?<img src={props.image} />:<img src={process.env.PUBLIC_URL + '/logoDefault.png'} /> }
+      {props.image?<img alt="company_logo" src={props.image} />:<img alt="company_logo" src={process.env.PUBLIC_URL + '/logoDefault.png'} /> }
         
       </div>
       <div className="content">
-        <a className="header">{props.title}</a>
+        <div className="header">{props.title}</div>
         <div className="description">
           Kristy is an art director living in New York.
         </div>
       </div>
       <div className="extra content">
       <div className="ui blue labels">
-      <a className="ui label">
+      <div className="ui label">
         Happy
-      </a>
-      <a className="ui label">
+      </div>
+      <div className="ui label">
         Smart
-      </a>
-      <a className="ui label">
+      </div>
+      <div className="ui label">
         Insane
-      </a>
-      <a className="ui label">
+      </div>
+      <div className="ui label">
         Exciting
-      </a>
+      </div>
     </div>
       </div>
       

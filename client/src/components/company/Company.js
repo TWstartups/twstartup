@@ -47,6 +47,7 @@ class Company extends React.Component {
             <div className="two wide column"></div>
             <div className="four wide column" style={{ textAlign: "center" }}>
               <img
+                alt=""
                 className="company-img"
                 src={process.env.PUBLIC_URL + "/logoDefault.png"}
               ></img>
@@ -56,10 +57,10 @@ class Company extends React.Component {
                 <div>
                   <h1 className="company-name">{company_name_en}</h1>
                   <div className="ui blue labels">
-                    <a className="ui label">Happy</a>
-                    <a className="ui label">Smart</a>
-                    <a className="ui label">Insane</a>
-                    <a className="ui label">Exciting</a>
+                    <div className="ui label">Happy</div>
+                    <div className="ui label">Smart</div>
+                    <div className="ui label">Insane</div>
+                    <div className="ui label">Exciting</div>
                   </div>
                 </div>
                 

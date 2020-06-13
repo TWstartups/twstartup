@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchComps } from '../../actions';
 import CompanyCard from './CompanyCard';
-import {Link} from 'react-router-dom';
 import history from '../../history';
 
 class CompanyList extends React.Component {
