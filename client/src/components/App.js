@@ -37,7 +37,7 @@ class App extends React.Component {
           <Route path="/apply/success" component={ApplyConfirm} />
           <Route exact path="/apply/:id" component={CandidateCreate} />
           <Route path="/application/:id" component={ShowApplication}/>
-          <Route path="/company/:id" component={Company}/>
+          <Route path="/company/:id" render={(props) => (<Company key={props.match.params.id} {...props}/>)} />
         </Switch>
       </>
     );
