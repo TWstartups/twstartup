@@ -1,12 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 
-const DashBoard = () => {
-  return (
+class DashBoard extends React.Component {
+  render(){
+    return (
     <div>
     <h2>This is Dashboard
-    </h2></div>
-  )
+    </h2>
+     
+    </div>
+  )}
 }
 
-export default DashBoard;
+export default connect(null)(DashBoard);
