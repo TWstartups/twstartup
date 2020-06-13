@@ -5,7 +5,16 @@ export default {
     res.status(200);
   },
   edit: async (req, res) => {
-    res.status(200);
+    console.log('in edit')
+    const toEdit = req.body.formValues;
+    try {
+      const editedCompany = await Company.findByIdAndUpdate(req.params.id, toEdit)
+      res.status(200).json({company: editedCompany})
+    } catch(err) {
+      console.log(err);
+      res.status(500).json({message: "Somthing went wrong when updating company"});
+    }
+   
   },
   show: async (req, res) => {
     try {
