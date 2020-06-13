@@ -15,7 +15,7 @@ class ProfileForm extends React.Component {
 
   render(){
     return (
-      <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+      <form className="ui form error" onSubmit={this.props.handleSubmit(this.props.onSubmit)}>
       <Field
       name="company_name_en"
       component={this.renderInput}
