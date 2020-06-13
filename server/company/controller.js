@@ -6,9 +6,10 @@ export default {
   },
   edit: async (req, res) => {
     console.log('in edit')
-    const toEdit = req.body.formValues;
+    const toEdit = req.body;
+    console.log(toEdit);
     try {
-      const editedCompany = await Company.findByIdAndUpdate(req.params.id, toEdit)
+      const editedCompany = await Company.findByIdAndUpdate(req.params.id, toEdit,{new:true})
       res.status(200).json({company: editedCompany})
     } catch(err) {
       console.log(err);
