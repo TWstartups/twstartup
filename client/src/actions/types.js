@@ -9,3 +9,4 @@ export const FETCH_CANDIS = 'FETCH_CANDIS';
 export const APPROVE_CANDI = 'APPROVE_CANDI';
 export const FETCH_COMPS = 'FETCH_COMPS';
 export const FETCH_COMP = 'FETCH_COMP';
+export const EDIT_COMP = 'EDIT_COMP';

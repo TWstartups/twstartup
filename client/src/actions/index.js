@@ -1,7 +1,8 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS, APPROVE_CANDI, FETCH_COMPS, FETCH_COMP } from './types';
+import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS, APPROVE_CANDI, FETCH_COMPS, FETCH_COMP, EDIT_COMP } from './types';
 import user from '../apis/user';
 import candidate from '../apis/candidate';
 import publicApi from '../apis/public';
+import company from '../apis/company';
 import history from '../history';
 
 const token = localStorage.getItem('token');
@@ -181,6 +182,22 @@ export const fetchComp = (id) => async dispatch => {
   } catch(err) {
     dispatch({
       type: FETCH_COMP,
+      payload: {err: err.response.data.message}
+    })
+  }
+}
+
+export const editComp = (id) => async dispatch => {
+  try {
+    const response = await company.put(`/${id}`);
+    dispatch({
+      type: EDIT_COMP,
+      payload: response.data
+    })
+  } catch(err) {
+    console.log(err)
+    dispatch({
+      type: EDIT_COMP,
       payload: {err: err.response.data.message}
     })
   }
