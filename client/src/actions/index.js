@@ -187,13 +187,15 @@ export const fetchComp = (id) => async dispatch => {
   }
 }
 
-export const editComp = (id) => async dispatch => {
+export const editComp = (id, formValues) => async dispatch => {
   try {
-    const response = await company.put(`/${id}`);
+    const response = await company.put(`/edit/${id}`,formValues);
+    console.log(response.data)
     dispatch({
       type: EDIT_COMP,
       payload: response.data
     })
+    
   } catch(err) {
     console.log(err)
     dispatch({
@@ -201,6 +203,7 @@ export const editComp = (id) => async dispatch => {
       payload: {err: err.response.data.message}
     })
   }
+  
 }
 
 
