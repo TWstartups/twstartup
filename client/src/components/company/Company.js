@@ -1,8 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchComp } from "../../actions";
+import ProfileModal from './modals/ProfileModal';
+
 
 class Company extends React.Component {
+
+  state = {
+    showModal: false
+  }
+
+  hideModal = () => {
+    this.setState({
+      showModal: false
+    })
+  }
+  
   componentDidMount() {
     this.props.fetchComp(this.props.match.params.id);
   }
@@ -12,7 +25,7 @@ class Company extends React.Component {
     const ownerArr = this.props.company.owners;
     for(let i = 0; i < ownerArr.length; i++) {
       if (ownerArr[i] === userId) {
-        return (<button className="circular ui icon button">
+        return (<button onClick={()=>this.setState({showModal:true})} className="circular ui icon button">
         <i className="edit outline icon"></i>
       </button>)
       }
@@ -27,6 +40,7 @@ class Company extends React.Component {
     }
     const { company_email, company_name_en, website } = this.props.company;
     return (
+      
       <div className="company-container">
         <div className="ui container">
           <div className="ui grid">
@@ -68,11 +82,14 @@ class Company extends React.Component {
             <div className="four wide column">
             <div>
                 {this.props.company && this.renderEditbtn()}
-                </div>
+              </div>
             </div>
           </div>
         </div>
+        
+        {this.state.showModal && <ProfileModal hideModal={this.hideModal}/>}
       </div>
+     
     );
   }
 }
