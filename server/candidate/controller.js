@@ -86,6 +86,7 @@ export default {
         const createdComp = await Company.create(newCompany);
         createdComp.owners.push(updatedCandi.applicant);
         createdComp.candidate = updatedCandi._id;
+        createdComp.executives.push({},{},{});
         await createdComp.save();
         try {
           console.log('applicantId',foundCandi.applicant._id)
