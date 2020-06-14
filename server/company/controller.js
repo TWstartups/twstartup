@@ -32,6 +32,39 @@ export default {
     } catch (err) {
       res.status(500).json({message:"something went wrong when getting all company data"});
     }
+  },
+  imgUpload: async (req, res) => {
+    console.log("in img upload");
+   
+    const imgURL = req.image;
+    const {companyId, type } = req.body;
+    //type = logo || banner_img || executive
+    const { exeIndex } = req.query? req.query: '';
+
+    try {
+     
+      const findCompany = await Company.findById(companyId);
+      
+      if (!findCompany) {
+        res.status(500).json({message: 'cannot find the company, try again'})
+      }
+      if (type == 'logo') {
+        findCompany.logo = imgURL;
+      } else if (type == 'banner_img') {
+        findCompany.banner_img = imgURL;
+      } else if (type == 'executive'){
+        findCompany.executives[exeIndex].image = imgURL;
+      }
+      await findCompany.save();
+      
+      const findupdatedComp = await Company.findById(findCompany._id)
+      res.status(200).json({company: findupdatedComp})
+      
+    } catch(err) {
+ 
+      res.status(500).json({message: "something went wrong when saving the image"})
+    }
+    
   }
  
 }
