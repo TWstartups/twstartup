@@ -38,6 +38,7 @@ class ProfileForm extends React.Component {
       type="text"
     />
     <button className='ui button' type="submit">Submit</button>
+    <div className="ui button" onClick={()=> this.props.hideModal()}>cancel</div>
       </form>
     )
   }
@@ -45,7 +46,7 @@ class ProfileForm extends React.Component {
 
 const validate = (formsValues) => {
   const errors = {};
-  return 
+  return errors
 }
 
 

@@ -23,12 +23,7 @@ class ProfileModal extends React.Component {
         <div onClick={(e)=> e.stopPropagation() } className="ui standard modal visible active">
           <div className="header">Edit Profile</div>
           <div className="content">
-          <ProfileForm onSubmit={this.onSubmit} initialValues={this.props.company}/></div>
-          <div className="actions">
-          <div className="ui approve button">Approve</div>
-      <div className="ui button">Neutral</div>
-      <div className="ui cancel button">Cancel</div>
-          </div>
+          <ProfileForm onSubmit={this.onSubmit} initialValues={this.props.company} hideModal={this.props.hideModal}/></div>
         </div>
       </div>,
       document.querySelector('#modal')
