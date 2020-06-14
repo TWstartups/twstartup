@@ -19,6 +19,12 @@ export default {
       accessKeyId: process.env.SESAWSAccessKeyId || '',
       secretKey: process.env.SESAWSAccessKey || '',
       region: 'us-east-1'
+    },
+    s3: {
+      accessKeyId: process.env.S3AWSAccessKeyId || '',
+      secretKey: process.env.S3AWSAccessKey || '',
+      region: 'us-east-1'      
     }
+    
   }
 }
