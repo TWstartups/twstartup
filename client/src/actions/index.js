@@ -123,6 +123,7 @@ export const fetchCandi = (candidateId) => async dispatch => {
 export const fetchCandis = () => async dispatch => {
   try {
     console.log('fetchCandis')
+    console.log('token in browser',localStorage.getItem('token'))
     const response = await candidate.get(`/all`);
     dispatch({
       type: FETCH_CANDIS,
@@ -167,7 +168,7 @@ export const fetchComps = () => async dispatch =>{
   } catch(err) {
     dispatch({
       type:FETCH_COMPS,
-      payload: {err: err.response.data.message}
+      payload: {err: err.response? err.response.data.message: ''}
     })
   }
 }

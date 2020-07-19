@@ -36,6 +36,7 @@ export default {
     if (!req.headers["authorization"]) {
       res.status(403).json({ message: "Please log in!" });
     }
+    console.log('authorization',req.headers.authorization)
     const token = req.headers.authorization.split(" ")[1];
     if (token == null) {
       res.status(403).json({ message: "Please log in!" });

@@ -1,7 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 
-
 class CandidateForm extends React.Component {
  
 
@@ -30,7 +29,7 @@ class CandidateForm extends React.Component {
     if (meta.error && meta.touched) {
       className = `required field error`
     }
-    if (label === "Additional support items"  || label === "Company Name in Chinese" || label === "News/Media link") {
+    if (label === "Additional support items" || label === "Company Name in Chinese" || label === "News/Media link") {
       className = "field"
     }
     return (
@@ -106,7 +105,7 @@ class CandidateForm extends React.Component {
               <Field
                 name="other"
                 component={this.renderInput}
-                label="Additional support items "
+                label="Additional support items"
                 placeholder=""
                 type="text"
               />

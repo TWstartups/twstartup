@@ -1,37 +1,63 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchComp } from "../../actions";
-import ProfileModal from './modals/ProfileModal';
-
+import ProfileModal from "./modals/ProfileModal";
+import ProfileImgModal from "./modals/ProfileImgModal";
+import Dropzone from "react-dropzone";
 
 class Company extends React.Component {
-
   state = {
-    showModal: false
-  }
+    showProfileModal: false,
+    showUploadProfileModal: false
+  };
 
   hideModal = () => {
     this.setState({
-      showModal: false
-    })
-  }
-  
+      showProfileModal: false,
+      showUploadProfileModal: false
+    });
+  };
+
   componentDidMount() {
     this.props.fetchComp(this.props.match.params.id);
   }
 
-  renderEditbtn = () => {
+  checkProfileOwner = () => {
     const userId = this.props.user._id;
     const ownerArr = this.props.company.owners;
-    for(let i = 0; i < ownerArr.length; i++) {
+    for (let i = 0; i < ownerArr.length; i++) {
       if (ownerArr[i] === userId) {
-        return (<button onClick={()=>this.setState({showModal:true})} className="circular ui icon button">
-        <i className="edit outline icon"></i>
-      </button>)
+        return true
       }
     }
+    return false;
   }
 
+  renderProfileEditbtn = () => {
+    if(this.checkProfileOwner()){
+      return (
+        <button
+          onClick={() => this.setState({ showProfileModal: true })}
+          className="circular ui icon button"
+        >
+          <i className="edit outline icon"></i>
+        </button>
+      );
+    }
+  };
+
+  renderUploadProfilebtn = () => {
+    if(this.checkProfileOwner()){
+      return (
+        <button
+          onClick={() => this.setState({ showUploadProfileModal: true })}
+          className="circular ui icon button"
+        >
+          <i className="edit outline icon"></i>
+        </button>
+      );
+    }
+  }
 
   render() {
     console.log(this.props.company);
@@ -40,7 +66,6 @@ class Company extends React.Component {
     }
     const { company_email, company_name_en, website } = this.props.company;
     return (
-      
       <div className="company-container">
         <div className="ui container">
           <div className="ui grid">
@@ -51,6 +76,8 @@ class Company extends React.Component {
                 className="company-img"
                 src={process.env.PUBLIC_URL + "/logoDefault.png"}
               ></img>
+              <div>{this.props.company && this.renderUploadProfilebtn()}</div>
+             
             </div>
             <div className="six wide column">
               <div className="company-info">
@@ -63,7 +90,7 @@ class Company extends React.Component {
                     <div className="ui label">Exciting</div>
                   </div>
                 </div>
-                
+
                 <div className="btn-group">
                   <div
                     className="ui teal button"
@@ -81,22 +108,20 @@ class Company extends React.Component {
               </div>
             </div>
             <div className="four wide column">
-            <div>
-                {this.props.company && this.renderEditbtn()}
-              </div>
+              <div>{this.props.company && this.renderProfileEditbtn()}</div>
             </div>
           </div>
         </div>
-        
-        {this.state.showModal && <ProfileModal hideModal={this.hideModal}/>}
+
+        {this.state.showProfileModal && <ProfileModal hideModal={this.hideModal} />}
+        {this.state.showUploadProfileModal && <ProfileImgModal hideModal={this.hideModal} />}
       </div>
-     
     );
   }
 }
 
-const mapStateToProps = ({ user,company }) => {
-  return { user,company: company.currentCompany };
+const mapStateToProps = ({ user, company }) => {
+  return { user, company: company.currentCompany };
 };
 
 export default connect(mapStateToProps, { fetchComp })(Company);

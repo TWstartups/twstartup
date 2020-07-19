@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCandis, approveCandi } from '../../actions';
+import { fetchCandis, approveCandi, fetchCandi } from '../../actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
@@ -9,6 +9,7 @@ class AdminDashBoard extends React.Component {
 
   componentDidMount(){
     this.props.fetchCandis();
+    // this.props.fetchCandi("5ee00f0d2899d90f1cdbb40a");
   }
 
   approve = (e) => {
@@ -99,4 +100,4 @@ const mapStateToProps = ({ candidate, user }) => {
 }
 
 
-export default connect(mapStateToProps, {fetchCandis, approveCandi})(AdminDashBoard);
+export default connect(mapStateToProps, {fetchCandis, approveCandi, fetchCandi})(AdminDashBoard);
