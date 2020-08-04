@@ -13,7 +13,7 @@ class CompanyList extends React.Component {
     history.push(`/company/${id}`)
   }
 
-  renderCompany = () => {
+  renderCompany = () =>{
     console.log(this.props.companyList)
     return this.props.companyList.map(company => {
       return <CompanyCard title={company.company_name_en} key={company._id} clickToCompany={this.clickToCompany} compId={company._id}/>
