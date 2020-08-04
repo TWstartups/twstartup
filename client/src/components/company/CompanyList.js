@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchComps } from '../../actions'
 import CompanyCard from './CompanyCard'
 import history from '../../history'
+import Signup from '../Signup.js'
 
 class CompanyList extends React.Component {
   componentDidMount () {
