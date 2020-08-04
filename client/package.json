@@ -24,7 +24,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && rm -rf ../docs && mv build ../docs",
-    "precommit": "echo hello",
     "fix": "eslint --fix .",
     "test": "eslint .",
     "eject": "react-scripts eject"
@@ -53,5 +52,10 @@
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint ."
+    }
   }
 }
