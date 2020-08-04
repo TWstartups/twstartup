@@ -1,17 +1,18 @@
-import React from "react";
-import { connect } from "react-redux";
-import { signUp, errMsgReset } from "../actions";
-import { Field, reduxForm } from "redux-form";
+import React from 'react'
+import { connect } from 'react-redux'
+import { signUp, errMsgReset } from '../actions'
+import { Field, reduxForm } from 'redux-form'
 
 class Signup extends React.Component {
-  componentWillUnmount() {
-    this.props.errMsgReset();
+  componentWillUnmount () {
+    this.props.errMsgReset()
   }
+
   onSubmit = (formValues) => {
-    console.log(formValues);
-    const toSend = { ...formValues, type: "normal" };
-    console.log(toSend);
-    this.props.signUp(toSend);
+    console.log(formValues)
+    const toSend = { ...formValues, type: 'normal' }
+    console.log(toSend)
+    this.props.signUp(toSend)
   };
 
   renderError = ({ error, touched, active }) => {
@@ -21,13 +22,13 @@ class Signup extends React.Component {
           <div className="ui error message">
             <div className="header">{error}</div>
           </div>
-        );
+        )
       }
       return (
         <div className="ui error message">
           <div className="header">{error}</div>
         </div>
-      );
+      )
     }
   };
 
@@ -37,18 +38,18 @@ class Signup extends React.Component {
         <div className="ui error message">
           <div className="header">{this.props.errMsg}</div>
         </div>
-      );
+      )
     }
   };
 
-  renderInput = ({tag, input, label, placeholder, meta, type }) => {
-    let className = `required field`;
+  renderInput = ({ tag, input, label, placeholder, meta, type }) => {
+    let className = 'required field'
     if (meta.error && meta.touched) {
-      className = `field error`
+      className = 'field error'
     }
-    
-    if (tag === "refer") {
-      className = `field`;
+
+    if (tag === 'refer') {
+      className = 'field'
     }
     console.log(className)
     return (
@@ -62,12 +63,13 @@ class Signup extends React.Component {
         />
         {this.renderError(meta)}
       </div>
-    );
+    )
   };
+
   renderOptions = () => {
     if (this.props.formValues && this.props.formValues.values) {
-      const referType = this.props.formValues.values.referral;
-      if (referType === "social_media") {
+      const referType = this.props.formValues.values.referral
+      if (referType === 'social_media') {
         return (
           <React.Fragment>
             <label>
@@ -77,7 +79,7 @@ class Signup extends React.Component {
                 type="radio"
                 value="Facebook"
                 tag="refer"
-              />{" "}
+              />{' '}
               Facebook
             </label>
             <label>
@@ -87,7 +89,7 @@ class Signup extends React.Component {
                 type="radio"
                 value="LinkedIn"
                 tag="refer"
-              />{" "}
+              />{' '}
               LinkedIn
             </label>
             <label>
@@ -97,12 +99,12 @@ class Signup extends React.Component {
                 type="radio"
                 value="Other"
                 tag="refer"
-              />{" "}
+              />{' '}
               Other
             </label>
           </React.Fragment>
-        );
-      } else if (referType === "accelerator") {
+        )
+      } else if (referType === 'accelerator') {
         return (
           <React.Fragment>
             <Field
@@ -113,8 +115,8 @@ class Signup extends React.Component {
               tag="refer"
             />
           </React.Fragment>
-        );
-      } else if (referType === "VC") {
+        )
+      } else if (referType === 'VC') {
         return (
           <React.Fragment>
             <Field
@@ -125,8 +127,8 @@ class Signup extends React.Component {
               label="please put the name of the VC"
             />
           </React.Fragment>
-        );
-      } else if (referType === "friend") {
+        )
+      } else if (referType === 'friend') {
         return (
           <React.Fragment>
             <Field
@@ -137,18 +139,19 @@ class Signup extends React.Component {
               tag="refer"
             />
           </React.Fragment>
-        );
-      } else if (referType === "other"){
+        )
+      } else if (referType === 'other') {
         return (
           <React.Fragment>
             <Field name="referral_notes" component="textarea" tag="refer" label="Please specific the information."/>
-            
+
           </React.Fragment>
-        );
+        )
       }
     }
   };
-  render() {
+
+  render () {
     return (
       <div className="signup">
         <div className="ui grid container ">
@@ -218,37 +221,37 @@ class Signup extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const validate = (formValues) => {
-  const errors = {};
+  const errors = {}
   if (!formValues.email) {
-    errors.email = "You must enter an email.";
+    errors.email = 'You must enter an email.'
   }
   if (!formValues.password) {
-    errors.password = "You must enter an password.";
+    errors.password = 'You must enter an password.'
   }
   if (!formValues.confirmPassword) {
-    errors.confirmPassword = "Please confirm the password above.";
+    errors.confirmPassword = 'Please confirm the password above.'
   }
   if (formValues.password && formValues.confirmPassword) {
     if (formValues.password !== formValues.confirmPassword) {
-      errors.confirmPassword = "Please make sure your password match.";
+      errors.confirmPassword = 'Please make sure your password match.'
     }
   }
 
-  return errors;
-};
+  return errors
+}
 
 const mapStateToProps = ({ user, form }) => {
-  return { user, errMsg: user.errMsg, formValues: form.signUp };
-};
+  return { user, errMsg: user.errMsg, formValues: form.signUp }
+}
 
 const formWrapped = reduxForm({
-  form: "signUp",
-  validate,
-})(Signup);
+  form: 'signUp',
+  validate
+})(Signup)
 
-export default connect(mapStateToProps, { signUp, errMsgReset })(formWrapped);
+export default connect(mapStateToProps, { signUp, errMsgReset })(formWrapped)
