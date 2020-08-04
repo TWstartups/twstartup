@@ -24,7 +24,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && rm -rf ../docs && mv build ../docs",
-    "test": "react-scripts test",
+    "fix": "eslint --fix .",
+    "test": "eslint .",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

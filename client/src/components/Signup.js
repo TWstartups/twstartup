@@ -149,7 +149,7 @@ class Signup extends React.Component {
         )
       }
     }
-  };
+  }
 
   render () {
     return (
