@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import userReducer from './userReducer';
-import candiReducer from './candiReducer';
-import { reducer as formReducer } from 'redux-form';
-import compReducer from './compReducer';
+import { combineReducers } from 'redux'
+import userReducer from './userReducer'
+import candiReducer from './candiReducer'
+import { reducer as formReducer } from 'redux-form'
+import compReducer from './compReducer'
 
 export default combineReducers({
   user: userReducer,
@@ -10,4 +10,3 @@ export default combineReducers({
   candidate: candiReducer,
   company: compReducer
 })
-

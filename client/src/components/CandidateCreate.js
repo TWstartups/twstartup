@@ -1,30 +1,24 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react'
+import { connect } from 'react-redux'
 import { createCandi } from '../actions'
-import CandidateForm from './CandidateForm';
+import CandidateForm from './CandidateForm'
 
 class CandidateCreate extends React.Component {
- 
-
-
   onSubmit = (formValues) => {
-    console.log(formValues);
-    this.props.createCandi(formValues);
+    console.log(formValues)
+    this.props.createCandi(formValues)
   }
 
-  
-
-  render() {
+  render () {
     return (
-      
-        <div className="ui grid container">
-          
-            <CandidateForm onSubmit={this.onSubmit} header="About your company..."/>
-        </div>
-    
-    );
+
+      <div className="ui grid container">
+
+        <CandidateForm onSubmit={this.onSubmit} header="About your company..."/>
+      </div>
+
+    )
   }
 }
 
-
-export default connect(null, {createCandi})(CandidateCreate);
+export default connect(null, { createCandi })(CandidateCreate)

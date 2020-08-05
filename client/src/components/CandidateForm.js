@@ -1,16 +1,14 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
 
 class CandidateForm extends React.Component {
- 
-
-  renderError = ({error, touched, active}) =>{
+  renderError = ({ error, touched, active }) => {
     if (touched && error) {
       return (
         <div className="ui error message">
           <div className="header">{error}</div>
         </div>
-      );
+      )
     }
   }
 
@@ -20,17 +18,17 @@ class CandidateForm extends React.Component {
         <div className="ui error message">
           <div className="header">{this.props.errMsg}</div>
         </div>
-      );
+      )
     }
   }
 
   renderInput = ({ input, label, placeholder, meta, type }) => {
-    let className = "required field";
+    let className = 'required field'
     if (meta.error && meta.touched) {
-      className = `required field error`
+      className = 'required field error'
     }
-    if (label === "Additional support items" || label === "Company Name in Chinese" || label === "News/Media link") {
-      className = "field"
+    if (label === 'Additional support items' || label === 'Company Name in Chinese' || label === 'News/Media link') {
+      className = 'field'
     }
     return (
       <div className={className}>
@@ -40,27 +38,24 @@ class CandidateForm extends React.Component {
           plazceholder={placeholder}
           autoComplete="off"
           type={type}
-          className={this.props.classForInput ? this.props.classForInput: ''}
+          className={this.props.classForInput ? this.props.classForInput : ''}
         />
         {this.renderError(meta)}
       </div>
-    );
+    )
   };
 
   onSubmit = (formValues) => {
-    
-    this.props.onSubmit(formValues);
+    this.props.onSubmit(formValues)
   }
 
-  
-
-  render() {
+  render () {
     return (
       <div className="candidate-form">
         <div className="ui grid container">
           <div className="five wide column"></div>
           <div className="six wide column">
-            
+
             <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
               <div className="ui huge header">{this.props.header}</div>
               <div className="ui medium header">Basic Information</div>
@@ -109,51 +104,48 @@ class CandidateForm extends React.Component {
                 placeholder=""
                 type="text"
               />
-              
+
               <button className='ui button' type="submit">Submit</button>
-              
+
               {this.renderServerErr()}
             </form>
           </div>
           <div className="five wide column"></div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const validate = (formValues) => {
-  const errors = {};
+  const errors = {}
   if (!formValues.company_name_en) {
-    errors.company_name_en = "Please enter an English company name."
+    errors.company_name_en = 'Please enter an English company name.'
   }
-  if (!formValues.company_name_chi ) {
-    errors.company_name_chi = "Please enter a Chinese company name."
+  if (!formValues.company_name_chi) {
+    errors.company_name_chi = 'Please enter a Chinese company name.'
   }
   // if (formValues.company_name_chi && !formValues.company_name_chi.match(/[\u3400-\u9FBF]/)) {
   //   errors.company_name_chi = "Please enter a company name in Chinese."
   // }
-  if(!formValues.website) {
-    errors.website = "Please provide a website."
+  if (!formValues.website) {
+    errors.website = 'Please provide a website.'
   }
-  if(!formValues.news) {
-    errors.news = "Please provide a news."
+  if (!formValues.news) {
+    errors.news = 'Please provide a news.'
   }
-  if(!formValues.company_email) {
-    errors.company_email = "Please enter an email."
+  if (!formValues.company_email) {
+    errors.company_email = 'Please enter an email.'
   }
-  if (formValues.company_email && !formValues.company_email.match( /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-    errors.company_email = "Please enter a valid email."
+  // eslint-disable-next-line no-useless-escape
+  if (formValues.company_email && !formValues.company_email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+    errors.company_email = 'Please enter a valid email.'
   }
 
-  
-  return errors;
+  return errors
 }
 
-
-
-
 export default reduxForm({
-  form: "candidateForm",
+  form: 'candidateForm',
   validate
-})(CandidateForm);
+})(CandidateForm)
