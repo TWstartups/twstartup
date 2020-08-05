@@ -1,20 +1,18 @@
-import React from "react";
-import { connect } from "react-redux";
-import { fetchCandi } from "../actions";
+import React from 'react'
+import { connect } from 'react-redux'
+import { fetchCandi } from '../actions'
 
 class ShowApplication extends React.Component {
-  componentDidMount() {
-    this.props.fetchCandi(this.props.match.params.id);
+  componentDidMount () {
+    this.props.fetchCandi(this.props.match.params.id)
   }
 
   onSubmit = (formValues) => {
-    console.log(formValues);
-
-    
+    console.log(formValues)
   };
 
   renderStatus = () => {
-    const status= this.props.candidate.approve_status
+    const status = this.props.candidate.approve_status
     if (status === true) {
       return (
         <div className="ui green label">Approved</div>
@@ -24,18 +22,18 @@ class ShowApplication extends React.Component {
     }
   }
 
-  render() {
+  render () {
     if (!this.props.candidate) {
-      return <div>Loading</div>;
+      return <div>Loading</div>
     }
 
     return (
       <div className="show-application">
         <div className="ui grid container">
-          <div className="ui vertical segment" style={{ width: "100%" }}>
+          <div className="ui vertical segment" style={{ width: '100%' }}>
             <h2 className="uileft floated header">Your Application</h2>
             <div>
-            {this.props.candidate && this.renderStatus()}
+              {this.props.candidate && this.renderStatus()}
             </div>
             <div className="ui clearing divider"></div>
             <div className="ui grid">
@@ -49,30 +47,30 @@ class ShowApplication extends React.Component {
                 <div>{this.props.candidate.company_name_chi}</div>
               </div>
               <div className="five wide column">
-              <div className="ui small header">Company Contact Email</div>
+                <div className="ui small header">Company Contact Email</div>
                 <div>{this.props.candidate.company_email}</div></div>
               <div className="one wide column"></div>
               <div className="five wide column">
-              <div className="ui small header">Company Website</div>
+                <div className="ui small header">Company Website</div>
                 <div>{this.props.candidate.website}</div></div>
               <div className="five wide column">
-              <div className="ui small header">News/Media</div>
+                <div className="ui small header">News/Media</div>
                 <div>{this.props.candidate.news}</div></div>
               <div className="five wide column">
-              <div className="ui small header">Other support resource</div>
+                <div className="ui small header">Other support resource</div>
                 <div>{this.props.candidate.other}</div></div>
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = ({ user, candidate, form }) => {
-  return { candidateId: user.candidate, candidate: candidate.candidate };
-};
+  return { candidateId: user.candidate, candidate: candidate.candidate }
+}
 
-export default connect(mapStateToProps, { fetchCandi})(
+export default connect(mapStateToProps, { fetchCandi })(
   ShowApplication
-);
+)

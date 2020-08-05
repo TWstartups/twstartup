@@ -1,16 +1,16 @@
-import React from "react";
-import { connect } from "react-redux";
-import { logIn, errMsgReset } from "../actions";
-import { Field, reduxForm } from "redux-form";
+import React from 'react'
+import { connect } from 'react-redux'
+import { logIn, errMsgReset } from '../actions'
+import { Field, reduxForm } from 'redux-form'
 
 class Login extends React.Component {
-  componentWillUnmount() {
-    //reset props.errMsg with new Action
-    this.props.errMsgReset();
+  componentWillUnmount () {
+    // reset props.errMsg with new Action
+    this.props.errMsgReset()
   }
 
   onSubmit = (formValues) => {
-    this.props.logIn(formValues);
+    this.props.logIn(formValues)
   };
 
   renderError = ({ error, touched }) => {
@@ -19,24 +19,26 @@ class Login extends React.Component {
         <div className="ui error message">
           <div className="header">{error}</div>
         </div>
-      );
+      )
     }
   };
+
   renderServerErr = () => {
     if (this.props.errMsg) {
       return (
         <div className="ui error message">
           <div className="header">{this.props.errMsg}</div>
         </div>
-      );
+      )
     }
   };
+
   renderInput = ({ input, label, placeholder, meta, type }) => {
     const className = `required field ${
-      meta.error && meta.touched ? "error" : ""
-    }`;
+      meta.error && meta.touched ? 'error' : ''
+    }`
 
-    console.log('meta',meta)
+    console.log('meta', meta)
     return (
       <div className={className}>
         <label>{label}</label>
@@ -48,10 +50,10 @@ class Login extends React.Component {
         />
         {this.renderError(meta)}
       </div>
-    );
+    )
   };
 
-  render() {
+  render () {
     console.log(this.props)
     return (
       <div className="login">
@@ -82,7 +84,7 @@ class Login extends React.Component {
                 <button className="ui button" type="submit">
                   Log in
                 </button>
-              {this.renderServerErr()}
+                {this.renderServerErr()}
               </form>
             </div>
             <div className="column"></div>
@@ -98,28 +100,28 @@ class Login extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const validate = (formValues) => {
-  const errors = {};
+  const errors = {}
   if (!formValues.email) {
-    errors.email = "You must enter an email.";
+    errors.email = 'You must enter an email.'
   }
   if (!formValues.password) {
-    errors.password = "You must enter an password.";
+    errors.password = 'You must enter an password.'
   }
-  return errors;
-};
+  return errors
+}
 
 const mapStateToProps = ({ user }) => {
-  return { user,errMsg: user.errMsg };
-};
+  return { user, errMsg: user.errMsg }
+}
 
 const formWrapped = reduxForm({
-  form: "logIn",
-  validate,
-})(Login);
+  form: 'logIn',
+  validate
+})(Login)
 
-export default connect(mapStateToProps, { logIn,errMsgReset })(formWrapped);
+export default connect(mapStateToProps, { logIn, errMsgReset })(formWrapped)

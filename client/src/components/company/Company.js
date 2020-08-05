@@ -1,9 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { fetchComp } from "../../actions";
-import ProfileModal from "./modals/ProfileModal";
-import ProfileImgModal from "./modals/ProfileImgModal";
-import Dropzone from "react-dropzone";
+import React from 'react'
+import { connect } from 'react-redux'
+import { fetchComp } from '../../actions'
+import ProfileModal from './modals/ProfileModal'
+import ProfileImgModal from './modals/ProfileImgModal'
+// import Dropzone from 'react-dropzone'
 
 class Company extends React.Component {
   state = {
@@ -15,26 +15,26 @@ class Company extends React.Component {
     this.setState({
       showProfileModal: false,
       showUploadProfileModal: false
-    });
+    })
   };
 
-  componentDidMount() {
-    this.props.fetchComp(this.props.match.params.id);
+  componentDidMount () {
+    this.props.fetchComp(this.props.match.params.id)
   }
 
   checkProfileOwner = () => {
-    const userId = this.props.user._id;
-    const ownerArr = this.props.company.owners;
+    const userId = this.props.user._id
+    const ownerArr = this.props.company.owners
     for (let i = 0; i < ownerArr.length; i++) {
       if (ownerArr[i] === userId) {
         return true
       }
     }
-    return false;
+    return false
   }
 
   renderProfileEditbtn = () => {
-    if(this.checkProfileOwner()){
+    if (this.checkProfileOwner()) {
       return (
         <button
           onClick={() => this.setState({ showProfileModal: true })}
@@ -42,12 +42,12 @@ class Company extends React.Component {
         >
           <i className="edit outline icon"></i>
         </button>
-      );
+      )
     }
   };
 
   renderUploadProfilebtn = () => {
-    if(this.checkProfileOwner()){
+    if (this.checkProfileOwner()) {
       return (
         <button
           onClick={() => this.setState({ showUploadProfileModal: true })}
@@ -55,33 +55,35 @@ class Company extends React.Component {
         >
           <i className="edit outline icon"></i>
         </button>
-      );
+      )
     }
   }
 
-  render() {
-    console.log(this.props.company);
+  render () {
+    console.log(this.props.company)
     if (!this.props.company) {
-      return <div>Loading</div>;
+      return <div>Loading</div>
     }
-    const { company_email, company_name_en, website } = this.props.company;
+    // eslint-disable-next-line camelcase
+    const { company_email, company_name_en, website } = this.props.company
     return (
       <div className="company-container">
         <div className="ui container">
           <div className="ui grid">
             <div className="two wide column"></div>
-            <div className="four wide column" style={{ textAlign: "center" }}>
+            <div className="four wide column" style={{ textAlign: 'center' }}>
               <img
                 alt=""
                 className="company-img"
-                src={process.env.PUBLIC_URL + "/logoDefault.png"}
+                src={process.env.PUBLIC_URL + '/logoDefault.png'}
               ></img>
               <div>{this.props.company && this.renderUploadProfilebtn()}</div>
-             
+
             </div>
             <div className="six wide column">
               <div className="company-info">
                 <div>
+                  {/* eslint-disable-next-line camelcase */}
                   <h1 className="company-name">{company_name_en}</h1>
                   <div className="ui blue labels">
                     <div className="ui label">Happy</div>
@@ -100,6 +102,7 @@ class Company extends React.Component {
                   </div>
                   <a
                     className="ui yellow button"
+                    // eslint-disable-next-line camelcase
                     href={`mailto:${company_email}`}
                   >
                     Contact
@@ -116,12 +119,12 @@ class Company extends React.Component {
         {this.state.showProfileModal && <ProfileModal hideModal={this.hideModal} />}
         {this.state.showUploadProfileModal && <ProfileImgModal hideModal={this.hideModal} />}
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = ({ user, company }) => {
-  return { user, company: company.currentCompany };
-};
+  return { user, company: company.currentCompany }
+}
 
-export default connect(mapStateToProps, { fetchComp })(Company);
+export default connect(mapStateToProps, { fetchComp })(Company)
