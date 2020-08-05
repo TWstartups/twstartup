@@ -1,0 +1,129 @@
+.image-zone-component {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  .action-layer {
+    display: none;
+  }
+  &.editable-true {
+    &:hover{
+      .action-layer {
+        bottom: 0px;
+      }
+    }
+    .action-layer {
+      display: block;
+      bottom: -30%;
+      transition: .1s all ease-in-out;
+      position: absolute;
+      right: 0px;
+      left: 0px;
+      height: 30%;
+      width: 100%;
+      background: rgba(black, 0.5);
+      backdrop-filter: blur(2px);
+    }
+    .action-button {
+      user-select: none;
+      margin-top: 8%;
+      color: rgba(black, 0.8);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      display: inline-block;
+      padding: 5px 15px;
+      background: rgba(white, 0.5);
+      font-size: 0.8rem;
+      font-weight: 800;
+      opacity: 0.8;
+      &:hover{
+        background: rgba(white, 0.7);
+        cursor: pointer;
+        opacity: 1;
+      }
+      &:active{
+        background: rgba(white, 0.6);
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+
+.image-modal-container {
+  height: 300px;
+  width: 100%;
+  .dropzone-container {
+    outline: none;
+    padding: 30px;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background: white;
+    display: block;
+    user-select: none;
+    .dropzone {
+      cursor: pointer;
+      text-align: center;
+      padding: 25% 10px;
+      border-radius:10px;
+      // background: rgba(black, 0.1);
+      border: 4px dotted rgba(black, 0.3);
+      height: 100%;
+      width: 100%;
+      opacity: 0.8;
+      .upload-icon {
+        color: rgba(black, 0.4);
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+      .upload-text {
+        color: rgba(black, 0.6);
+        font-size: 1.5rem;
+        letter-spacing:1px;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+      &:hover{
+        opacity: 1;
+        border: 4px dotted rgba(black, 0.6);
+      }
+      &:active{
+        transform: scale(0.96);
+        .upload-icon {
+          color: rgba(black, 0.6);
+        }
+        .upload-text {
+          color: rgba(black, 0.7);
+        }
+      }
+      &.true-dropping {
+        background: rgba(black, 0.2);
+        .upload-icon {
+          color: rgba(black, 0.3);
+        }
+        .upload-text {
+          color: rgba(black, 0.6);
+        }
+      }
+    }
+  }
+}
+
+#modal {
+  .ui.dimmer.modals.visible.active {
+    background: rgba(black, 0.1);
+    backdrop-filter: blur(2px);
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    .ui.standard.modal.visible.active {
+      max-width: 400px;
+      min-height: 200px;
+      box-shadow: 0 0 30px -5px rgba(black, 0.2);
+      border-radius: 10px;
+      // padding: 20px;
+    }
+  }
+}
+
+@import './images.scss';

@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchComp } from '../../actions'
 import ProfileModal from './modals/ProfileModal'
-import ProfileImgModal from './modals/ProfileImgModal'
-// import Dropzone from 'react-dropzone'
+import ProfileImgModal from './imageZone/modal'
+import ImageZone from './imageZone'
+import './index.scss'
 
 class Company extends React.Component {
   state = {
@@ -65,17 +66,13 @@ class Company extends React.Component {
     }
     // eslint-disable-next-line camelcase
     const { company_email, company_name_en, website, logo } = this.props.company
-    console.log('logo', logo)
     return (
       <div className="company-container">
         <div className="ui container">
           <div className="ui grid">
             <div className="two wide column"></div>
             <div className="four wide column" style={{ textAlign: 'center' }}>
-              <div className="company-img">
-                <img alt="" className="company-img" src={logo}></img>
-              </div>
-              <div>{this.props.company && this.renderUploadProfilebtn()}</div>
+              <ImageZone className="company-img" src={logo} type='logo' editable={Boolean(this.props.company._id)} companyId={this.props.company._id} />
             </div>
             <div className="six wide column">
               <div className="company-info">

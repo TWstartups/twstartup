@@ -33,11 +33,7 @@ export default {
     }
   },
   imgUpload: async (req, res) => {
-    console.log('in img upload')
-
-    const imgURL = req.image
-    const { companyId, type } = req.body
-    // type = logo || banner_img || executive
+    const { imgURL, companyId, type } = req.query;
     const { exeIndex } = req.query ? req.query : ''
 
     try {
@@ -55,8 +51,7 @@ export default {
       }
       await findCompany.save()
 
-      const findupdatedComp = await Company.findById(findCompany._id)
-      res.status(200).json({ company: findupdatedComp })
+      res.status(200).json({ imgURL, companyId, type })
     } catch (err) {
       res.status(500).json({ message: 'something went wrong when saving the image' })
     }

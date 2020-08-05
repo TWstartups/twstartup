@@ -61,7 +61,7 @@ export default {
     const S3_REGION = 'us-east-1'
     const S3_ROOT_BUCKET = 'twstartup'
     const file = req.file
-    const { companyId, type } = req.body
+    const { companyId, type } = req.query
     if (!file) return res.status(500).json({ message: 'image bad' })
     if (!type) return res.status(500).json({ message: 'Uploading Photo Failed: type is not validate.' })
     const filenameParts = file.originalname.split('.')
