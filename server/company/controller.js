@@ -1,70 +1,65 @@
-import Company from './model';
+import Company from './model'
 
 export default {
   create: async (req, res) => {
-    res.status(200);
+    res.status(200)
   },
   edit: async (req, res) => {
     console.log('in edit')
-    const toEdit = req.body;
-    console.log(toEdit);
+    const toEdit = req.body
+    console.log(toEdit)
     try {
-      const editedCompany = await Company.findByIdAndUpdate(req.params.id, toEdit,{new:true})
-      res.status(200).json({company: editedCompany})
-    } catch(err) {
-      console.log(err);
-      res.status(500).json({message: "Somthing went wrong when updating company"});
+      const editedCompany = await Company.findByIdAndUpdate(req.params.id, toEdit, { new: true })
+      res.status(200).json({ company: editedCompany })
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ message: 'Somthing went wrong when updating company' })
     }
-   
   },
   show: async (req, res) => {
     try {
-      const foundCompany = await Company.findById(req.params.id);
-      res.status(200).json({company:foundCompany});
-    } catch(err) {
-      res.status(500).json({message: "something went wrong when getting the company info"});
+      const foundCompany = await Company.findById(req.params.id)
+      res.status(200).json({ company: foundCompany })
+    } catch (err) {
+      res.status(500).json({ message: 'something went wrong when getting the company info' })
     }
   },
   showAll: async (req, res) => {
-    try{
-      const allCompany = await Company.find();
-      res.status(200).json({companies:allCompany});
+    try {
+      const allCompany = await Company.find()
+      res.status(200).json({ companies: allCompany })
     } catch (err) {
-      res.status(500).json({message:"something went wrong when getting all company data"});
+      res.status(500).json({ message: 'something went wrong when getting all company data' })
     }
   },
   imgUpload: async (req, res) => {
-    console.log("in img upload");
-   
-    const imgURL = req.image;
-    const {companyId, type } = req.body;
-    //type = logo || banner_img || executive
-    const { exeIndex } = req.query? req.query: '';
+    console.log('in img upload')
+
+    const imgURL = req.image
+    const { companyId, type } = req.body
+    // type = logo || banner_img || executive
+    const { exeIndex } = req.query ? req.query : ''
 
     try {
-     
-      const findCompany = await Company.findById(companyId);
-      
+      const findCompany = await Company.findById(companyId)
+
       if (!findCompany) {
-        res.status(500).json({message: 'cannot find the company, try again'})
+        res.status(500).json({ message: 'cannot find the company, try again' })
       }
-      if (type == 'logo') {
-        findCompany.logo = imgURL;
-      } else if (type == 'banner_img') {
-        findCompany.banner_img = imgURL;
-      } else if (type == 'executive'){
-        findCompany.executives[exeIndex].image = imgURL;
+      if (type === 'logo') {
+        findCompany.logo = imgURL
+      } else if (type === 'banner_img') {
+        findCompany.banner_img = imgURL
+      } else if (type === 'executive') {
+        findCompany.executives[exeIndex].image = imgURL
       }
-      await findCompany.save();
-      
+      await findCompany.save()
+
       const findupdatedComp = await Company.findById(findCompany._id)
-      res.status(200).json({company: findupdatedComp})
-      
-    } catch(err) {
- 
-      res.status(500).json({message: "something went wrong when saving the image"})
+      res.status(200).json({ company: findupdatedComp })
+    } catch (err) {
+      res.status(500).json({ message: 'something went wrong when saving the image' })
     }
-    
   }
- 
+
 }

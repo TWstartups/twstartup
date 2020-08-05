@@ -1,48 +1,46 @@
-import AWS from 'aws-sdk';
-import config from '../config';
-import template from './emailTemplate';
-
+import AWS from 'aws-sdk'
+import config from '../config'
+import template from './emailTemplate'
 
 AWS.config.update({
   region: config.aws.ses.region,
   accessKeyId: config.aws.ses.accessKeyId,
   secretAccessKey: config.aws.ses.secretKey
-});
-
+})
 
 export default {
   send: (toEmail, name) => {
-    const html = template.getHTML(name);
-    return new AWS.SES({apiVersion: '2010-12-01'}).sendEmail({
+    const html = template.getHTML(name)
+    return new AWS.SES({ apiVersion: '2010-12-01' }).sendEmail({
       Destination: { /* required */
         ToAddresses: [
-          toEmail,
+          toEmail
           /* more items */
         ]
       },
       Message: { /* required */
         Body: { /* required */
           Html: {
-           Charset: "UTF-8",
-           Data: html
+            Charset: 'UTF-8',
+            Data: html
           },
           Text: {
-           Charset: "UTF-8",
-           Data: 'showw text'
+            Charset: 'UTF-8',
+            Data: 'showw text'
           }
-         },
-         Subject: {
+        },
+        Subject: {
           Charset: 'UTF-8',
           Data: 'You are approved'
-         }
-        },
+        }
+      },
       Source: 'twstartups.service@gmail.com', /* required */
       ReplyToAddresses: [
-         'twstartups.service@gmail.com',
+        'twstartups.service@gmail.com'
         /* more items */
-      ],
+      ]
     }).promise()
-  } 
+  }
 }
 
 // sendPromise

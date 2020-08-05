@@ -60,25 +60,22 @@ class Company extends React.Component {
   }
 
   render () {
-    console.log(this.props.company)
     if (!this.props.company) {
       return <div>Loading</div>
     }
     // eslint-disable-next-line camelcase
-    const { company_email, company_name_en, website } = this.props.company
+    const { company_email, company_name_en, website, logo } = this.props.company
+    console.log('logo', logo)
     return (
       <div className="company-container">
         <div className="ui container">
           <div className="ui grid">
             <div className="two wide column"></div>
             <div className="four wide column" style={{ textAlign: 'center' }}>
-              <img
-                alt=""
-                className="company-img"
-                src={process.env.PUBLIC_URL + '/logoDefault.png'}
-              ></img>
+              <div className="company-img">
+                <img alt="" className="company-img" src={logo}></img>
+              </div>
               <div>{this.props.company && this.renderUploadProfilebtn()}</div>
-
             </div>
             <div className="six wide column">
               <div className="company-info">
