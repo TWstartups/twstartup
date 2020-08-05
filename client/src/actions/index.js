@@ -173,7 +173,7 @@ export const fetchComp = (id) => async dispatch => {
   } catch (err) {
     dispatch({
       type: FETCH_COMP,
-      payload: { err: err.response.data.message }
+      payload: { err: 'err.response.data.message' }
     })
   }
 }

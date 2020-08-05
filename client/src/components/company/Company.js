@@ -60,6 +60,11 @@ class Company extends React.Component {
     }
   }
 
+  checkOwnership = () => {
+    const { user, company } = this.props;
+    return user.type === 'super' || (user._id && (company.owners.indexOf(user._id) > -1));
+  }
+
   render () {
     if (!this.props.company) {
       return <div>Loading</div>
@@ -72,7 +77,7 @@ class Company extends React.Component {
           <div className="ui grid">
             <div className="two wide column"></div>
             <div className="four wide column" style={{ textAlign: 'center' }}>
-              <ImageZone className="company-img" src={logo} type='logo' editable={Boolean(this.props.company._id)} companyId={this.props.company._id} />
+              <ImageZone className="company-img" src={logo} type='logo' editable={this.checkOwnership()} companyId={this.props.company._id} />
             </div>
             <div className="six wide column">
               <div className="company-info">
