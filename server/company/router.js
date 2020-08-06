@@ -1,21 +1,17 @@
-import Controller from './controller';
-import multer from 'multer';
-import express from 'express';
-import MDW from '../middlewares';
+import Controller from './controller'
+import multer from 'multer'
+import express from 'express'
+import middleware from '../middlewares'
 
-const router = express.Router();
+const router = express.Router()
 
-const upload = multer({
+const uploader = multer({
   storage: multer.memoryStorage()
 })
 
+router.get('/', (req, res) => res.json({ message: '/api/company connected' }))
+router.post('/create', Controller.create)
+router.put('/edit/:id', Controller.edit)
+router.post('/image', uploader.single('company_image_update'), middleware.imageUpload, Controller.imgUpload)
 
-router.get('/', (req, res)=> res.json({message:"/api/company connected"}))
-router.post('/create', Controller.create);
-router.put('/edit/:id', Controller.edit);
-router.post('/image', upload.single('company_images'), MDW.imageUpload, Controller.imgUpload);
-
-
-
-
-export default router;
+export default router

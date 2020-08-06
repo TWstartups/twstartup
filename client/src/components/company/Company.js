@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchComp } from '../../actions'
 import ProfileModal from './modals/ProfileModal'
-import ProfileImgModal from './modals/ProfileImgModal'
-// import Dropzone from 'react-dropzone'
+import ProfileImgModal from './imageZone/modal'
+import ImageZone from './imageZone'
+import './index.scss'
 
 class Company extends React.Component {
   state = {
@@ -59,26 +60,24 @@ class Company extends React.Component {
     }
   }
 
+  checkOwnership = () => {
+    const { user, company } = this.props
+    return user.type === 'super' || (user._id && (company.owners.indexOf(user._id) > -1))
+  }
+
   render () {
-    console.log(this.props.company)
     if (!this.props.company) {
       return <div>Loading</div>
     }
     // eslint-disable-next-line camelcase
-    const { company_email, company_name_en, website } = this.props.company
+    const { company_email, company_name_en, website, logo } = this.props.company
     return (
       <div className="company-container">
         <div className="ui container">
           <div className="ui grid">
             <div className="two wide column"></div>
             <div className="four wide column" style={{ textAlign: 'center' }}>
-              <img
-                alt=""
-                className="company-img"
-                src={process.env.PUBLIC_URL + '/logoDefault.png'}
-              ></img>
-              <div>{this.props.company && this.renderUploadProfilebtn()}</div>
-
+              <ImageZone className="company-img" src={logo} type='logo' editable={this.checkOwnership()} companyId={this.props.company._id} />
             </div>
             <div className="six wide column">
               <div className="company-info">

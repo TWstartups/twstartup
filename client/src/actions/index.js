@@ -34,11 +34,12 @@ export const logIn = formValues => async dispatch => {
     })
     history.push('/')
   } catch (err) {
-    console.log(err.response.data.message)
-    dispatch({
-      type: LOG_IN,
-      payload: { err: err.response.data.message }
-    })
+    if (err.response && err.response.status) {
+      dispatch({
+        type: LOG_IN,
+        payload: { err: err.response.data.message }
+      })
+    }
   }
 }
 
@@ -173,7 +174,7 @@ export const fetchComp = (id) => async dispatch => {
   } catch (err) {
     dispatch({
       type: FETCH_COMP,
-      payload: { err: err.response.data.message }
+      payload: { err: 'err.response.data.message' }
     })
   }
 }
