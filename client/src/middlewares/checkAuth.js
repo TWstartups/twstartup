@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Login from '../components/Auth/Login-old'
+import Login from '../components/Auth/Login'
 
 class AuthComponent extends React.Component {
   isLogIn () {
