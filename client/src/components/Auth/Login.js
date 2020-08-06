@@ -1,18 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { signUp, errMsgReset } from '../actions'
+import {signUp, errMsgReset, logIn} from '../../actions'
 import { Field, reduxForm } from 'redux-form'
-
-class Signup extends React.Component {
+import './index.scss'
+class Login extends React.Component {
   componentWillUnmount () {
     this.props.errMsgReset()
   }
 
   onSubmit = (formValues) => {
-    console.log(formValues)
-    const toSend = { ...formValues, type: 'normal' }
-    console.log(toSend)
-    this.props.signUp(toSend)
+    this.props.logIn(formValues)
   };
 
   renderError = ({ error, touched, active }) => {
@@ -144,7 +141,6 @@ class Signup extends React.Component {
         return (
           <React.Fragment>
             <Field name="referral_notes" component="textarea" tag="refer" label="Please specific the information."/>
-
           </React.Fragment>
         )
       }
@@ -153,24 +149,21 @@ class Signup extends React.Component {
 
   render () {
     return (
-      <div className="signup">
-        <div className="ui grid container ">
-          <div className="three column row">
-            <div className="column"></div>
-            <div className="column">
+      <div className="auth-container">
+        <div className="container">
+          <div className="row">
+            <div className="col-xs-12 col-sm-6 image-col">
+              <img src={require('../../assets/images/sign-up-image.svg')} alt='signup'/>
+            </div>
+            <div className="col-xs-12 col-sm-6 auth-col">
               <form
-                className="ui form error"
+                className="error main-form"
                 onSubmit={this.props.handleSubmit(this.onSubmit)}
               >
-                <div className="ui huge header">Signup</div>
-
-                <Field
-                  name="name"
-                  component={this.renderInput}
-                  label="Your Name"
-                  placeholder="Your Name"
-                  type="text"
-                />
+                <div className='marketing'>
+                  <div className="title">Sign in</div>
+                  <div className="sub-title">continue growing your <span className='primary-blue'>startup</span></div>
+                </div>
                 <Field
                   name="email"
                   component={this.renderInput}
@@ -185,39 +178,13 @@ class Signup extends React.Component {
                   placeholder="Password"
                   type="password"
                 />
-                <Field
-                  name="confirmPassword"
-                  component={this.renderInput}
-                  label="Confirm Password"
-                  placeholder="Confirm Password"
-                  type="password"
-                />
-                <div className="ui small header">Referrals (optional)</div>
-                <Field name="referral" component="select">
-                  <option />
-                  <option value="social_media">Social Media</option>
-                  <option value="accelerator">Accelerator</option>
-                  <option value="VC">VC</option>
-                  <option value="friend">Friend</option>
-                  <option value="other">Other</option>
-                </Field>
                 {this.renderOptions()}
-                <button className="ui button" type="submit">
-                  Sign up
+                <button className="primary" type="submit">
+                  Log In
                 </button>
                 {this.renderServerErr()}
               </form>
             </div>
-            <div className="column"></div>
-          </div>
-
-          <div className="three column row">
-            <div className="column"></div>
-            <div className="column">
-              <div className="ui divider"></div>
-              {/* <GoogleAuth/> */}
-            </div>
-            <div className="column"></div>
           </div>
         </div>
       </div>
@@ -233,25 +200,16 @@ const validate = (formValues) => {
   if (!formValues.password) {
     errors.password = 'You must enter an password.'
   }
-  if (!formValues.confirmPassword) {
-    errors.confirmPassword = 'Please confirm the password above.'
-  }
-  if (formValues.password && formValues.confirmPassword) {
-    if (formValues.password !== formValues.confirmPassword) {
-      errors.confirmPassword = 'Please make sure your password match.'
-    }
-  }
-
   return errors
 }
 
-const mapStateToProps = ({ user, form }) => {
-  return { user, errMsg: user.errMsg, formValues: form.signUp }
+const mapStateToProps = ({ user }) => {
+  return { user, errMsg: user.errMsg }
 }
 
 const formWrapped = reduxForm({
-  form: 'signUp',
+  form: 'logIn',
   validate
-})(Signup)
+})(Login)
 
-export default connect(mapStateToProps, { signUp, errMsgReset })(formWrapped)
+export default connect(mapStateToProps, { logIn, errMsgReset })(formWrapped)

@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logIn, errMsgReset } from '../actions'
+import { logIn, errMsgReset } from '../../actions'
 import { Field, reduxForm } from 'redux-form'
+import './index.scss'
 
 class Login extends React.Component {
   componentWillUnmount () {
@@ -56,11 +57,11 @@ class Login extends React.Component {
   render () {
     console.log(this.props)
     return (
-      <div className="login">
-        <div className="ui grid container ">
-          <div className="three column row">
-            <div className="column"></div>
-            <div className="column">
+      <div className="auth-container">
+        <div className="container">
+          <div className="row">
+            <div className="col-xs-12 col-sm-6"></div>
+            <div className="col-xs-12 col-sm-6">
               <form
                 className="ui form error"
                 onSubmit={this.props.handleSubmit(this.onSubmit)}
@@ -87,16 +88,6 @@ class Login extends React.Component {
                 {this.renderServerErr()}
               </form>
             </div>
-            <div className="column"></div>
-          </div>
-
-          <div className="three column row">
-            <div className="column"></div>
-            <div className="column">
-              <div className="ui divider"></div>
-              {/* <GoogleAuth/> */}
-            </div>
-            <div className="column"></div>
           </div>
         </div>
       </div>
