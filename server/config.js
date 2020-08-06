@@ -1,17 +1,17 @@
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'
 import path from 'path'
 
-if (process.env.NODE_ENV != 'production') {
-    dotenv.config({ path: path.resolve(__dirname, '.env') });
-  }
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: path.resolve(__dirname, '.env') })
+}
 export default {
   jwt_secret: process.env.JWT_SECRET || 'jwt_secret',
-	mongoose: {
-		uri: process.env.MONGODB_URI || 'mongodb://localhost/twstartups'
+  mongoose: {
+    uri: process.env.MONGODB_URI || 'mongodb://localhost/twstartups'
   },
   twilio: {
-        sid: process.env.TWILIO_SID,
-        token: process.env.TWILIO_TOKEN
+    sid: process.env.TWILIO_SID,
+    token: process.env.TWILIO_TOKEN
   },
   environment: process.env.NODE_ENV || 'development',
   aws: {
@@ -22,9 +22,9 @@ export default {
     },
     s3: {
       accessKeyId: process.env.S3AWSAccessKeyId || '',
-      secretKey: process.env.S3AWSAccessKey || '',
-      region: 'us-east-1'      
+      secretKey: process.env.S3AWSSecretKey || '',
+      region: 'us-east-1'
     }
-    
+
   }
 }

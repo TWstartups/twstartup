@@ -1,47 +1,46 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const newsSchema = new mongoose.Schema({
   og_title: {
-    type: String,
+    type: String
   },
   og_description: {
-    type: String,
+    type: String
   },
   og_image: {
-    type: String,
+    type: String
   },
   note: {
     type: String
   },
   link: {
-    type: String,
+    type: String
   }
 })
 
 const eventSchema = new mongoose.Schema({
   location: {
-    type: String,
+    type: String
   },
   from_time: {
-    type: Date,
+    type: Date
   },
   to_time: {
     type: Date
   },
   event_name: {
-    type: String,
+    type: String
   },
   memo: {
     type: String
   },
   link: {
-    type: String,
+    type: String
   }
 })
 
-const executiveSchema = new mongoose.Schema ({
+const executiveSchema = new mongoose.Schema({
   title: {
     type: String
   },
@@ -62,22 +61,22 @@ const executiveSchema = new mongoose.Schema ({
 
 const CompanySchema = mongoose.Schema({
   company_name_en: {
-    type: String,
+    type: String
   },
   company_name_chi: {
-    type: String,
+    type: String
   },
   introduction: {
     type: String
   },
   website: {
-    type: String,
+    type: String
   },
   pitch_deck: {
-    typs:String
+    typs: String
   },
   company_email: {
-    type: String,
+    type: String
   },
   key_point: [{
     type: String
@@ -91,15 +90,15 @@ const CompanySchema = mongoose.Schema({
   logo: {
     type: String
   },
-  events:[eventSchema],
-  news:[newsSchema],
-  owners:[{
+  events: [eventSchema],
+  news: [newsSchema],
+  owners: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
   }],
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
   candidate: {
     type: Schema.Types.ObjectId,
@@ -112,8 +111,8 @@ const CompanySchema = mongoose.Schema({
   video_link: {
     type: String
   }
-});
+})
 
-const Company = mongoose.model("Company", CompanySchema);
+const Company = mongoose.model('Company', CompanySchema)
 
-module.exports = Company;
+module.exports = Company

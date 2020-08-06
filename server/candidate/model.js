@@ -1,33 +1,33 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const CandidateSchema = mongoose.Schema({
   company_name_en: {
-    type: String,
+    type: String
   },
   company_name_chi: {
-    type: String,
+    type: String
   },
   website: {
-    type: String,
+    type: String
   },
   company_email: {
-    type: String,
+    type: String
   },
-  news:{
-    type: String,
+  news: {
+    type: String
   },
   other: {
-    type: String,
+    type: String
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
-  approve_status:{
+  approve_status: {
     type: Boolean
   },
-  applicant:{
+  applicant: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
@@ -35,8 +35,8 @@ const CandidateSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }
-});
+})
 
-const Candidate = mongoose.model("Candidate", CandidateSchema);
+const Candidate = mongoose.model('Candidate', CandidateSchema)
 
-module.exports = Candidate;
+module.exports = Candidate
