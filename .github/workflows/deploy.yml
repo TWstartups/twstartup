@@ -17,13 +17,12 @@ jobs:
         node-version: [14.x]
 
     steps:
-      - uses: actions/checkout@master
-      - name: publish:starters
-        uses: TWstartups/twstartups@master
+      - name: GitHub Action to Push Subdirectories to Another Repo
+        uses: johno/actions-push-subdirectories@v0.0.1
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: ./client/build TWstartups starter-name
+          args: ./docs johno
         
       
