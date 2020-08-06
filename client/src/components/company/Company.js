@@ -61,8 +61,8 @@ class Company extends React.Component {
   }
 
   checkOwnership = () => {
-    const { user, company } = this.props;
-    return user.type === 'super' || (user._id && (company.owners.indexOf(user._id) > -1));
+    const { user, company } = this.props
+    return user.type === 'super' || (user._id && (company.owners.indexOf(user._id) > -1))
   }
 
   render () {
