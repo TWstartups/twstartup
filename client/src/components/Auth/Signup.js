@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { signUp, errMsgReset } from '../../actions'
 import { Field, reduxForm } from 'redux-form'
 import './index.scss'
+
 class Signup extends React.Component {
   componentWillUnmount () {
     this.props.errMsgReset()
@@ -72,36 +73,33 @@ class Signup extends React.Component {
       if (referType === 'social_media') {
         return (
           <React.Fragment>
-            <label>
+            <div className='radio-select'>
               <Field
                 name="referral_notes"
                 component="input"
                 type="radio"
                 value="Facebook"
                 tag="refer"
-              />{' '}
-              Facebook
-            </label>
-            <label>
+              />{' '}Facebook
+            </div>
+            <div className='radio-select'>
               <Field
                 name="referral_notes"
                 component="input"
                 type="radio"
                 value="LinkedIn"
                 tag="refer"
-              />{' '}
-              LinkedIn
-            </label>
-            <label>
+              />{' '}LinkedIn
+            </div>
+            <div className='radio-select'>
               <Field
                 name="referral_notes"
                 component="input"
                 type="radio"
                 value="Other"
                 tag="refer"
-              />{' '}
-              Other
-            </label>
+              />{' '}Other
+            </div>
           </React.Fragment>
         )
       } else if (referType === 'accelerator') {

@@ -54,7 +54,7 @@ class Index extends React.Component {
     return (
       <div className="ui menu global-navbar">
         <Link to='/'>
-            <div className='logo'>TW<span>startups</span></div>
+          <div className='logo'>TW<span>startups</span></div>
         </Link>
         <div className="right menu">
           {this.renderNav()}

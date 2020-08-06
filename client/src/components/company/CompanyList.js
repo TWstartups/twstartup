@@ -19,6 +19,7 @@ class CompanyList extends React.Component {
   componentDidMount () {
     this.props.fetchComps()
   }
+
   render () {
     return (
       <div className="ui container">

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { errMsgReset, logIn } from '../../actions'
 import { Field, reduxForm } from 'redux-form'
 import './index.scss'
+
 class Login extends React.Component {
   componentWillUnmount () {
     this.props.errMsgReset()
@@ -44,7 +45,6 @@ class Login extends React.Component {
     if (meta.error && meta.touched) {
       className = 'field error'
     }
-
     if (tag === 'refer') {
       className = 'field'
     }
@@ -62,90 +62,6 @@ class Login extends React.Component {
       </div>
     )
   };
-
-  renderOptions = () => {
-    if (this.props.formValues && this.props.formValues.values) {
-      const referType = this.props.formValues.values.referral
-      if (referType === 'social_media') {
-        return (
-          <React.Fragment>
-            <label>
-              <Field
-                name="referral_notes"
-                component="input"
-                type="radio"
-                value="Facebook"
-                tag="refer"
-              />{' '}
-              Facebook
-            </label>
-            <label>
-              <Field
-                name="referral_notes"
-                component="input"
-                type="radio"
-                value="LinkedIn"
-                tag="refer"
-              />{' '}
-              LinkedIn
-            </label>
-            <label>
-              <Field
-                name="referral_notes"
-                component="input"
-                type="radio"
-                value="Other"
-                tag="refer"
-              />{' '}
-              Other
-            </label>
-          </React.Fragment>
-        )
-      } else if (referType === 'accelerator') {
-        return (
-          <React.Fragment>
-            <Field
-              name="referral_notes"
-              component={this.renderInput}
-              type="text"
-              label="please put the name of the accelerator"
-              tag="refer"
-            />
-          </React.Fragment>
-        )
-      } else if (referType === 'VC') {
-        return (
-          <React.Fragment>
-            <Field
-              name="referral_notes"
-              component={this.renderInput}
-              type="text"
-              tag="refer"
-              label="please put the name of the VC"
-            />
-          </React.Fragment>
-        )
-      } else if (referType === 'friend') {
-        return (
-          <React.Fragment>
-            <Field
-              name="referral_notes"
-              component={this.renderInput}
-              type="text"
-              label="please put the name"
-              tag="refer"
-            />
-          </React.Fragment>
-        )
-      } else if (referType === 'other') {
-        return (
-          <React.Fragment>
-            <Field name="referral_notes" component="textarea" tag="refer" label="Please specific the information."/>
-          </React.Fragment>
-        )
-      }
-    }
-  }
 
   render () {
     return (
@@ -178,7 +94,6 @@ class Login extends React.Component {
                   placeholder="Password"
                   type="password"
                 />
-                {this.renderOptions()}
                 <button className="primary" type="submit">
                   Log In
                 </button>
