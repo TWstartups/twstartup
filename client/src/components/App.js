@@ -1,6 +1,6 @@
 import React from 'react'
-import Signup from './Signup'
-import Login from './Login'
+import Signup from './Auth/Signup'
+import Login from './Auth/Login'
 import DashBoard from './DashBoard'
 import CompanyList from './company/CompanyList'
 import ApplyConfirm from './ApplyConfirm'
@@ -26,7 +26,6 @@ class App extends React.Component {
     return (
       <>
         <Nav/>
-
         <Switch>
           <Route exact path="/" component={CompanyList} />
           <Route path="/signup" component={Signup} />

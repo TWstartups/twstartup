@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logIn, errMsgReset } from '../actions'
+import { errMsgReset, logIn } from '../../actions'
 import { Field, reduxForm } from 'redux-form'
+import './index.scss'
 
 class Login extends React.Component {
   componentWillUnmount () {
-    // reset props.errMsg with new Action
     this.props.errMsgReset()
   }
 
@@ -13,8 +13,15 @@ class Login extends React.Component {
     this.props.logIn(formValues)
   };
 
-  renderError = ({ error, touched }) => {
+  renderError = ({ error, touched, active }) => {
     if (touched && error) {
+      if (!active && error.confirmPassword) {
+        return (
+          <div className="ui error message">
+            <div className="header">{error}</div>
+          </div>
+        )
+      }
       return (
         <div className="ui error message">
           <div className="header">{error}</div>
@@ -33,12 +40,15 @@ class Login extends React.Component {
     }
   };
 
-  renderInput = ({ input, label, placeholder, meta, type }) => {
-    const className = `required field ${
-      meta.error && meta.touched ? 'error' : ''
-    }`
-
-    console.log('meta', meta)
+  renderInput = ({ tag, input, label, placeholder, meta, type }) => {
+    let className = 'required field'
+    if (meta.error && meta.touched) {
+      className = 'field error'
+    }
+    if (tag === 'refer') {
+      className = 'field'
+    }
+    console.log(className)
     return (
       <div className={className}>
         <label>{label}</label>
@@ -54,18 +64,22 @@ class Login extends React.Component {
   };
 
   render () {
-    console.log(this.props)
     return (
-      <div className="login">
-        <div className="ui grid container ">
-          <div className="three column row">
-            <div className="column"></div>
-            <div className="column">
+      <div className="auth-container">
+        <div className="container">
+          <div className="row">
+            <div className="col-xs-12 col-sm-6 image-col">
+              <img src={require('../../assets/images/sign-in-image.svg')} alt='signup'/>
+            </div>
+            <div className="col-xs-12 col-sm-6 auth-col">
               <form
-                className="ui form error"
+                className="error main-form"
                 onSubmit={this.props.handleSubmit(this.onSubmit)}
               >
-                <div className="ui huge header">Log in</div>
+                <div className='marketing'>
+                  <div className="title">Sign in</div>
+                  <div className="sub-title">continue growing your <span className='primary-blue'>startup</span></div>
+                </div>
                 <Field
                   name="email"
                   component={this.renderInput}
@@ -80,23 +94,12 @@ class Login extends React.Component {
                   placeholder="Password"
                   type="password"
                 />
-
-                <button className="ui button" type="submit">
-                  Log in
+                <button className="primary" type="submit">
+                  Log In
                 </button>
                 {this.renderServerErr()}
               </form>
             </div>
-            <div className="column"></div>
-          </div>
-
-          <div className="three column row">
-            <div className="column"></div>
-            <div className="column">
-              <div className="ui divider"></div>
-              {/* <GoogleAuth/> */}
-            </div>
-            <div className="column"></div>
           </div>
         </div>
       </div>

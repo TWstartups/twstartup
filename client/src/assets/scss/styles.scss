@@ -1,4 +1,15 @@
-.signup, .login, .candidate-form, .apply-confirm, .show-application{
+$main-color: #54d1db;
+$red-color: #de624f;
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import './form.scss';
+
+*, body, div, h1, h2, h3, h4, h5 {
+  font-family: 'Poppins', sans-serif;
+}
+.primary-blue {
+  color: $main-color !important;
+}
+.candidate-form, .apply-confirm, .show-application{
   margin-top:15vh;
   margin-bottom: 15vh;
 }
