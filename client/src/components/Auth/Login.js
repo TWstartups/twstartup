@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {signUp, errMsgReset, logIn} from '../../actions'
+import { errMsgReset, logIn } from '../../actions'
 import { Field, reduxForm } from 'redux-form'
 import './index.scss'
 class Login extends React.Component {
@@ -153,7 +153,7 @@ class Login extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-6 image-col">
-              <img src={require('../../assets/images/sign-up-image.svg')} alt='signup'/>
+              <img src={require('../../assets/images/sign-in-image.svg')} alt='signup'/>
             </div>
             <div className="col-xs-12 col-sm-6 auth-col">
               <form

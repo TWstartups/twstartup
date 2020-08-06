@@ -30,16 +30,12 @@ class Index extends React.Component {
     if (!this.props.user.isLogIn) {
       return (
         <React.Fragment>
-          <div className="nav-item">
-            <Link className="login" to="/login">
-                Log In
-            </Link>
-          </div>
-          <div className="nav-item highlight">
-            <Link className="signup" to="/signup">
-                Sign Up
-            </Link>
-          </div>
+          <Link className="login" to="/login">
+            <div className="nav-item">Log In</div>
+          </Link>
+          <Link className="signup" to="/signup">
+            <div className="nav-item highlight">Sign Up</div>
+          </Link>
         </React.Fragment>
       )
     } else if (this.props.user.type === 'normal' && !this.props.user.candidate && !this.props.candidate.candidate) {

@@ -7,7 +7,6 @@ class DashBoard extends React.Component {
       <div>
         <h2>This is Dashboard
         </h2>
-
       </div>
     )
   }
