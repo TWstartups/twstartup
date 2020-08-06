@@ -25,10 +25,10 @@ jobs:
     - run: npm install --prefix client
     - run: npm run build --if-present --prefix client
     - name: deploy changes to a repo
-    - uses: sugatpoudel/git-deploy@v0.1
-    with:
-      changes: public
-      repository: git@github.com:TWstartups/twstartups.github.io.git
-      ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDMt8DfeKLuX9t449O6N1FjQjRHR6wSbxBxVWXunQUlUDSot908x9er7DhxWzA6r1GQHBdRjF+bs04sBvXKnJ39KlnhaBzJ2kTkU4lu2yEBf3qeBLslTTvoCqhKDgMUH3g3c2usxGvLTpMsjSz2JynSp25s9qi+TjGQaYWnsunOUqTzzDAUz2ozpWqDBh8DR7HTycPVirKDK/P8ngDv/DJL2s3LYTARVu44Xix0/jHe+5rAIk1Q/S1KDLXSfQ34nC36CrzTpLe0S6FbC66s3/gIfVyx1bSEv87jPoecaJgiHVREPuQNuc0+Yah18G4kBiE9zKE9dv5ewp9NzS9mcuwsfAhNDzz45NVpbucxScIjymeHL6X6SMtqTcdHx13pfCp0TGUn+Lc1v23dGncDHN0hV1nO+EfAAWH1mC6A8f+0PZJsAvyhPME2s/Slhr60yhMHyN9kU7XnK9mmKt1LtZ3CDoJLBf/blP41NkcPm85mEHr4GVKcOrD0s0OcqclFoCs= amazingshellyyy@amazinglyyysMBP.hsd1.ca.comcast.net
-      name: user
-      email: amazingshellyyy@email.com
+    - uses: shelly/git-deploy@v0.1
+      with:
+        changes: ./client/build
+        repository: git@github.com:TWstartups/twstartups.github.io.git
+        ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDMt8DfeKLuX9t449O6N1FjQjRHR6wSbxBxVWXunQUlUDSot908x9er7DhxWzA6r1GQHBdRjF+bs04sBvXKnJ39KlnhaBzJ2kTkU4lu2yEBf3qeBLslTTvoCqhKDgMUH3g3c2usxGvLTpMsjSz2JynSp25s9qi+TjGQaYWnsunOUqTzzDAUz2ozpWqDBh8DR7HTycPVirKDK/P8ngDv/DJL2s3LYTARVu44Xix0/jHe+5rAIk1Q/S1KDLXSfQ34nC36CrzTpLe0S6FbC66s3/gIfVyx1bSEv87jPoecaJgiHVREPuQNuc0+Yah18G4kBiE9zKE9dv5ewp9NzS9mcuwsfAhNDzz45NVpbucxScIjymeHL6X6SMtqTcdHx13pfCp0TGUn+Lc1v23dGncDHN0hV1nO+EfAAWH1mC6A8f+0PZJsAvyhPME2s/Slhr60yhMHyN9kU7XnK9mmKt1LtZ3CDoJLBf/blP41NkcPm85mEHr4GVKcOrD0s0OcqclFoCs= amazingshellyyy@amazinglyyysMBP.hsd1.ca.comcast.net
+        name: shelly
+        email: amazingshellyyy@email.com
