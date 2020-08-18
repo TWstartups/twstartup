@@ -60,10 +60,10 @@ const executiveSchema = new mongoose.Schema({
 })
 
 const CompanySchema = mongoose.Schema({
-  company_name_en: {
+  companyNameEn: {
     type: String
   },
-  company_name_chi: {
+  companyNameChi: {
     type: String
   },
   introduction: {
@@ -75,7 +75,7 @@ const CompanySchema = mongoose.Schema({
   pitch_deck: {
     typs: String
   },
-  company_email: {
+  companyEmail: {
     type: String
   },
   key_point: [{

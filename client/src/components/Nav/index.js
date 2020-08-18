@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { logOut } from '../actions'
+import { Link } from 'react-router-dom'
+import { logOut } from '../../actions'
+import './index.scss'
 
-class Nav extends React.Component {
+class Index extends React.Component {
   handleLogOut = () => {
     this.props.logOut()
   };
@@ -11,14 +12,14 @@ class Nav extends React.Component {
   renderBtn = (firstTo, firstText) => {
     return (
       <React.Fragment>
-        <div className="item">
-          <Link className="ui button primary" to={firstTo}>
+        <div className="nav-item highlight">
+          <Link className="" to={firstTo}>
             {firstText}
           </Link>
         </div>
-        <div className="item">
-          <div className="ui button secondary" onClick={this.handleLogOut}>
-          Log out
+        <div className="nav-item">
+          <div className="" onClick={this.handleLogOut}>
+            Log out
           </div>
         </div>
       </React.Fragment>
@@ -26,19 +27,16 @@ class Nav extends React.Component {
   }
 
   renderNav = () => {
+    console.log('user', this.props.user)
     if (!this.props.user.isLogIn) {
       return (
         <React.Fragment>
-          <div className="item">
-            <Link className="ui button primary" to="/signup">
-          Sign Up
-            </Link>
-          </div>
-          <div className="item">
-            <Link className="ui button primary" to="/login">
-          Log In
-            </Link>
-          </div>
+          <Link className="login" to="/login">
+            <div className="nav-item">Log In</div>
+          </Link>
+          <Link className="signup" to="/signup">
+            <div className="nav-item highlight">Sign Up</div>
+          </Link>
         </React.Fragment>
       )
     } else if (this.props.user.type === 'normal' && !this.props.user.candidate && !this.props.candidate.candidate) {
@@ -55,9 +53,9 @@ class Nav extends React.Component {
 
   render () {
     return (
-      <div className="ui menu">
+      <div className="ui menu global-navbar">
         <Link to='/'>
-          <img alt="twstartups logo" src={require('../assets/images/logo.svg')} style={{}}></img>
+          <div className='logo'>TW<span>startups</span></div>
         </Link>
         <div className="right menu">
           {this.renderNav()}
@@ -71,4 +69,4 @@ const mapStateToProp = ({ user, candidate }) => {
   return { user, candidate }
 }
 
-export default connect(mapStateToProp, { logOut })(Nav)
+export default connect(mapStateToProp, { logOut })(Index)

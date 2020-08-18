@@ -44,7 +44,7 @@ class ShowApplication extends React.Component {
               </div>
               <div className="five wide column">
                 <div className="ui small header">Company Name in Chinese</div>
-                <div>{this.props.candidate.company_name_chi}</div>
+                <div>{this.props.candidate.companyNameChi}</div>
               </div>
               <div className="five wide column">
                 <div className="ui small header">Company Contact Email</div>

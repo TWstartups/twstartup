@@ -23,7 +23,7 @@ class AdminDashBoard extends React.Component {
         <tr key={candidate._id}>
           <td>{moment(candidate.createdAt).format('l')}</td>
           <td>{candidate.companyNameEn}</td>
-          <td>{candidate.company_name_chi}</td>
+          <td>{candidate.companyNameChi}</td>
           <td><a target="_blank" rel="noopener noreferrer" href={candidate.website} style={{ cursor: 'pointer' }}>{candidate.website}</a></td>
           <td><a target="_blank" rel="noopener noreferrer" href={candidate.news} style={{ cursor: 'pointer' }}>{candidate.news}</a></td>
           <td><a target="_blank" rel="noopener noreferrer" href={candidate.other} style={{ cursor: 'pointer' }}>{candidate.other}</a></td>

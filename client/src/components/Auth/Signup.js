@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { signUp, errMsgReset } from '../actions'
+import { signUp, errMsgReset } from '../../actions'
 import { Field, reduxForm } from 'redux-form'
+import './index.scss'
 
 class Signup extends React.Component {
   componentWillUnmount () {
@@ -72,36 +73,33 @@ class Signup extends React.Component {
       if (referType === 'social_media') {
         return (
           <React.Fragment>
-            <label>
+            <div className='radio-select'>
               <Field
                 name="referral_notes"
                 component="input"
                 type="radio"
                 value="Facebook"
                 tag="refer"
-              />{' '}
-              Facebook
-            </label>
-            <label>
+              />{' '}Facebook
+            </div>
+            <div className='radio-select'>
               <Field
                 name="referral_notes"
                 component="input"
                 type="radio"
                 value="LinkedIn"
                 tag="refer"
-              />{' '}
-              LinkedIn
-            </label>
-            <label>
+              />{' '}LinkedIn
+            </div>
+            <div className='radio-select'>
               <Field
                 name="referral_notes"
                 component="input"
                 type="radio"
                 value="Other"
                 tag="refer"
-              />{' '}
-              Other
-            </label>
+              />{' '}Other
+            </div>
           </React.Fragment>
         )
       } else if (referType === 'accelerator') {
@@ -144,7 +142,6 @@ class Signup extends React.Component {
         return (
           <React.Fragment>
             <Field name="referral_notes" component="textarea" tag="refer" label="Please specific the information."/>
-
           </React.Fragment>
         )
       }
@@ -153,22 +150,27 @@ class Signup extends React.Component {
 
   render () {
     return (
-      <div className="signup">
-        <div className="ui grid container ">
-          <div className="three column row">
-            <div className="column"></div>
-            <div className="column">
+      <div className="auth-container">
+        <div className="container">
+          <div className="row">
+            <div className="col-xs-12 col-sm-6 image-col">
+              <img src={require('../../assets/images/sign-up-image.svg')} alt='signup'/>
+            </div>
+            <div className="col-xs-12 col-sm-6 auth-col">
               <form
-                className="ui form error"
+                className="error main-form"
                 onSubmit={this.props.handleSubmit(this.onSubmit)}
               >
-                <div className="ui huge header">Signup</div>
+                <div className='marketing'>
+                  <div className="title">Signup</div>
+                  <div className="sub-title">bootup your <span className='primary-blue'>startup</span> now!</div>
+                </div>
 
                 <Field
                   name="name"
                   component={this.renderInput}
                   label="Your Name"
-                  placeholder="Your Name"
+                  placeholder="Name"
                   type="text"
                 />
                 <Field
@@ -192,9 +194,9 @@ class Signup extends React.Component {
                   placeholder="Confirm Password"
                   type="password"
                 />
-                <div className="ui small header">Referrals (optional)</div>
+                <label>Referrals (optional)</label>
                 <Field name="referral" component="select">
-                  <option />
+                  <option>choose one</option>
                   <option value="social_media">Social Media</option>
                   <option value="accelerator">Accelerator</option>
                   <option value="VC">VC</option>
@@ -202,22 +204,12 @@ class Signup extends React.Component {
                   <option value="other">Other</option>
                 </Field>
                 {this.renderOptions()}
-                <button className="ui button" type="submit">
+                <button className="primary" type="submit">
                   Sign up
                 </button>
                 {this.renderServerErr()}
               </form>
             </div>
-            <div className="column"></div>
-          </div>
-
-          <div className="three column row">
-            <div className="column"></div>
-            <div className="column">
-              <div className="ui divider"></div>
-              {/* <GoogleAuth/> */}
-            </div>
-            <div className="column"></div>
           </div>
         </div>
       </div>

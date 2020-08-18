@@ -73,6 +73,8 @@ export default {
     }
     const AWS_KEY_ID = config.aws.s3.accessKeyId
     const AWS_SECRET = config.aws.s3.secretKey
+    console.log('id',AWS_KEY_ID)
+    console.log('secret',AWS_SECRET)
     AWS.config.update({
       accessKeyId: AWS_KEY_ID,
       secretAccessKey: AWS_SECRET,
@@ -87,6 +89,7 @@ export default {
       ACL: 'public-read'
     }, async (err, result) => {
       console.log(err)
+      console.log('err in img upload',{err})
       if (err) return res.status(500).json({ message: 'Uploading Photo Failed' })
 
       const imageURL = `https://${S3_ROOT_BUCKET}.s3.amazonaws.com/${uuidKey}`

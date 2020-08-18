@@ -67,7 +67,7 @@ class CandidateForm extends React.Component {
                 type="text"
               />
               <Field
-                name="company_name_chi"
+                name="companyNameChi"
                 component={this.renderInput}
                 label="Company Name in Chinese"
                 placeholder=""
@@ -122,11 +122,11 @@ const validate = (formValues) => {
   if (!formValues.companyNameEn) {
     errors.companyNameEn = 'Please enter an English company name.'
   }
-  if (!formValues.company_name_chi) {
-    errors.company_name_chi = 'Please enter a Chinese company name.'
+  if (!formValues.companyNameChi) {
+    errors.companyNameChi = 'Please enter a Chinese company name.'
   }
-  // if (formValues.company_name_chi && !formValues.company_name_chi.match(/[\u3400-\u9FBF]/)) {
-  //   errors.company_name_chi = "Please enter a company name in Chinese."
+  // if (formValues.companyNameChi && !formValues.companyNameChi.match(/[\u3400-\u9FBF]/)) {
+  //   errors.companyNameChi = "Please enter a company name in Chinese."
   // }
   if (!formValues.website) {
     errors.website = 'Please provide a website.'
