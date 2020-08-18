@@ -9,7 +9,7 @@
 //   onSubmit = (formValues) => {
 //     console.log('formValues', formValues)
 
-//     const bodyToSend = _.pick(formValues, ['company_name_en', 'company_email', 'website'])
+//     const bodyToSend = _.pick(formValues, ['companyNameEn', 'companyEmail', 'website'])
 //     console.log('tosend', bodyToSend)
 
 //     // this.props.hideModal();
