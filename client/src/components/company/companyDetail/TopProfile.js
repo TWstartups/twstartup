@@ -22,6 +22,7 @@ class TopProfile extends React.Component {
   checkProfileOwner = () => {
     const userId = this.props.user._id
     const ownerArr = this.props.company.owners
+    console.log('this.props', this.props)
     for (let i = 0; i < ownerArr.length; i++) {
       if (ownerArr[i] === userId) {
         return true
@@ -45,6 +46,7 @@ class TopProfile extends React.Component {
 
   render () {
     const { companyEmail, companyNameEn, website, logo } = this.props.company
+    console.log('logo in company detail', logo)
     return (
       <div className="ui container">
         <div className="ui grid">

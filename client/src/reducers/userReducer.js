@@ -17,17 +17,17 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, errMsg: action.payload.err }
     }
     // put jwt in local storage for future verify login
-    localStorage.setItem('token', action.payload.token)
+    localStorage.setItem('tw_token', action.payload.token)
     // return userObj
     return { ...state, ...action.payload.user, isLogIn: true }
   case LOG_IN:
     if (action.payload.err) {
       return { ...state, errMsg: action.payload.err }
     }
-    localStorage.setItem('token', action.payload.token)
+    localStorage.setItem('tw_token', action.payload.token)
     return { ...state, ...action.payload.user, isLogIn: true }
   case LOG_OUT:
-    localStorage.removeItem('token')
+    localStorage.removeItem('tw_token')
     return { ...INITIAL_STATE }
   case ERR_MSG_RESET:
     return { ...state, errMsg: null }

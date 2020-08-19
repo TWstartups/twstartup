@@ -1,8 +1,5 @@
 import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS, APPROVE_CANDI, FETCH_COMPS, FETCH_COMP, EDIT_COMP } from './types'
-import user from '../apis/user'
-import candidate from '../apis/candidate'
-import publicApi from '../apis/public'
-import company from '../apis/company'
+import privateAPI from '../apis/private'
 import history from '../history'
 
 const token = localStorage.getItem('token')
@@ -10,7 +7,7 @@ const token = localStorage.getItem('token')
 export const signUp = formValues => async dispatch => {
   // redux thunk will take the returned function and invoke it, after that, it will pass it back to the dispatch and go through reduc thunk again. this time, the disptch is return a plain opbject which redux thunk will not do anything but pass it through.
   try {
-    const response = await user.post('./signup', { formValues })
+    const response = await privateAPI.post('./signup', { formValues })
     dispatch({
       type: SIGN_UP,
       payload: response.data
@@ -27,7 +24,7 @@ export const signUp = formValues => async dispatch => {
 
 export const logIn = formValues => async dispatch => {
   try {
-    const response = await user.post('./login', { formValues })
+    const response = await privateAPI.post('./login', { formValues })
     dispatch({
       type: LOG_IN,
       payload: response.data
@@ -58,7 +55,7 @@ export const errMsgReset = () => {
 
 export const fetchUser = () => async dispatch => {
   try {
-    const response = await user.get('./profile')
+    const response = await privateAPI.get('./profile')
     dispatch({
       type: FETCH_USER,
       payload: response.data
@@ -73,14 +70,16 @@ export const createCandi = formValues => async dispatch => {
     history.push('/login')
   }
   try {
-    const response = await candidate.post('/create', { formValues })
+    const response = await privateAPI.post('/api/candidate/create', { formValues })
 
     dispatch({
       type: CREATE_CANDI,
       payload: response.data
     })
+    console.log('here after candi')
     history.push('/apply/success')
   } catch (err) {
+    console.log(err.response)
     if (err.response.status === 403) {
       window.location = '#/login'
     }
@@ -97,7 +96,7 @@ export const fetchCandi = (candidateId) => async dispatch => {
     history.push('/login')
   }
   try {
-    const response = await candidate.get(`/${candidateId}`)
+    const response = await privateAPI.get(`/api/candidate/${candidateId}`)
     dispatch({
       type: FETCH_CANDI,
       payload: response.data
@@ -117,7 +116,7 @@ export const fetchCandis = () => async dispatch => {
   try {
     console.log('fetchCandis')
     console.log('token in browser', localStorage.getItem('token'))
-    const response = await candidate.get('/all')
+    const response = await privateAPI.get('/api/candidate/all')
     dispatch({
       type: FETCH_CANDIS,
       payload: response.data
@@ -136,7 +135,7 @@ export const fetchCandis = () => async dispatch => {
 
 export const approveCandi = (candiId, approverId) => async dispatch => {
   try {
-    const response = await candidate.post(`/approve/${candiId}`, { approverId })
+    const response = await privateAPI.post(`/api/candidate/approve/${candiId}`, { approverId })
     dispatch({
       type: APPROVE_CANDI,
       payload: response.data
@@ -151,7 +150,7 @@ export const approveCandi = (candiId, approverId) => async dispatch => {
 
 export const fetchComps = () => async dispatch => {
   try {
-    const response = await publicApi.get('/company/all')
+    const response = await privateAPI.get('/company/all')
     dispatch({
       type: FETCH_COMPS,
       payload: response.data
@@ -166,7 +165,8 @@ export const fetchComps = () => async dispatch => {
 
 export const fetchComp = (id) => async dispatch => {
   try {
-    const response = await publicApi.get(`/company/${id}`)
+    const response = await privateAPI.get(`/company/${id}`)
+    console.log('comapny', response.data)
     dispatch({
       type: FETCH_COMP,
       payload: response.data
@@ -181,7 +181,7 @@ export const fetchComp = (id) => async dispatch => {
 
 export const editComp = (id, formValues) => async dispatch => {
   try {
-    const response = await company.put(`/edit/${id}`, formValues)
+    const response = await privateAPI.put(`/api/company/edit/${id}`, formValues)
     console.log(response.data)
     dispatch({
       type: EDIT_COMP,

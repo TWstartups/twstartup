@@ -87,6 +87,7 @@ export default {
         createdComp.candidate = updatedCandi._id
         createdComp.executives.push({}, {}, {})
         await createdComp.save()
+        await User.findByIdAndUpdate(updatedCandi.applicant)
         try {
           console.log('applicantId', foundCandi.applicant._id)
           res.status(200).json({ candidates: allCandidate, candidate: updatedCandi })
