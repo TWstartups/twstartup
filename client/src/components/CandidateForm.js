@@ -60,21 +60,21 @@ class CandidateForm extends React.Component {
               <div className="ui huge header">{this.props.header}</div>
               <div className="ui medium header">Basic Information</div>
               <Field
-                name="company_name_en"
+                name="companyNameEn"
                 component={this.renderInput}
                 label="Company Name in English"
                 placeholder=""
                 type="text"
               />
               <Field
-                name="company_name_chi"
+                name="companyNameChi"
                 component={this.renderInput}
                 label="Company Name in Chinese"
                 placeholder=""
                 type="text"
               />
               <Field
-                name="company_email"
+                name="companyEmail"
                 component={this.renderInput}
                 label="Contact Email"
                 placeholder=""
@@ -119,14 +119,14 @@ class CandidateForm extends React.Component {
 
 const validate = (formValues) => {
   const errors = {}
-  if (!formValues.company_name_en) {
-    errors.company_name_en = 'Please enter an English company name.'
+  if (!formValues.companyNameEn) {
+    errors.companyNameEn = 'Please enter an English company name.'
   }
-  if (!formValues.company_name_chi) {
-    errors.company_name_chi = 'Please enter a Chinese company name.'
+  if (!formValues.companyNameChi) {
+    errors.companyNameChi = 'Please enter a Chinese company name.'
   }
-  // if (formValues.company_name_chi && !formValues.company_name_chi.match(/[\u3400-\u9FBF]/)) {
-  //   errors.company_name_chi = "Please enter a company name in Chinese."
+  // if (formValues.companyNameChi && !formValues.companyNameChi.match(/[\u3400-\u9FBF]/)) {
+  //   errors.companyNameChi = "Please enter a company name in Chinese."
   // }
   if (!formValues.website) {
     errors.website = 'Please provide a website.'
@@ -134,12 +134,12 @@ const validate = (formValues) => {
   if (!formValues.news) {
     errors.news = 'Please provide a news.'
   }
-  if (!formValues.company_email) {
-    errors.company_email = 'Please enter an email.'
+  if (!formValues.companyEmail) {
+    errors.companyEmail = 'Please enter an email.'
   }
   // eslint-disable-next-line no-useless-escape
-  if (formValues.company_email && !formValues.company_email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-    errors.company_email = 'Please enter a valid email.'
+  if (formValues.companyEmail && !formValues.companyEmail.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+    errors.companyEmail = 'Please enter a valid email.'
   }
 
   return errors

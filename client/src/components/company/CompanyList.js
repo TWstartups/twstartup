@@ -8,7 +8,7 @@ const Comapnies = ({ list }) => {
   return list.map(company => {
     return <CompanyCard
       key={company._id}
-      title={company.company_name_en}
+      title={company.companyNameEn}
       clickToCompany={() => history.push(`/company/${company._id}`)}
       compId={company._id}
     />
@@ -18,6 +18,17 @@ const Comapnies = ({ list }) => {
 class CompanyList extends React.Component {
   componentDidMount () {
     this.props.fetchComps()
+  }
+
+  clickToCompany = (id) => {
+    history.push(`/company/${id}`)
+  }
+
+  renderCompany = () => {
+    console.log(this.props.companyList)
+    return this.props.companyList.map(company => {
+      return <CompanyCard title={company.companyNameEn} key={company._id} clickToCompany={this.clickToCompany} compId={company._id}/>
+    })
   }
 
   render () {

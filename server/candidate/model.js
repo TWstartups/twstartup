@@ -2,16 +2,16 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const CandidateSchema = mongoose.Schema({
-  company_name_en: {
+  companyNameEn: {
     type: String
   },
-  company_name_chi: {
+  companyNameChi: {
     type: String
   },
   website: {
     type: String
   },
-  company_email: {
+  companyEmail: {
     type: String
   },
   news: {

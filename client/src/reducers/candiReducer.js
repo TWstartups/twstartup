@@ -13,12 +13,12 @@ export default (state = INITIAL_STATE, action) => {
     if (action.payload.err) {
       return { ...state, errMsg: action.payload.err }
     }
-    return { ...state, candidate: action.payload.candidate, email: action.payload.candidate.company_email }
+    return { ...state, candidate: action.payload.candidate, email: action.payload.candidate.companyEmail }
   case FETCH_CANDI:
     if (action.payload.err) {
       return { ...state, errMsg: action.payload.err }
     }
-    return { ...state, candidate: action.payload.candidate, email: action.payload.candidate.company_email }
+    return { ...state, candidate: action.payload.candidate, email: action.payload.candidate.companyEmail }
   case FETCH_CANDIS:
     if (action.payload.err) {
       return { ...state, errMsg: action.payload.err }

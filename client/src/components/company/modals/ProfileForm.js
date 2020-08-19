@@ -15,14 +15,14 @@ class ProfileForm extends React.Component {
     return (
       <form className="ui form error" onSubmit={this.props.handleSubmit(this.props.onSubmit)}>
         <Field
-          name="company_name_en"
+          name="companyNameEn"
           component={this.renderInput}
           label="Company Name in English"
           placeholder=""
           type="text"
         />
         <Field
-          name="company_email"
+          name="companyEmail"
           component={this.renderInput}
           label="Contact Email"
           placeholder=""

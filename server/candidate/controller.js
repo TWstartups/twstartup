@@ -81,7 +81,7 @@ export default {
       try {
         const updatedCandi = await Candidate.findByIdAndUpdate(req.params.id, { approve_status: true, approver: req.body.approverId }, { new: true })
         const allCandidate = await Candidate.find().populate('approver')
-        const newCompany = _.pick(updatedCandi, ['company_name_en', 'company_name_chi', 'company_email', 'website'])
+        const newCompany = _.pick(updatedCandi, ['companyNameEn', 'companyNameChi', 'companyEmail', 'website'])
         const createdComp = await Company.create(newCompany)
         createdComp.owners.push(updatedCandi.applicant)
         createdComp.candidate = updatedCandi._id

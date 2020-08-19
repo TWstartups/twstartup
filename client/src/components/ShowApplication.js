@@ -40,15 +40,15 @@ class ShowApplication extends React.Component {
               <div className="one wide column"></div>
               <div className="five wide column">
                 <div className="ui small header">Company Name in English</div>
-                <div>{this.props.candidate.company_name_en}</div>
+                <div>{this.props.candidate.companyNameEn}</div>
               </div>
               <div className="five wide column">
                 <div className="ui small header">Company Name in Chinese</div>
-                <div>{this.props.candidate.company_name_chi}</div>
+                <div>{this.props.candidate.companyNameChi}</div>
               </div>
               <div className="five wide column">
                 <div className="ui small header">Company Contact Email</div>
-                <div>{this.props.candidate.company_email}</div></div>
+                <div>{this.props.candidate.companyEmail}</div></div>
               <div className="one wide column"></div>
               <div className="five wide column">
                 <div className="ui small header">Company Website</div>
