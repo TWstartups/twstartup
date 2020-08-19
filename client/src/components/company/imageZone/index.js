@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 // import ReactDOM from 'react-dom'
 import superagent from 'superagent'
 import qs from 'query-string'
@@ -7,30 +7,24 @@ import './index.scss'
 import { useDropzone } from 'react-dropzone'
 
 const ImageZone = ({ type, src, className, identifier = 'company_image_update', editable = false, companyId }) => {
-  const onDrop = useCallback(files => {
-    console.log('company Id in drop', companyId)
-    console.log('hiiii in on drop')
-    console.log('editable', editable)
-    // if (!editable) return
+  const [imgSrc, setImgSrc] = useState('')
+  const onDrop = useCallback((files, editable, companyId) => {
+    if (!editable) return
     const f = files[0]
-    console.log('f', f)
     const apiEndPoint = `${process.env.REACT_APP_API_URL}/api/company/image?${qs.stringify({ type, companyId })}`
-    console.log('api end', apiEndPoint)
     const token = localStorage.getItem('tw_token')
     // upload to api
-    console.log('')
     superagent
       .post(apiEndPoint)
       .set('authorization', `bearer ${token}`)
       .attach(identifier, f)
       .end((err, res) => {
         if (err) return console.error(err)
-        console.log(res.body)
+        setImgSrc(res.body.result)
       })
   // eslint-disable-next-line
   }, [])
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
-  console.log((editable))
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: (f) => onDrop(f, editable, companyId) })
   return (
     <div>
       <div className={`image-zone-component ${className} editable-${editable}`}>
@@ -41,7 +35,7 @@ const ImageZone = ({ type, src, className, identifier = 'company_image_update', 
             <div className='upload-text'>upload</div>
           </div>
         </div>}
-        <img alt={identifier} src={src}></img>
+        <img alt={identifier} src={imgSrc || src}></img>
       </div>
     </div>
   )
