@@ -16,7 +16,7 @@ class App extends React.Component {
   // fetch current user from local storage jwt
   // if jwt -> fetch user
   componentDidMount () {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('tw_token')
     if (token) {
       this.props.fetchUser(token)
     }

@@ -2,8 +2,6 @@ import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETC
 import privateAPI from '../apis/private'
 import history from '../history'
 
-const token = localStorage.getItem('token')
-
 export const signUp = formValues => async dispatch => {
   // redux thunk will take the returned function and invoke it, after that, it will pass it back to the dispatch and go through reduc thunk again. this time, the disptch is return a plain opbject which redux thunk will not do anything but pass it through.
   try {
@@ -66,9 +64,6 @@ export const fetchUser = () => async dispatch => {
 }
 
 export const createCandi = formValues => async dispatch => {
-  if (!token) {
-    history.push('/login')
-  }
   try {
     const response = await privateAPI.post('/api/candidate/create', { formValues })
 
@@ -92,9 +87,6 @@ export const createCandi = formValues => async dispatch => {
 
 export const fetchCandi = (candidateId) => async dispatch => {
   console.log('candiId', candidateId)
-  if (!token) {
-    history.push('/login')
-  }
   try {
     const response = await privateAPI.get(`/api/candidate/${candidateId}`)
     dispatch({
@@ -114,8 +106,6 @@ export const fetchCandi = (candidateId) => async dispatch => {
 
 export const fetchCandis = () => async dispatch => {
   try {
-    console.log('fetchCandis')
-    console.log('token in browser', localStorage.getItem('token'))
     const response = await privateAPI.get('/api/candidate/all')
     dispatch({
       type: FETCH_CANDIS,
@@ -164,6 +154,7 @@ export const fetchComps = () => async dispatch => {
 }
 
 export const fetchComp = (id) => async dispatch => {
+  console.log('company Id', id)
   try {
     const response = await privateAPI.get(`/company/${id}`)
     console.log('comapny', response.data)

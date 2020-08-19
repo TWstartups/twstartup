@@ -26,8 +26,8 @@ class CompanyList extends React.Component {
 
   renderCompany = () => {
     console.log(this.props.companyList)
-    return this.props.companyList.map(company => {
-      return <CompanyCard title={company.companyNameEn} key={company._id} clickToCompany={this.clickToCompany} compId={company._id}/>
+    return this.props.companyList.map((company, id) => {
+      return <CompanyCard title={company.companyNameEn} key={company._id + id} clickToCompany={this.clickToCompany} compId={company._id}/>
     })
   }
 
@@ -35,7 +35,7 @@ class CompanyList extends React.Component {
     return (
       <div className="ui container">
         <h2>This is CompanyList</h2>
-        <div className="ui link cards">{this.props.companyList && <Comapnies list={[...this.props.companyList, ...this.props.companyList, ...this.props.companyList, ...this.props.companyList, ...this.props.companyList, ...this.props.companyList]} />}</div>
+        <div className="ui link cards">{this.props.companyList && <>{this.renderCompany(this.props.companyList)}<Comapnies list={[...this.props.companyList, ...this.props.companyList, ...this.props.companyList, ...this.props.companyList, ...this.props.companyList, ...this.props.companyList]} /></>}</div>
       </div>
     )
   }

@@ -5,7 +5,7 @@ const request = axios.create({
 })
 request.defaults.headers.common.access_token = localStorage.getItem('tw_token') || 'Unauthorized'
 request.interceptors.request.use(config => {
-  config.headers.access_token = localStorage.getItem('tw_token')
+  config.headers.authorization = `bearer ${localStorage.getItem('tw_token')}`
   return config
 })
 

@@ -19,20 +19,8 @@ class TopProfile extends React.Component {
     return user.type === 'super' || (user._id && (company.owners.indexOf(user._id) > -1))
   }
 
-  checkProfileOwner = () => {
-    const userId = this.props.user._id
-    const ownerArr = this.props.company.owners
-    console.log('this.props', this.props)
-    for (let i = 0; i < ownerArr.length; i++) {
-      if (ownerArr[i] === userId) {
-        return true
-      }
-    }
-    return false
-  }
-
   renderProfileEditbtn = () => {
-    if (this.checkProfileOwner()) {
+    if (this.props.checkOwnership()) {
       return (
         <button
           onClick={() => this.setState({ showProfileModal: true })}
@@ -45,14 +33,15 @@ class TopProfile extends React.Component {
   };
 
   render () {
-    const { companyEmail, companyNameEn, website, logo } = this.props.company
+    const { companyEmail, companyNameEn, website, logo, _id } = this.props.company
     console.log('logo in company detail', logo)
+    console.log('companyId', _id)
     return (
       <div className="ui container">
         <div className="ui grid">
           <div className="two wide column"></div>
           <div className="four wide column" style={{ textAlign: 'center' }}>
-            <ImageZone className="company-img" src={logo} type='logo' editable={this.checkOwnership()} companyId={this.props.company._id} />
+            <ImageZone className="company-img" src={logo} type='logo' editable={this.props.checkOwnership()} companyId={_id} />
           </div>
           <div className="six wide column">
             <div className="company-info">

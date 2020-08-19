@@ -60,7 +60,7 @@ class Company extends React.Component {
 
     return (
       <div className="company-container">
-        <TopProfile/>
+        <TopProfile checkOwnership={this.checkOwnership}/>
         <CompanyIntro/>
       </div>
     )

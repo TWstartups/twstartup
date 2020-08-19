@@ -8,11 +8,17 @@ import { useDropzone } from 'react-dropzone'
 
 const ImageZone = ({ type, src, className, identifier = 'company_image_update', editable = false, companyId }) => {
   const onDrop = useCallback(files => {
-    if (!editable) return
+    console.log('company Id in drop', companyId)
+    console.log('hiiii in on drop')
+    console.log('editable', editable)
+    // if (!editable) return
     const f = files[0]
+    console.log('f', f)
     const apiEndPoint = `${process.env.REACT_APP_API_URL}/api/company/image?${qs.stringify({ type, companyId })}`
-    const token = localStorage.getItem('token')
+    console.log('api end', apiEndPoint)
+    const token = localStorage.getItem('tw_token')
     // upload to api
+    console.log('')
     superagent
       .post(apiEndPoint)
       .set('authorization', `bearer ${token}`)
