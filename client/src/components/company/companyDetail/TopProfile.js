@@ -41,7 +41,7 @@ class TopProfile extends React.Component {
         <div className="ui grid">
           <div className="two wide column"></div>
           <div className="four wide column" style={{ textAlign: 'center' }}>
-            <ImageZone className="company-img" src={logo} type='logo' editable={this.props.checkOwnership()} companyId={_id} />
+            <ImageZone className="company-img" src={logo} editable={this.props.checkOwnership()} query={{ companyId: _id, type: 'logo' }} />
           </div>
           <div className="six wide column">
             <div className="company-info">
