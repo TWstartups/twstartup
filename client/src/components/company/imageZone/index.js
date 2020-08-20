@@ -6,12 +6,15 @@ import './index.scss'
 
 import { useDropzone } from 'react-dropzone'
 
-const ImageZone = ({ type, src, className, identifier = 'company_image_update', editable = false, companyId }) => {
+const ImageZone = ({ src, className, identifier = 'company_image_update', editable = false, query = {} }) => {
+  const { type, companyId, exeId } = query
   const [imgSrc, setImgSrc] = useState('')
+  const [uploading, setUploading] = useState(false)
   const onDrop = useCallback((files, editable, companyId) => {
     if (!editable) return
+    setUploading(true)
     const f = files[0]
-    const apiEndPoint = `${process.env.REACT_APP_API_URL}/api/company/image?${qs.stringify({ type, companyId })}`
+    const apiEndPoint = `${process.env.REACT_APP_API_URL}/api/company/image?${qs.stringify({ type, companyId, exeId })}`
     const token = localStorage.getItem('tw_token')
     // upload to api
     superagent
@@ -20,6 +23,7 @@ const ImageZone = ({ type, src, className, identifier = 'company_image_update', 
       .attach(identifier, f)
       .end((err, res) => {
         if (err) return console.error(err)
+        setUploading(false)
         setImgSrc(res.body.result)
       })
   // eslint-disable-next-line
@@ -28,11 +32,21 @@ const ImageZone = ({ type, src, className, identifier = 'company_image_update', 
   return (
     <div>
       <div className={`image-zone-component ${className} editable-${editable}`}>
-        {editable && <div className={`dropzone-layer ${isDragActive}`} {...getRootProps()}>
+        {editable && <div className={`dropzone-layer ${isDragActive} isUploading-${uploading}`} {...getRootProps()}>
           <input {...getInputProps()} />
-          <div className={'dropzone'}>
-            <i className="cloud upload icon"></i>
-            <div className='upload-text'>upload</div>
+          <div className='dropzone'>
+            {!uploading && <i className="cloud upload icon"></i>}
+            {!uploading && <div className='upload-text'>upload</div>}
+            {uploading && <div className='uploadingzone'>
+              <div className="sk-chase">
+                <div className="sk-chase-dot"></div>
+                <div className="sk-chase-dot"></div>
+                <div className="sk-chase-dot"></div>
+                <div className="sk-chase-dot"></div>
+                <div className="sk-chase-dot"></div>
+                <div className="sk-chase-dot"></div>
+              </div>
+            </div>}
           </div>
         </div>}
         <img alt={identifier} src={imgSrc || src}></img>
