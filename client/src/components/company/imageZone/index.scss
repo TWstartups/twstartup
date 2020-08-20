@@ -1,3 +1,5 @@
+@import "./loader.scss";
+
 .image-zone-component {
   height: 200px;
   width: 200px;
@@ -23,13 +25,13 @@
       background: rgba(black, 0);
       outline: none;
 
-      &.true,&:hover{
-        background: rgba(black, 0.1);
+      &.true,&:hover,&.isUploading-true{
+        background: rgba(black, 0.3);
         backdrop-filter: blur(2px);
         .dropzone {
           user-select: none;
           margin-top: 40%;
-          color: rgba(black, 0.6);
+          color: rgba(white, 1);
           text-transform: uppercase;
           letter-spacing: 1px;
           border-radius: 50px;
@@ -41,6 +43,7 @@
           opacity: 0.8;
           &:hover{
             opacity: 1;
+            transform: scale(1.04);
           }
           &:active{
             transform: scale(0.95);
@@ -53,11 +56,14 @@
       &.true{
         opacity: 1;
         .dropzone {
-          color: white;
+          color: rgba(white, 0.8);
         }
       }
       .dropzone {
         display: none
+      }
+      .uploadingzone {
+
       }
     }
   }

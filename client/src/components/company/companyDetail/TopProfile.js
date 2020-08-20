@@ -49,13 +49,7 @@ class TopProfile extends React.Component {
       <div className="top-profile-container">
         <div className="top-profile">
           <div className="" style={{ textAlign: 'center' }}>
-            <ImageZone
-              className="company-img"
-              src={logo}
-              type="logo"
-              editable={this.props.checkOwnership()}
-              companyId={_id}
-            />
+            <ImageZone className="company-img" src={logo} editable={this.props.checkOwnership()} query={{ companyId: _id, type: 'logo' }} />
           </div>
           <div className="company-info">
             <div>
