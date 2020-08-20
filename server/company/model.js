@@ -105,7 +105,7 @@ const CompanySchema = mongoose.Schema({
     ref: 'Candidate'
   },
   executives: [executiveSchema],
-  banner_img: {
+  bannerImg: {
     type: String
   },
   video_link: {

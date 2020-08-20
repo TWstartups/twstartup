@@ -4,21 +4,12 @@ import { fetchComp } from '../../../actions'
 import '../index.scss'
 import TopProfile from './TopProfile'
 import CompanyIntro from './CompanyIntro'
+import ImageZone from '../imageZone'
+import Team from './Team'
 
 class Company extends React.Component {
   componentDidMount () {
     this.props.fetchComp(this.props.match.params.id)
-  }
-
-  checkProfileOwner = () => {
-    const userId = this.props.user._id
-    const ownerArr = this.props.company.owners
-    for (let i = 0; i < ownerArr.length; i++) {
-      if (ownerArr[i] === userId) {
-        return true
-      }
-    }
-    return false
   }
 
   renderProfileEditbtn = () => {
@@ -49,7 +40,7 @@ class Company extends React.Component {
 
   checkOwnership = () => {
     const { user, company } = this.props
-    return user.type === 'super' || (user._id && (company.owners.indexOf(user._id) > -1))
+    return user.type === 'super' || (company.owners && (company.owners.indexOf(user._id) > -1))
   }
 
   render () {
@@ -57,11 +48,13 @@ class Company extends React.Component {
       return <div>Loading</div>
     }
     // eslint-disable-next-line camelcase
-
+    const { bannerImg, _id } = this.props.company
     return (
       <div className="company-container">
         <TopProfile checkOwnership={this.checkOwnership}/>
         <CompanyIntro/>
+        <ImageZone className="banner-img" src={bannerImg} type="bannerImg" editable={this.checkOwnership()} companyId={_id}/>
+        <Team checkOwnership={this.checkOwnership}/>
       </div>
     )
   }
