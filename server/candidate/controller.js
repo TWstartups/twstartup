@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 export default {
   create: async (req, res) => {
-    console.log(req.body.formValues)
+    console.log('here in candidate create', req.body.formValues)
     const data = req.body.formValues
     const user = req.user
     try {
@@ -16,13 +16,16 @@ export default {
         res.status(500).json({ message: 'This company already exists. Please contact the customer service for more detail.' })
       }
     } catch (err) {
+      console.log('in err')
+      console.log(err)
       res.status(500).json({ message: 'Something went wrong' })
     }
-
+    console.log('create candi and user')
     try {
+      console.log('user in create', user)
       const createdComp = await Candidate.create({ ...data, approve_status: false, applicant: user._id })
       const updatedUser = await User.findByIdAndUpdate(user._id, { candidate: createdComp._id })
-      console.log(updatedUser)
+      console.log('updated user', updatedUser)
       res.status(200).json({ candidate: createdComp })
     } catch (err) {
       res.status(500).json({ message: 'something went wrong' })
@@ -87,6 +90,7 @@ export default {
         createdComp.candidate = updatedCandi._id
         createdComp.executives.push({}, {}, {})
         await createdComp.save()
+        await User.findByIdAndUpdate(updatedCandi.applicant)
         try {
           console.log('applicantId', foundCandi.applicant._id)
           res.status(200).json({ candidates: allCandidate, candidate: updatedCandi })

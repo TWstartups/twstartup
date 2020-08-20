@@ -6,15 +6,16 @@ import AWS from 'aws-sdk'
 
 export default {
   loginRequired: async (req, res, next) => {
+    console.log('headers', req.headers)
     if (!req.headers.authorization) {
       res.status(403).json({ message: 'Please log in!' })
     } else {
       console.log('mdw')
       const token = req.headers.authorization.split(' ')[1]
+      console.log('token', token)
       if (token === null) {
         res.status(403).json({ message: 'Please log in!' })
       }
-      console.log('token', token)
       try {
         const userId = await JWT.verifyToken(token)
         const foundUser = await User.findById(userId)
@@ -23,7 +24,6 @@ export default {
         }
 
         req.user = foundUser
-
         next()
       } catch (err) {
         res.status(403).json({ message: 'access forbidden' })

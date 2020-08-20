@@ -2,8 +2,8 @@ import { FETCH_COMPS, FETCH_COMP, EDIT_COMP } from '../actions/types'
 
 const INITIAL_STATE = {
   errMsg: null,
-  companylist: null,
-  currentCompany: null
+  companylist: [],
+  currentCompany: {}
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,6 +14,7 @@ export default (state = INITIAL_STATE, action) => {
     }
     return { ...state, companylist: action.payload.companies }
   case FETCH_COMP:
+    console.log('in reducer', action.payload.company)
     if (action.payload.err) {
       return { ...state, errMsg: action.payload.err }
     }
