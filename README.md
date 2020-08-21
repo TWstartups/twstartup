@@ -6,7 +6,7 @@
   </p>
 </div>
 
-[![Build Status](https://travis-ci.com/amazingandyyy/twstartups.svg?branch=master)](https://travis-ci.com/amazingandyyy/twstartups)
+[![Build Status](https://travis-ci.com/TWstartups/twstartups.svg?branch=master)](https://travis-ci.com/TWstartups/twstartups)
 
 ## Initial Setup
 
