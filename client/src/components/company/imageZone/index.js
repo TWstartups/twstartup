@@ -7,14 +7,13 @@ import './index.scss'
 import { useDropzone } from 'react-dropzone'
 
 const ImageZone = ({ src, className, identifier = 'company_image_update', editable = false, query = {} }) => {
-  const { type, companyId, exeId } = query
   const [imgSrc, setImgSrc] = useState('')
   const [uploading, setUploading] = useState(false)
-  const onDrop = useCallback((files, editable, companyId) => {
+  const onDrop = useCallback((files, editable, query) => {
     if (!editable) return
     setUploading(true)
     const f = files[0]
-    const apiEndPoint = `${process.env.REACT_APP_API_URL}/api/company/image?${qs.stringify({ type, companyId, exeId })}`
+    const apiEndPoint = `${process.env.REACT_APP_API_URL}/api/company/image?${qs.stringify(query)}`
     const token = localStorage.getItem('tw_token')
     // upload to api
     superagent
@@ -28,7 +27,7 @@ const ImageZone = ({ src, className, identifier = 'company_image_update', editab
       })
   // eslint-disable-next-line
   }, [])
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: (f) => onDrop(f, editable, companyId) })
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: (f) => onDrop(f, editable, query) })
   return (
     <div>
       <div className={`image-zone-component ${className} editable-${editable}`}>
