@@ -23,13 +23,19 @@ const eventSchema = new mongoose.Schema({
   location: {
     type: String
   },
-  from_time: {
-    type: Date
+  fromDay: {
+    type: Number
   },
-  to_time: {
-    type: Date
+  fromMonth: {
+    type: Number
   },
-  event_name: {
+  toDay: {
+    type: Number
+  },
+  toMonth: {
+    type: Number
+  },
+  eventName: {
     type: String
   },
   memo: {

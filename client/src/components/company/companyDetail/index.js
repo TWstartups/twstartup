@@ -6,6 +6,7 @@ import TopProfile from './TopProfile'
 import CompanyIntro from './CompanyIntro'
 import ImageZone from '../imageZone'
 import Team from './Team'
+import Events from './Events'
 
 class Company extends React.Component {
   componentDidMount () {
@@ -58,6 +59,7 @@ class Company extends React.Component {
         <CompanyIntro/>
         <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }}/>
         <Team checkOwnership={this.checkOwnership()}/>
+        <Events/>
       </div>
     )
   }
