@@ -44,18 +44,19 @@ const executiveSchema = new mongoose.Schema({
   title: {
     type: String
   },
-  first_name: {
+  firstName: {
     type: String
   },
-  last_name: {
+  lastName: {
     type: String
   },
   link: {
-    type: String
+    type: String,
+    default: 'https://www.linkedin.com/'
   },
   image: {
     type: String,
-    default: ''
+    default: 'https://i.imgur.com/6WUcB60.jpg'
   }
 })
 

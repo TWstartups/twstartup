@@ -16,7 +16,7 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter history={history}>
-      <App />
+      <App history={history}/>
     </HashRouter>
   </Provider>,
   document.getElementById('root')

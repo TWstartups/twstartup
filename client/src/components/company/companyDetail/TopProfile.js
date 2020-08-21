@@ -2,10 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import ImageZone from '../imageZone'
 import ProfileModal from '../modals/ProfileModal'
+import { fetchComp } from '../../../actions'
 
 class TopProfile extends React.Component {
   state = {
     showProfileModal: false
+  }
+
+  componentDidMount () {
+    console.log('fetch in team')
+    console.log(this.props)
+    // this.props.fetchComp(this.props.match.params.id)
   }
 
   hideModal = () => {
@@ -14,16 +21,8 @@ class TopProfile extends React.Component {
     })
   }
 
-  checkOwnership = () => {
-    const { user, company } = this.props
-    return (
-      user.type === 'super' ||
-      (user._id && company.owners.indexOf(user._id) > -1)
-    )
-  }
-
   renderProfileEditbtn = () => {
-    if (this.props.checkOwnership()) {
+    if (this.props.checkOwnership) {
       return (
         <button
           onClick={() => this.setState({ showProfileModal: true })}
@@ -49,7 +48,7 @@ class TopProfile extends React.Component {
       <div className="top-profile-container">
         <div className="top-profile">
           <div className="" style={{ textAlign: 'center' }}>
-            <ImageZone className="company-img" src={logo} editable={this.props.checkOwnership()} query={{ companyId: _id, type: 'logo' }} />
+            <ImageZone className="company-img" src={logo} editable={this.props.checkOwnership} query={{ companyId: _id, type: 'logo' }} />
           </div>
           <div className="company-info">
             <div>
@@ -91,4 +90,4 @@ const mapStateToProps = ({ user, company }) => {
   return { user, company: company.currentCompany }
 }
 
-export default connect(mapStateToProps)(TopProfile)
+export default connect(mapStateToProps, { fetchComp })(TopProfile)
