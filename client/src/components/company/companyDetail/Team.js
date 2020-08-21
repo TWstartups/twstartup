@@ -14,7 +14,7 @@ class Team extends React.Component {
               src={executives && executives[0].image} type="executive" editable={this.props.checkOwnership()} companyId={_id} />
             <div className="exe-title">CEO</div>
             <div className="exe-name">Ceooo Nameee</div>
-            <a href=""></a>
+            <a href=""><img className="linkedin-logo" src={require('../../../assets/images/linedin.png')}></img></a>
           </div>
         </div>
       </div>
