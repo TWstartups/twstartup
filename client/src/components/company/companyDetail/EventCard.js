@@ -5,6 +5,7 @@ const EventCard = ({ location, fromDay, fromMonth, toDay, toMonth, eventName, me
     <div className="event-card" onClick={() => window.open('https://robinhood.com/', '_blank')}>
       <div className="location">
         <img
+          alt="marker"
           className="marker"
           src={require('../../../assets/images/marker.svg')}
         ></img>
