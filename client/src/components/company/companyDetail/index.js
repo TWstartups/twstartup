@@ -57,7 +57,7 @@ class Company extends React.Component {
       <div className="company-container">
         <TopProfile checkOwnership={this.checkOwnership()}/>
         <CompanyIntro/>
-        <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }}/>
+        <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }} dimension={{ width: 400, height: 1000 }} style={{ maxWidth: '1000px', width: '100%' }}/>
         <Team checkOwnership={this.checkOwnership()}/>
         <Events/>
       </div>

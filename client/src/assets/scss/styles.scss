@@ -3,6 +3,9 @@ $red-color: #de624f;
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import './form.scss';
 @import './companyDetail.scss';
+body {
+  background-color: #FAFAFA;
+}
 *, body, div, h1, h2, h3, h4, h5 {
   font-family: 'Poppins', sans-serif;
 }

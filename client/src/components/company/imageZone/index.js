@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react'
-// import ReactDOM from 'react-dom'
 import superagent from 'superagent'
 import qs from 'query-string'
 import './index.scss'
 
 import { useDropzone } from 'react-dropzone'
 
-const ImageZone = ({ src, className, identifier = 'company_image_update', editable = false, query = {} }) => {
+const ImageZone = (props) => {
+  const { src, className, identifier = 'company_image_update', editable = false, query = {}, style = {}, dimension = {} } = props
   const [imgSrc, setImgSrc] = useState('')
   const [uploading, setUploading] = useState(false)
   const onDrop = useCallback((files, editable, query) => {
@@ -30,12 +30,13 @@ const ImageZone = ({ src, className, identifier = 'company_image_update', editab
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: (f) => onDrop(f, editable, query) })
   return (
     <div>
-      <div className={`image-zone-component ${className} editable-${editable}`}>
+      <div {...props} className={`image-zone-component ${className} editable-${editable}`} style={style}>
         {editable && <div className={`dropzone-layer ${isDragActive} isUploading-${uploading}`} {...getRootProps()}>
           <input {...getInputProps()} />
           <div className='dropzone'>
-            {!uploading && <i className="cloud upload icon"></i>}
+            {!uploading && <div><i className="cloud upload icon"></i></div>}
             {!uploading && <div className='upload-text'>upload</div>}
+            {!uploading && <div className='upload-text-dimension'>{dimension.width || 200} x {dimension.height || 200}</div>}
             {uploading && <div className='uploadingzone'>
               <div className="sk-chase">
                 <div className="sk-chase-dot"></div>

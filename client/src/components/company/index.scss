@@ -1,3 +1,78 @@
-.company-container {
-  
+@import '../../assets/scss/styles.scss';
+
+.company-list-component {
+  .hero-layer {
+    padding: 10px;
+    z-index: 5;
+    background-color: $main-color;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    &.option-0 {
+      background-image: url("https://www.transparenttextures.com/patterns/tree-bark.png");
+    }
+    &.option-1 {
+      background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+    }
+    &.option-2 {
+      background-image: url("https://www.transparenttextures.com/patterns/old-map.png");
+    }
+    .header-title {
+      color: black;
+      font-size: 4rem;
+      font-weight: 800;
+      span {
+        color: white;
+      }
+      @media only screen and (max-width: 600px) {
+        font-size: 2.5rem;
+      }
+    }
+  }
+  .container {
+    padding-top: 30px;
+    @media only screen and (max-width: 600px) {
+      padding-top: 20px;
+    }
+  }
+  .card{
+    box-shadow: 0px 0px 20px -3px rgba(black, 0.1);
+    margin-bottom: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s all ease-in-out;
+    background: white;
+    &:hover{
+      box-shadow: 0px 0px 20px -5px rgba(black, 0.2);
+      transform: translateY(-5px);
+      transition: .2s all ease-in-out;
+      .companyNameEn {
+        color: $main-color;
+      }
+    }
+    .image {
+      text-align: center;
+      padding: 40px 40px 20px;
+      img {
+        width: 100%;
+        border-radius: 10px;
+        max-width: 200px;
+      }
+    }
+    .body {
+      padding: 0px 20px 30px;
+      text-align: center;
+      .companyNameEn {
+        font-weight: 800;
+        font-size: 2rem;
+        padding: 10px 0;
+      }
+      .introduction {
+        opacity: 0.8;
+        padding: 5px 0;
+      }
+    }
+  }
 }
