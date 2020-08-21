@@ -1,0 +1,25 @@
+  
+language: node_js
+node_js:
+  - "13"
+cache:
+  directories:
+    - "node_modules"
+    - "client/node_modules"
+install:
+  - npm install
+  - npm install --prefix client
+script:
+  - npm run build --prefix client
+deploy:
+  provider: pages
+  local-dir: docs
+  repo: TWstartups/twstartups.github.io
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
+  target-branch: master
+  name: Travis Worker
+  email: twstartups.service@gmail.com

@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt'
 import User from './model'
 import JWT from './jwt'
+import SES from '../candidate/email'
+
 require('dotenv').config()
 
 export default {
@@ -49,6 +51,9 @@ export default {
         name
       }
       console.log('userToSend', userToSend)
+      // send email!
+      SES.send(email, name)
+
       res.status(200).json({ token, user: userToSend })
     } catch (err) {
       console.log(err)
