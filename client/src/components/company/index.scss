@@ -17,16 +17,15 @@ $main-color: #54d1db;
     }
     .image {
       text-align: center;
-      padding: 20px;
-      padding-bottom: 10px;
+      padding: 40px;
+      padding-bottom: 20px;
       img {
-        max-width: 200px;
         width: 100%;
         border-radius: 10px;
       }
     }
     .body {
-      padding: 0px 20px 20px;
+      padding: 0px 20px 30px;
       text-align: center;
       .companyNameEn {
         font-weight: 800;
