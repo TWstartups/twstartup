@@ -1,4 +1,3 @@
-
 <div align="center">
   <!-- <img src='https://github.com/mapitout/design/blob/master/assets/logo.png?raw=true' width='120px' alt='mapitout-logo.png'/> -->
   <h1>TWstartups</h1>
@@ -7,6 +6,7 @@
   </p>
 </div>
 
+[![Build Status](https://travis-ci.com/amazingandyyy/twstartups.svg?branch=master)](https://travis-ci.com/amazingandyyy/twstartups)
 
 ## Initial Setup
 
