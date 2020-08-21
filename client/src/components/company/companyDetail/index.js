@@ -9,6 +9,7 @@ import Team from './Team'
 
 class Company extends React.Component {
   componentDidMount () {
+    console.log(this.props)
     this.props.fetchComp(this.props.match.params.id)
   }
 
@@ -50,12 +51,13 @@ class Company extends React.Component {
     }
     // eslint-disable-next-line camelcase
     const { bannerImg, _id } = this.props.company
+    console.log('in company detail index')
     return (
       <div className="company-container">
-        <TopProfile checkOwnership={this.checkOwnership}/>
+        <TopProfile checkOwnership={this.checkOwnership()}/>
         <CompanyIntro/>
         <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }}/>
-        <Team checkOwnership={this.checkOwnership}/>
+        <Team checkOwnership={this.checkOwnership()}/>
       </div>
     )
   }

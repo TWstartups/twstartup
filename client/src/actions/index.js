@@ -1,11 +1,12 @@
 import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS, APPROVE_CANDI, FETCH_COMPS, FETCH_COMP, EDIT_COMP } from './types'
 import privateAPI from '../apis/private'
+import publicAPI from '../apis/public'
 import history from '../history'
 
 export const signUp = formValues => async dispatch => {
   // redux thunk will take the returned function and invoke it, after that, it will pass it back to the dispatch and go through reduc thunk again. this time, the disptch is return a plain opbject which redux thunk will not do anything but pass it through.
   try {
-    const response = await privateAPI.post('./signup', { formValues })
+    const response = await publicAPI.post('./signup', { formValues })
     dispatch({
       type: SIGN_UP,
       payload: response.data
@@ -22,7 +23,7 @@ export const signUp = formValues => async dispatch => {
 
 export const logIn = formValues => async dispatch => {
   try {
-    const response = await privateAPI.post('./login', { formValues })
+    const response = await publicAPI.post('./login', { formValues })
     dispatch({
       type: LOG_IN,
       payload: response.data
@@ -140,7 +141,7 @@ export const approveCandi = (candiId, approverId) => async dispatch => {
 
 export const fetchComps = () => async dispatch => {
   try {
-    const response = await privateAPI.get('/company/all')
+    const response = await publicAPI.get('/company/all')
     dispatch({
       type: FETCH_COMPS,
       payload: response.data
@@ -154,15 +155,16 @@ export const fetchComps = () => async dispatch => {
 }
 
 export const fetchComp = (id) => async dispatch => {
-  console.log('company Id', id)
+  console.log('company Id in fetch Comp', id)
   try {
-    const response = await privateAPI.get(`/company/${id}`)
+    const response = await publicAPI.get(`/company/${id}`)
     console.log('comapny', response.data)
     dispatch({
       type: FETCH_COMP,
       payload: response.data
     })
   } catch (err) {
+    console.log(err.response)
     dispatch({
       type: FETCH_COMP,
       payload: { err: 'err.response.data.message' }

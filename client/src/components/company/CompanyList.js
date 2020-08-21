@@ -4,17 +4,6 @@ import { fetchComps } from '../../actions'
 import CompanyCard from './CompanyCard'
 import history from '../../history'
 
-const Comapnies = ({ list }) => {
-  return list.map(company => {
-    return <CompanyCard
-      key={company._id}
-      title={company.companyNameEn}
-      clickToCompany={() => history.push(`/company/${company._id}`)}
-      compId={company._id}
-    />
-  })
-}
-
 class CompanyList extends React.Component {
   componentDidMount () {
     this.props.fetchComps()
@@ -35,7 +24,7 @@ class CompanyList extends React.Component {
     return (
       <div className="ui container">
         <h2>This is CompanyList</h2>
-        <div className="ui link cards">{this.props.companyList && <>{this.renderCompany(this.props.companyList)}<Comapnies list={[...this.props.companyList, ...this.props.companyList, ...this.props.companyList, ...this.props.companyList, ...this.props.companyList, ...this.props.companyList]} /></>}</div>
+        <div className="ui link cards">{this.props.companyList && this.renderCompany(this.props.companyList)}</div>
       </div>
     )
   }
