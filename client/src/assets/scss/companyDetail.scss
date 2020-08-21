@@ -35,27 +35,46 @@
 
   }
   .banner-img {
+    margin-top:100px;
     width: 100%;
     max-width: 1000px;
     height:400px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
   }
   .team-container {
     margin-top: 100px;
     .team-title {
       text-align:center;
+      margin-bottom:70px;
+      font-size:32px;
     }
     .team-group {
       display: flex;
       flex-direction:row;
+      justify-content:space-between;
       .exe {
         display: flex;
         flex-direction:column;
         justify-content:center;
         text-align: center;
         .executive {
-          
+          box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+          width:300px;
+          height:300px;
+          border-radius:50%;
+        }
+        .exe-title {
+          font-size:30px;
+          font-weight: bold;
+          margin:30px 0px 15px 0px;
+        }
+        .exe-name {
+          font-size:24px;
+          font-weight: bold;
+          margin:15px 0px;
         }
         .linkedin-logo {
+          margin:15px 0px;
           width:50px;  
         }
       }
