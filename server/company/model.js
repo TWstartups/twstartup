@@ -29,15 +29,20 @@ const eventSchema = new mongoose.Schema({
     type: String,
     default: ""
   },
-  from_time: {
-    type: Date
+  fromDay: {
+    type: Number
   },
-  to_time: {
-    type: Date
+  fromMonth: {
+    type: Number
   },
-  event_name: {
-    type: String,
-    default: ""
+  toDay: {
+    type: Number
+  },
+  toMonth: {
+    type: Number
+  },
+  eventName: {
+    type: String
   },
   memo: {
     type: String,

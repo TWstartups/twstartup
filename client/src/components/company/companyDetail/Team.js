@@ -4,11 +4,9 @@ import { connect } from 'react-redux'
 import { fetchComp } from '../../../actions'
 
 class Team extends React.Component {
-  renderExecutive = (exes, id) => {
-    console.log('in render exe', exes, id)
-    console.log('check exe', this.props.checkOwnership)
+  renderExecutive = (exes, compnayId) => {
     if (exes && exes.length > 0) {
-      return exes.map((exe) => {
+      return exes.map((exe, id) => {
         return (
           <div className="exe" key={exe._id}>
             <ImageZone
@@ -16,12 +14,14 @@ class Team extends React.Component {
               src={exe.image}
               type="executive"
               editable={this.props.checkOwnership}
-              query={{ type: 'executive', companyId: id, exeIndex: 1 }}
+              query={{ type: 'executive', companyId: compnayId, exeIndex: id }}
+              dimension={{ width: '300px', height: '300px' }}
             />
-            <div className="exe-title">{exe.title}</div>
+            <div className="exe-title">{exe.title}CEO</div>
             <div className="exe-name">
               {exe.firstName}
               {exe.lastName}
+              Ceoooo Nameeee
             </div>
             <a href={exe.link}>
               <img
