@@ -2,7 +2,7 @@ $main-color: #54d1db;
 $red-color: #de624f;
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import './form.scss';
-
+@import './companyDetail.scss';
 *, body, div, h1, h2, h3, h4, h5 {
   font-family: 'Poppins', sans-serif;
 }
@@ -32,19 +32,6 @@ $red-color: #de624f;
   
 }
 
-
-.company-container {
-  margin-top: 150px;
-  .company-info {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-    .company-name {
-      font-size: 40px;
-    }
-  }
-}
 
 #modal {
   .content {

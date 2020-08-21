@@ -34,12 +34,10 @@ export default {
   },
   imgUpload: async (req, res) => {
     console.log('in img upload')
-
     const imgURL = req.image
     const { companyId, type } = req.query
-    // type = logo || banner_img || executive
+    // type = logo || bannerImg || executive
     const { exeIndex } = req.query ? req.query : ''
-
     try {
       const findCompany = await Company.findById(companyId)
 
@@ -48,8 +46,8 @@ export default {
       }
       if (type === 'logo') {
         findCompany.logo = imgURL
-      } else if (type === 'banner_img') {
-        findCompany.banner_img = imgURL
+      } else if (type === 'bannerImg') {
+        findCompany.bannerImg = imgURL
       } else if (type === 'executive') {
         findCompany.executives[exeIndex].image = imgURL
       }
