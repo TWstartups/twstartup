@@ -21,10 +21,14 @@ class CompanyList extends React.Component {
 
   render () {
     return (
-      <div className="container company-list-component">
-        <h2>This is CompanyList</h2>
-        <div className="row">
-          {this.renderCompany(this.props.companyList)}
+      <div className="company-list-component">
+        <div className={`hero-layer option-${Math.floor(Math.random() * 3)}`}>
+          <div className='header-title'>Explore<span>startups</span></div>
+        </div>
+        <div className="container">
+          <div className="row">
+            {this.renderCompany(this.props.companyList)}
+          </div>
         </div>
       </div>
     )
