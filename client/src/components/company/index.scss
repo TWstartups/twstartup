@@ -1,6 +1,19 @@
-$main-color: #54d1db;
+@import '../../assets/scss/styles.scss';
 
 .company-list-component {
+  .hero-layer {
+    padding: 10px;
+    z-index: 1;
+    background-color: $main-color;
+    background-image: url("https://www.transparenttextures.com/patterns/inspiration-geometry.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    .header-title {
+      color: black;
+      margin: 150px 10px 80px;
+      font-size: 4rem;
+      font-weight: 800;
+    }
+  }
   .card{
     box-shadow: 0px 0px 20px -3px rgba(black, 0.1);
     margin-bottom: 20px;
