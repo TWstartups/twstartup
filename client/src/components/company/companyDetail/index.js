@@ -13,7 +13,7 @@ class Company extends React.Component {
   }
 
   renderProfileEditbtn = () => {
-    if (this.checkProfileOwner()) {
+    if (this.checkOwnership()) {
       return (
         <button
           onClick={() => this.setState({ showProfileModal: true })}
@@ -26,7 +26,7 @@ class Company extends React.Component {
   };
 
   renderUploadProfilebtn = () => {
-    if (this.checkProfileOwner()) {
+    if (this.checkOwnership()) {
       return (
         <button
           onClick={() => this.setState({ showUploadProfileModal: true })}
@@ -40,7 +40,8 @@ class Company extends React.Component {
 
   checkOwnership = () => {
     const { user, company } = this.props
-    return user.type === 'super' || (company.owners && (company.owners.indexOf(user._id) > -1))
+    console.log('check here', company.owners && (company.owners.indexOf(user._id) > -1))
+    return user.type === 'super' || ((user._id && company.owners) && (company.owners.indexOf(user._id) > -1))
   }
 
   render () {
