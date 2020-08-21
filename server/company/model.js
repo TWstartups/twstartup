@@ -3,25 +3,31 @@ const Schema = mongoose.Schema
 
 const newsSchema = new mongoose.Schema({
   og_title: {
-    type: String
+    type: String,
+    default: ""
   },
   og_description: {
-    type: String
+    type: String,
+    default: ""
   },
   og_image: {
-    type: String
+    type: String,
+    default: ""
   },
   note: {
-    type: String
+    type: String,
+    default: ""
   },
   link: {
-    type: String
+    type: String,
+    default: ""
   }
 })
 
 const eventSchema = new mongoose.Schema({
   location: {
-    type: String
+    type: String,
+    default: ""
   },
   from_time: {
     type: Date
@@ -30,25 +36,31 @@ const eventSchema = new mongoose.Schema({
     type: Date
   },
   event_name: {
-    type: String
+    type: String,
+    default: ""
   },
   memo: {
-    type: String
+    type: String,
+    default: ""
   },
   link: {
-    type: String
+    type: String,
+    default: ""
   }
 })
 
 const executiveSchema = new mongoose.Schema({
   title: {
-    type: String
+    type: String,
+    default: ""
   },
   firstName: {
-    type: String
+    type: String,
+    default: ""
   },
   lastName: {
-    type: String
+    type: String,
+    default: ""
   },
   link: {
     type: String,
@@ -62,34 +74,43 @@ const executiveSchema = new mongoose.Schema({
 
 const CompanySchema = mongoose.Schema({
   companyNameEn: {
-    type: String
+    type: String,
+    default: ""
   },
   companyNameChi: {
-    type: String
+    type: String,
+    default: ""
   },
   introduction: {
-    type: String
+    type: String,
+    default: ""
   },
   website: {
-    type: String
+    type: String,
+    default: ""
   },
   pitch_deck: {
     typs: String
   },
   companyEmail: {
-    type: String
+    type: String,
+    default: ""
   },
   key_point: [{
-    type: String
+    type: String,
+    default: ""
   }],
   funding_status: {
-    type: String
+    type: String,
+    default: ""
   },
   category: [{
-    type: String
+    type: String,
+    default: ""
   }],
   logo: {
-    type: String
+    type: String,
+    default: "https://i.imgur.com/m5kOMUt.png"
   },
   events: [eventSchema],
   news: [newsSchema],
@@ -107,10 +128,20 @@ const CompanySchema = mongoose.Schema({
   },
   executives: [executiveSchema],
   bannerImg: {
-    type: String
+    type: String,
+    default: ""
   },
-  video_link: {
-    type: String
+  videoLink: {
+    type: String,
+    default: ""
+  },
+  socialLinks: {
+    facebook: "",
+    instagram: "",
+    linkedIn: "",
+    twitter: "",
+    angelList: "",
+    crunchbase: ""
   }
 })
 
