@@ -14,7 +14,7 @@ import { fetchComp } from '../../../actions'
 
 class TopProfile extends React.Component {
   state = {
-    showProfileModal: false
+    showProfielModal: false
   }
 
   componentDidMount () {
@@ -23,14 +23,8 @@ class TopProfile extends React.Component {
     // this.props.fetchComp(this.props.match.params.id)
   }
 
-  hideModal = () => {
-    this.setState({
-      showProfileModal: false
-    })
-  }
-
-  renderProfileEditbtn = () => {
-    if (this.props.checkOwnership) {
+  renderEditbtn = () => {
+    if (this.props.checkOwnership()) {
       return (
         <button
           onClick={() => this.setState({ showProfileModal: true })}
@@ -38,6 +32,12 @@ class TopProfile extends React.Component {
         ><i className="edit outline icon" /></button>
       )
     }
+  }
+
+  hideModal = () => {
+    this.setState({
+      showProfielModal: false
+    })
   }
 
   render () {

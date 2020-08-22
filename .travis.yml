@@ -22,4 +22,4 @@ deploy:
     branch: master
   target-branch: master
   name: Travis Worker
-  email: twstartup.service@gmail.com
+  email: twstartups.service@gmail.com
