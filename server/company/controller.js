@@ -9,7 +9,9 @@ export default {
     const toEdit = req.body
     console.log(toEdit)
     try {
+      console.log('helpoooo')
       const editedCompany = await Company.findByIdAndUpdate(req.params.id, toEdit, { new: true })
+      console.log('edit company', editedCompany)
       res.status(200).json({ company: editedCompany })
     } catch (err) {
       console.log(err)

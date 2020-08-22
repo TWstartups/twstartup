@@ -10,13 +10,11 @@ import Events from './Events'
 
 class Company extends React.Component {
   componentDidMount () {
-    console.log(this.props)
     this.props.fetchComp(this.props.match.params.id)
   }
 
   checkOwnership = () => {
     const { user, company } = this.props
-    console.log('check here', company.owners && (company.owners.indexOf(user._id) > -1))
     return user.type === 'super' || ((user._id && company.owners) && (company.owners.indexOf(user._id) > -1))
   }
 
@@ -26,11 +24,10 @@ class Company extends React.Component {
     }
     // eslint-disable-next-line camelcase
     const { bannerImg, _id } = this.props.company
-    console.log('in company detail index')
     return (
       <div className="company-container">
         <TopProfile checkOwnership={this.checkOwnership()}/>
-        <CompanyIntro/>
+        <CompanyIntro checkOwnership={this.checkOwnership()}/>
         <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }} dimension={{ width: 400, height: 1000 }} style={{ maxWidth: '1000px', width: '100%' }}/>
         <Team checkOwnership={this.checkOwnership()}/>
         <Events/>

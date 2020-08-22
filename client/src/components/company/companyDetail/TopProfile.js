@@ -6,20 +6,14 @@ import { fetchComp } from '../../../actions'
 
 class TopProfile extends React.Component {
   state = {
-    showProfielModal: false
-  }
-
-  componentDidMount () {
-    console.log('fetch in team')
-    console.log(this.props)
-    // this.props.fetchComp(this.props.match.params.id)
+    showProfileModal: false
   }
 
   renderEditbtn = () => {
-    if (this.props.checkOwnership()) {
+    if (this.props.checkOwnership) {
       return (
         <button
-          onClick={() => this.setState({ showProfielModal: true })}
+          onClick={() => this.setState({ showProfileModal: true })}
           className="circular ui icon button"
         >
           <i className="edit outline icon"></i>
@@ -30,7 +24,7 @@ class TopProfile extends React.Component {
 
   hideModal = () => {
     this.setState({
-      showProfielModal: false
+      showProfileModal: false
     })
   }
 
@@ -42,8 +36,6 @@ class TopProfile extends React.Component {
       logo,
       _id
     } = this.props.company
-    console.log('logo in company detail', logo)
-    console.log('companyId', _id)
     return (
       <div className="top-profile-container">
         <div className="top-profile">
@@ -81,9 +73,7 @@ class TopProfile extends React.Component {
             </div>
           </div>
         </div>
-        {this.state.showProfileModal && (
-          <ProfileModal hideModal={this.hideModal} />
-        )}
+        {this.state.showProfileModal && <ProfileModal hideModal={this.hideModal} />}
       </div>
     )
   }

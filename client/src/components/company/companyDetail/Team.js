@@ -38,7 +38,6 @@ class Team extends React.Component {
 
   render () {
     const { _id, executives } = this.props.company
-    console.log('in Team', _id, executives)
     return (
       <div className="team-container">
         <h2 className="team-title">Executive Team</h2>

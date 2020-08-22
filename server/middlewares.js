@@ -6,7 +6,6 @@ import AWS from 'aws-sdk'
 
 export default {
   loginRequired: async (req, res, next) => {
-    console.log('headers', req.headers)
     if (!req.headers.authorization) {
       res.status(403).json({ message: 'Please log in!' })
     } else {

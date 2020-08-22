@@ -14,7 +14,6 @@ export default (state = INITIAL_STATE, action) => {
     }
     return { ...state, companylist: action.payload.companies }
   case FETCH_COMP:
-    console.log('in reducer', action.payload.company)
     if (action.payload.err) {
       return { ...state, errMsg: action.payload.err }
     }

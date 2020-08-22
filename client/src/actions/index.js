@@ -87,7 +87,6 @@ export const createCandi = formValues => async dispatch => {
 }
 
 export const fetchCandi = (candidateId) => async dispatch => {
-  console.log('candiId', candidateId)
   try {
     const response = await privateAPI.get(`/api/candidate/${candidateId}`)
     dispatch({
@@ -155,10 +154,8 @@ export const fetchComps = () => async dispatch => {
 }
 
 export const fetchComp = (id) => async dispatch => {
-  console.log('company Id in fetch Comp', id)
   try {
     const response = await publicAPI.get(`/company/${id}`)
-    console.log('comapny', response.data)
     dispatch({
       type: FETCH_COMP,
       payload: response.data
@@ -172,19 +169,19 @@ export const fetchComp = (id) => async dispatch => {
   }
 }
 
-export const editComp = (id, formValues) => async dispatch => {
-  try {
-    const response = await privateAPI.put(`/api/company/edit/${id}`, formValues)
-    console.log(response.data)
-    dispatch({
-      type: EDIT_COMP,
-      payload: response.data
+export const editComp = (id, formValues) => (dispatch) => {
+  return privateAPI.put(`/api/company/edit/${id}`, formValues)
+    .then(res => {
+      dispatch({
+        type: EDIT_COMP,
+        payload: res.data
+      })
     })
-  } catch (err) {
-    console.log(err)
-    dispatch({
-      type: EDIT_COMP,
-      payload: { err: err.response.data.message }
+    .catch(err => {
+      console.log(err)
+      dispatch({
+        type: EDIT_COMP,
+        payload: { err: err.response.data.message }
+      })
     })
-  }
 }

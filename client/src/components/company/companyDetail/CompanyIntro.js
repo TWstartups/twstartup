@@ -1,5 +1,6 @@
 import React from 'react'
-// import { connect } from 'react-redux'
+import KeyPointModal from '../modals/KeyPointModal'
+import { connect } from 'react-redux'
 
 class CompanyIntro extends React.Component {
   state = {
@@ -7,7 +8,7 @@ class CompanyIntro extends React.Component {
   }
 
   renderEditbtn = () => {
-    if (this.checkOwnership) {
+    if (this.props.checkOwnership) {
       return (
         <button
           onClick={() => this.setState({ showIntroModal: true })}
@@ -25,21 +26,30 @@ class CompanyIntro extends React.Component {
     })
   }
 
+  renderList = (keyPoints) => {
+    return keyPoints.map(key => {
+      return <ul key={key}>{key}</ul>
+    })
+  }
+
   render () {
     return (
       <div className="intro-container">
         <div>
-          <div className="one-liner">One liner(up to 30 words)</div>
+          <div className="one-liner">{this.props.company.introduction}</div>
           {this.renderEditbtn()}
         </div>
         <ul className="bullet-list">
-          <li> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec posuere leo eros, et sodales lorem placerat luctus. Duis cursus, libero.(up to 20 words)</li>
-          <li> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec posuere leo eros, et sodales lorem placerat luctus. Duis cursus, libero.(up to 20 words)</li>
-          <li> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec posuere leo eros, et sodales lorem placerat luctus. Duis cursus, libero.(up to 20 words)</li>
+          {(this.props.company && this.props.company.keyPoints) && this.renderList(this.props.company.keyPoints)}
         </ul>
+        {this.state.showIntroModal && <KeyPointModal hideModal={this.hideModal}/>}
       </div>
     )
   }
 }
 
-export default CompanyIntro
+const mapStateToProps = ({ company }) => {
+  return { company: company.currentCompany }
+}
+
+export default connect(mapStateToProps)(CompanyIntro)

@@ -27,7 +27,6 @@ class Index extends React.Component {
   }
 
   renderNav = () => {
-    console.log('user', this.props.user)
     if (!this.props.user.isLogIn) {
       return (
         <React.Fragment>
