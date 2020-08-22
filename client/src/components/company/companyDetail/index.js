@@ -29,10 +29,10 @@ class Company extends React.Component {
     console.log('in company detail index')
     return (
       <div className="company-container">
-        <TopProfile checkOwnership={this.checkOwnership} hideModal={this.hideModal}/>
-        <CompanyIntro renderEditbtn={this.renderEditbtn}/>
-        <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }}/>
-        <Team checkOwnership={this.checkOwnership()} renderEditbtn={this.renderEditbtn}/>
+        <TopProfile checkOwnership={this.checkOwnership()}/>
+        <CompanyIntro/>
+        <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }} dimension={{ width: 400, height: 1000 }} style={{ maxWidth: '1000px', width: '100%' }}/>
+        <Team checkOwnership={this.checkOwnership()}/>
         <Events/>
       </div>
     )

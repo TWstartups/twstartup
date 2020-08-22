@@ -13,18 +13,23 @@ class CompanyList extends React.Component {
     history.push(`/company/${id}`)
   }
 
-  renderCompany = () => {
-    console.log(this.props.companyList)
-    return this.props.companyList.map((company, id) => {
-      return <CompanyCard title={company.companyNameEn} key={company._id + id} clickToCompany={this.clickToCompany} compId={company._id}/>
+  renderCompany = (list) => {
+    return list.map((company, id) => {
+      return <CompanyCard company={company} key={company._id + id} clickToCompany={this.clickToCompany} compId={company._id}/>
     })
   }
 
   render () {
     return (
-      <div className="ui container">
-        <h2>This is CompanyList</h2>
-        <div className="ui link cards">{this.props.companyList && this.renderCompany(this.props.companyList)}</div>
+      <div className="company-list-component">
+        <div className={`hero-layer option-${Math.floor(Math.random() * 3)}`}>
+          <div className='header-title'>Explore<span>startups</span></div>
+        </div>
+        <div className="container">
+          <div className="row">
+            {this.renderCompany(this.props.companyList)}
+          </div>
+        </div>
       </div>
     )
   }
