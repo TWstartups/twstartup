@@ -14,6 +14,7 @@
     display: none;
   }
   &.circle {
+    border-radius: 1000px;
     .dropzone,.dropzone-layer {
       border-radius: 1000px;
     }
