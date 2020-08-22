@@ -11,8 +11,8 @@
 ## Initial Setup
 
 ```
-$ git clone git@github.com:TWstartups/twstartups.github.io.git
-$ cd twstartups
+$ git clone git@github.com:TWstartups/twstartup.github.io.git
+$ cd twstartup
 $ ./scripts/setup.sh
 ```
 

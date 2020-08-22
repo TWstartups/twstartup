@@ -1,57 +1,81 @@
+@import "../../../assets/scss/styles";
 
-
-
-.company-container {
-  margin: 0 15vw;
-  margin-top: 150px;
+.component-details-component {
+  margin-top: 50px;
   .top-profile-container {
-  
-    .top-profile {
-      display:flex;
-      flex-direction:row;   
-      justify-content: flex-start;
-      .company-info {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        justify-content: flex-start;
-        margin-left: 100px;
-        .name-group {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          margin-bottom: 10px;
-          justify-content:space-between;
-          .edit-btn {
-            margin:10px;
+    .session {
+      text-align: center;
+      .company-img {
+        box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+        margin: auto;
+      }
+    }
+    .company-info {
+      div {
+      }
+      .companyNameEn {
+        font-size: 3rem;
+        padding-top: 30px;
+        font-weight: 900;
+      }
+      .introduction {
+        font-size: 1.6rem;
+        opacity: 0.8;
+        padding: 30px 0px 20px;
+      }
+      .info-link {
+        padding: 15px 25px;
+        background: rgba(black, 0.1);
+        display: inline-block;
+        margin: 5px;
+        border-radius: 100px;
+        color: black;
+        cursor: pointer;
+        font-size: 1.4rem;
+        text-transform: capitalize;
+        &.highlight {
+          font-weight: 600;
+          background: $main-color;
+          margin-bottom: 20px;
+          i {
+            margin-right: 5px;
           }
-          .company-name {
-            font-size: 40px;
-            font-weight: bold;
-          }
+        }
+        &:hover{
+          opacity: 0.8;
+        }
+        &:active{
+          transform: scale(0.97);
         }
       }
     }
   }
-  .intro-container {
-    margin-top:80px;
-    .one-liner {
-      font-size:2rem;
+  .session-header {
+    font-weight: 800;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.2;
+    padding-bottom: 20px;
+    width: 100%;
+    text-align: center;
+  }
+  .key-points {
+    margin-top: 50px;
+    text-align: center;
+    .key-point-item {
+      padding: 10px 0px;
+      font-size: 2rem;
+      line-height: 3rem;
+      font-weight: 800;
     }
-    .bullet-list {
-      li {
-        padding:5px;
-      }
-
-    }
-
   }
   .banner-img {
-    margin-top: 100px;
     width: 100%;
     max-width: 1000px;
     height: 400px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+    margin: auto;
   }
   .team-container {
     margin-top: 100px;
@@ -61,19 +85,39 @@
       font-size:32px;
     }
     .team-group {
-      display: flex;
-      flex-direction:row;
-      justify-content:space-between;
       .exe {
-        display: flex;
-        flex-direction:column;
-        justify-content:center;
         text-align: center;
         .executive {
           box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
           width:250px;
           height:250px;
           border-radius:50%;
+          margin: auto;
+        }
+        .info-link {
+          padding: 15px 25px;
+          background: rgba(black, 0.1);
+          display: inline-block;
+          margin: 5px;
+          border-radius: 100px;
+          color: black;
+          cursor: pointer;
+          font-size: 1.4rem;
+          text-transform: capitalize;
+          &.highlight {
+            font-weight: 600;
+            background: $main-color;
+            margin-bottom: 20px;
+            i {
+              margin-right: 5px;
+            }
+          }
+          &:hover{
+            opacity: 0.8;
+          }
+          &:active{
+            transform: scale(0.97);
+          }
         }
         .exe-title {
           font-size:30px;
@@ -86,12 +130,12 @@
         }
         .linkedin-logo {
           margin:15px 0px;
-          width:50px;  
+          width:50px;
         }
       }
     }
   }
-  
+
   .event-container {
     margin:100px 0px;
     .event-title {
@@ -173,7 +217,7 @@
           margin-right:20px;
         }
         .event-note {
-          
+
         }
       }
     }
