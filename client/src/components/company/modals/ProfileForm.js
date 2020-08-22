@@ -36,7 +36,7 @@ class ProfileForm extends React.Component {
           type="text"
         />
         <button className='ui button' type="submit">Submit</button>
-        <div className="ui button" onClick={() => this.props.hideModal()}>cancel</div>
+        <div className="ui button" onClick={() => this.props.hideModal('showProfielModal')}>cancel</div>
       </form>
     )
   }

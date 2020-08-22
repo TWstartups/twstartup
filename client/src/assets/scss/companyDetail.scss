@@ -16,8 +16,19 @@
         height: 100%;
         justify-content: flex-start;
         margin-left: 100px;
-        .company-name {
-          font-size: 40px;
+        .name-group {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-bottom: 10px;
+          justify-content:space-between;
+          .edit-btn {
+            margin:10px;
+          }
+          .company-name {
+            font-size: 40px;
+            font-weight: bold;
+          }
         }
       }
     }

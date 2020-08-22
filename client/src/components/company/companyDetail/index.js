@@ -14,32 +14,6 @@ class Company extends React.Component {
     this.props.fetchComp(this.props.match.params.id)
   }
 
-  renderProfileEditbtn = () => {
-    if (this.checkOwnership()) {
-      return (
-        <button
-          onClick={() => this.setState({ showProfileModal: true })}
-          className="circular ui icon button"
-        >
-          <i className="edit outline icon"></i>
-        </button>
-      )
-    }
-  };
-
-  renderUploadProfilebtn = () => {
-    if (this.checkOwnership()) {
-      return (
-        <button
-          onClick={() => this.setState({ showUploadProfileModal: true })}
-          className="circular ui icon button"
-        >
-          <i className="edit outline icon"></i>
-        </button>
-      )
-    }
-  }
-
   checkOwnership = () => {
     const { user, company } = this.props
     console.log('check here', company.owners && (company.owners.indexOf(user._id) > -1))
@@ -55,10 +29,10 @@ class Company extends React.Component {
     console.log('in company detail index')
     return (
       <div className="company-container">
-        <TopProfile checkOwnership={this.checkOwnership()}/>
-        <CompanyIntro/>
+        <TopProfile checkOwnership={this.checkOwnership} hideModal={this.hideModal}/>
+        <CompanyIntro renderEditbtn={this.renderEditbtn}/>
         <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }}/>
-        <Team checkOwnership={this.checkOwnership()}/>
+        <Team checkOwnership={this.checkOwnership()} renderEditbtn={this.renderEditbtn}/>
         <Events/>
       </div>
     )
