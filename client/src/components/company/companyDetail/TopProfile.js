@@ -67,12 +67,12 @@ class TopProfile extends React.Component {
                 Website
               </div>
             </div>
-            {companyEmail && <a className="info-link" href={`mailto:${companyEmail}`} rel="noreferrer" target='_blank'>
+            {companyEmail && <a className="info-link" href={`mailto:${companyEmail}`} rel="noopener noreferrer" target='_blank'>
               <i className="fa fa-envelope" aria-hidden="true"/>
             </a>}
             {socialLinksArr.map(s => (<span key={s}>
               {socialLinks[s] &&
-                <a className="info-link" href={socialLinks[s]} rel="noreferrer" target='_blank'>
+                <a className="info-link" rel="noopener noreferrer" href={socialLinks[s]} target='_blank'>
                   <i className={`fa fa-${s.toLowerCase()}`} aria-hidden="true"/>
                 </a>}
             </span>)
