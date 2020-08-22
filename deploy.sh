@@ -13,5 +13,5 @@ git push origin master
 
 echo ">>frontend deploy successfully"
 
-echo "|| client-> https://twstartups.github.io/twstartups/#/"
-echo "|| server-> https://dashboard.heroku.com/apps/twstartups/logs"
+echo "|| client-> https://twstartup.com"
+echo "|| server-> https://server.twstartup.com"
