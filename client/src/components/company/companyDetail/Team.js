@@ -8,14 +8,14 @@ class Team extends React.Component {
     if (exes && exes.length > 0) {
       return exes.map((exe, id) => {
         return (
-          <div className="exe" key={exe._id}>
+          <div className="exe col-sm-12 col-md-4" key={exe._id}>
             <ImageZone
-              className="executive"
+              className="executive circle"
               src={exe.image}
               type="executive"
               editable={this.props.checkOwnership}
               query={{ type: 'executive', companyId: compnayId, exeIndex: id }}
-              dimension={{ width: '300px', height: '300px' }}
+              dimension={{ width: '70%' }}
             />
             <div className="exe-title">{exe.title}CEO</div>
             <div className="exe-name">
@@ -23,12 +23,8 @@ class Team extends React.Component {
               {exe.lastName}
               Ceoooo Nameeee
             </div>
-            <a href={exe.link}>
-              <img
-                alt="executive"
-                className="linkedin-logo"
-                src={require('../../../assets/images/linedin.png')}
-              ></img>
+            <a className='info-link' href={exe.link}>
+              <i className='fa fa-linkedin'/>
             </a>
           </div>
         )
@@ -41,8 +37,8 @@ class Team extends React.Component {
     console.log('in Team', _id, executives)
     return (
       <div className="team-container">
-        <h2 className="team-title">Executive Team</h2>
-        <div className="team-group">
+        <h2 className="session-header">Executive Team</h2>
+        <div className="team-group row">
           {this.renderExecutive(executives, _id)}
         </div>
       </div>

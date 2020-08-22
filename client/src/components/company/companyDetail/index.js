@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import { fetchComp } from '../../../actions'
 import '../index.scss'
 import TopProfile from './TopProfile'
-import CompanyIntro from './CompanyIntro'
+import KeyPoints from './KeyPoints'
 import ImageZone from '../imageZone'
 import Team from './Team'
 import Events from './Events'
+import './style.scss'
 
 class Company extends React.Component {
   componentDidMount () {
@@ -30,11 +31,8 @@ class Company extends React.Component {
   renderUploadProfilebtn = () => {
     if (this.checkOwnership()) {
       return (
-        <button
-          onClick={() => this.setState({ showUploadProfileModal: true })}
-          className="circular ui icon button"
-        >
-          <i className="edit outline icon"></i>
+        <button onClick={() => this.setState({ showUploadProfileModal: true })} className='circular ui icon button'>
+          <i className='edit outline icon'/>
         </button>
       )
     }
@@ -47,6 +45,7 @@ class Company extends React.Component {
   }
 
   render () {
+    console.log('this.props.company', this.props.company)
     if (!this.props.company) {
       return <div>Loading</div>
     }
@@ -54,9 +53,10 @@ class Company extends React.Component {
     const { bannerImg, _id } = this.props.company
     console.log('in company detail index')
     return (
-      <div className="company-container">
+      <div className="component-details-component container">
         <TopProfile checkOwnership={this.checkOwnership()}/>
-        <CompanyIntro/>
+        <KeyPoints keyPoints={this.props.company.key_point}/>
+        <h2 className="session-header">Banner</h2>
         <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }} dimension={{ width: 400, height: 1000 }} style={{ maxWidth: '1000px', width: '100%' }}/>
         <Team checkOwnership={this.checkOwnership()}/>
         <Events/>

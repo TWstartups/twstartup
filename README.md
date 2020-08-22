@@ -6,13 +6,13 @@
   </p>
 </div>
 
-[![Build Status](https://travis-ci.com/TWstartups/twstartups.svg?branch=master)](https://travis-ci.com/TWstartups/twstartups)
+[![Build Status](https://travis-ci.com/TWstartups/twstartup.svg?branch=master)](https://travis-ci.com/TWstartups/twstartup)
 
 ## Initial Setup
 
 ```
-$ git clone git@github.com:TWstartups/twstartups.github.io.git
-$ cd twstartups
+$ git clone git@github.com:TWstartups/twstartup.github.io.git
+$ cd twstartup
 $ ./scripts/setup.sh
 ```
 

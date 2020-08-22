@@ -14,7 +14,7 @@ script:
 deploy:
   provider: pages
   local-dir: docs
-  repo: TWstartups/twstartups.github.io
+  repo: TWstartups/twstartup.github.io
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   keep-history: true
@@ -22,4 +22,4 @@ deploy:
     branch: master
   target-branch: master
   name: Travis Worker
-  email: twstartups.service@gmail.com
+  email: twstartup.service@gmail.com
