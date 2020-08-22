@@ -14,32 +14,6 @@ class Company extends React.Component {
     this.props.fetchComp(this.props.match.params.id)
   }
 
-  renderProfileEditbtn = () => {
-    if (this.checkOwnership()) {
-      return (
-        <button
-          onClick={() => this.setState({ showProfileModal: true })}
-          className="circular ui icon button"
-        >
-          <i className="edit outline icon"></i>
-        </button>
-      )
-    }
-  };
-
-  renderUploadProfilebtn = () => {
-    if (this.checkOwnership()) {
-      return (
-        <button
-          onClick={() => this.setState({ showUploadProfileModal: true })}
-          className="circular ui icon button"
-        >
-          <i className="edit outline icon"></i>
-        </button>
-      )
-    }
-  }
-
   checkOwnership = () => {
     const { user, company } = this.props
     console.log('check here', company.owners && (company.owners.indexOf(user._id) > -1))

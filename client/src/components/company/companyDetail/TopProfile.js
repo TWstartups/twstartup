@@ -6,7 +6,7 @@ import { fetchComp } from '../../../actions'
 
 class TopProfile extends React.Component {
   state = {
-    showProfileModal: false
+    showProfielModal: false
   }
 
   componentDidMount () {
@@ -15,23 +15,23 @@ class TopProfile extends React.Component {
     // this.props.fetchComp(this.props.match.params.id)
   }
 
-  hideModal = () => {
-    this.setState({
-      showProfileModal: false
-    })
-  }
-
-  renderProfileEditbtn = () => {
-    if (this.props.checkOwnership) {
+  renderEditbtn = () => {
+    if (this.props.checkOwnership()) {
       return (
         <button
-          onClick={() => this.setState({ showProfileModal: true })}
+          onClick={() => this.setState({ showProfielModal: true })}
           className="circular ui icon button"
         >
           <i className="edit outline icon"></i>
         </button>
       )
     }
+  }
+
+  hideModal = () => {
+    this.setState({
+      showProfielModal: false
+    })
   }
 
   render () {
@@ -53,7 +53,10 @@ class TopProfile extends React.Component {
           <div className="company-info">
             <div>
               {/* eslint-disable-next-line camelcase */}
-              <h1 className="company-name">{companyNameEn}</h1>
+              <div className="name-group">
+                <div className="company-name">{companyNameEn}</div>
+                <div className="edit-btn">{this.props.company && this.renderEditbtn()}</div>
+              </div>
               <div className="ui blue labels">
                 <div className="ui label">Happy</div>
                 <div className="ui label">Smart</div>
@@ -76,7 +79,6 @@ class TopProfile extends React.Component {
                 Contact
               </a>
             </div>
-            <div>{this.props.company && this.renderProfileEditbtn()}</div>
           </div>
         </div>
         {this.state.showProfileModal && (
