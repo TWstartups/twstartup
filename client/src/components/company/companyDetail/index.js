@@ -10,6 +10,7 @@ import Events from './Events'
 
 class Company extends React.Component {
   componentDidMount () {
+    console.log('going to fetch comp')
     this.props.fetchComp(this.props.match.params.id)
   }
 
@@ -30,7 +31,7 @@ class Company extends React.Component {
         <CompanyIntro checkOwnership={this.checkOwnership()}/>
         <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }} dimension={{ width: 400, height: 1000 }} style={{ maxWidth: '1000px', width: '100%' }}/>
         <Team checkOwnership={this.checkOwnership()}/>
-        <Events/>
+        <Events checkOwnership={this.checkOwnership()}/>
       </div>
     )
   }
