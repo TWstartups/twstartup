@@ -40,7 +40,7 @@ class EventCard extends React.Component {
             {memo}
           </div>
         </div>
-        {this.props.checkOwnership && <div className="delete-btn"><img src={require('../../../assets/images/delete_btn.svg')} onClick={this.deleteEvent}></img></div>}
+        {this.props.checkOwnership && <div className="delete-btn"><img alt="delete" src={require('../../../assets/images/delete_btn.svg')} onClick={this.deleteEvent}></img></div>}
       </div>
     )
   }
