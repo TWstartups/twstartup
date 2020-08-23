@@ -51,9 +51,6 @@ export default {
         name
       }
       console.log('userToSend', userToSend)
-      // send email!
-      SES.send(email, name)
-
       res.status(200).json({ token, user: userToSend })
     } catch (err) {
       console.log(err)
