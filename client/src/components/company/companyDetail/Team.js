@@ -10,6 +10,7 @@ class Team extends React.Component {
   }
 
   hideModal = () => {
+    console.log(this.props.company)
     this.setState({
       showTeamModal: false
     })

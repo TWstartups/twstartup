@@ -20,23 +20,23 @@ mongoose.connect(config.mongoose.uri, {
   .catch((err) => console.log(`MongoDB connection error: ${err}`))
 
 
-const originList = ['http://localhost:3000', 'https://twstartup.com']
-const coresOptions = {
-  origin: function (origin, callback) {
-    if (originList.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else if (origin === undefined) {
-      callback(null, true)// assume is postman
-    } else {
-      callback(new Error('Not allow by cors'))
-    }
-  },
-  credentials: true,
-  optionsSuccessStatus: 200
-}
+// const originList = ['http://localhost:3000', 'https://twstartup.com']
+// const coresOptions = {
+//   origin: function (origin, callback) {
+//     if (originList.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else if (origin === undefined) {
+//       callback(null, true)// assume is postman
+//     } else {
+//       callback(new Error('Not allow by cors'))
+//     }
+//   },
+//   credentials: true,
+//   optionsSuccessStatus: 200
+// }
 
 app.use(morgan('dev'))
-app.use(cors(coresOptions))
+app.use(cors())
 app.use(bodyParser.json())
 
 app.use('/', routers)
