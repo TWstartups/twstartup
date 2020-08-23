@@ -42,6 +42,50 @@ class ProfileForm extends React.Component {
           placeholder=""
           type="text"
         />
+        <div className="ui small header">Social Links</div>
+        <Field
+          name="facebook"
+          component={this.renderInput}
+          label="Facebook"
+          placeholder=""
+          type="text"
+        />
+        <Field
+          name="instagram"
+          component={this.renderInput}
+          label="Instagram"
+          placeholder=""
+          type="text"
+        />
+        <Field
+          name="linkedIn"
+          component={this.renderInput}
+          label="LinkedIn"
+          placeholder=""
+          type="text"
+        />
+        <Field
+          name="twitter"
+          component={this.renderInput}
+          label="Twitter"
+          placeholder=""
+          type="text"
+        />
+        <Field
+          name="angelList"
+          component={this.renderInput}
+          label="AngelList"
+          placeholder=""
+          type="text"
+        />
+        <Field
+          name="crunchbase"
+          component={this.renderInput}
+          label="Crunchbase"
+          placeholder=""
+          type="text"
+        />
+
         <button className='ui button' type="submit">Submit</button>
         <div className="ui button" onClick={() => this.props.hideModal('showProfielModal')}>cancel</div>
       </form>

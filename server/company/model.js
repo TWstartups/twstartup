@@ -78,12 +78,12 @@ const executiveSchema = new mongoose.Schema({
 })
 
 const socialLinkSchema = new mongoose.Schema({
-  facebook: { type: String, default: "facebook.com"},
-  instagram: { type: String, default: "instagram.com"},
-  linkedIn: { type: String, default: "linkedin.com"},
-  twitter: { type: String, default: "twitter.com"},
-  angelList: { type: String, default: "angellist.com"},
-  crunchbase:{ type: String, default:  "crunchbase.com"}
+  facebook: { type: String, default: "https://facebook.com"},
+  instagram: { type: String, default: "https://instagram.com"},
+  linkedIn: { type: String, default: "https://linkedin.com"},
+  twitter: { type: String, default: "https://twitter.com"},
+  angelList: { type: String, default: "https://angellist.com"},
+  crunchbase:{ type: String, default:  "https://crunchbase.com"}
 })
 
 const CompanySchema = mongoose.Schema({
@@ -155,7 +155,14 @@ const CompanySchema = mongoose.Schema({
     type: String,
     default: ""
   },
-  socialLinks: socialLinkSchema
+  socialLinks: {
+    facebook: { type: String, default: "https://facebook.com"},
+    instagram: { type: String, default: "https://instagram.com"},
+    linkedIn: { type: String, default: "https://linkedin.com"},
+    twitter: { type: String, default: "https://twitter.com"},
+    angelList: { type: String, default: "https://angellist.com"},
+    crunchbase:{ type: String, default:  "https://crunchbase.com"}
+  }
 })
 
 const Company = mongoose.model('Company', CompanySchema)

@@ -60,8 +60,10 @@ class Team extends React.Component {
     const { _id, executives } = this.props.company
     return (
       <div className="team-container">
-        <h2 className="session-header">Executive Team</h2>
-        {this.renderEditbtn()}
+        <div>
+          <h2 className="session-header">Executive Team</h2>
+          {this.renderEditbtn()}
+        </div>
         <div className="team-group row">
           {this.renderExecutive(executives, _id)}
         </div>

@@ -15,13 +15,6 @@ class KeyPointForm extends React.Component {
     return (
       <form className="ui form error" onSubmit={this.props.handleSubmit(this.props.onSubmit)}>
         <Field
-          name="introduction"
-          component={this.renderInput}
-          label="Company One liner"
-          placeholder=""
-          type="text"
-        />
-        <Field
           name="keyPoint_0"
           component={this.renderInput}
           label="Key Point"
