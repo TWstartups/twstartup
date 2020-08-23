@@ -12,7 +12,7 @@ class Events extends React.Component {
     if (this.props.company.events && this.props.company.events.length > 0) {
       const events = this.props.company.events
       return events.map(event => {
-        return <EventCard key={event._id} event={event}/>
+        return <EventCard key={event._id} event={event} checkOwnership={this.props.checkOwnership} compId={this.props.company._id}/>
       })
     }
   }
@@ -27,7 +27,6 @@ class Events extends React.Component {
         <div className="event-title">Event</div>
         <div className="event-group">
           {this.renderEventCard()}
-          <EventCard/>
           {this.props.checkOwnership &&
           <div className="event-add" onClick={() => this.setState({ showEventModal: true })}>
             Add New Event
