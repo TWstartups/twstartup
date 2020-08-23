@@ -77,6 +77,15 @@ const executiveSchema = new mongoose.Schema({
   }
 })
 
+const socialLinkSchema = new mongoose.Schema({
+  facebook: { type: String, default: "https://facebook.com"},
+  instagram: { type: String, default: "https://instagram.com"},
+  linkedIn: { type: String, default: "https://linkedin.com"},
+  twitter: { type: String, default: "https://twitter.com"},
+  angelList: { type: String, default: "https://angellist.com"},
+  crunchbase:{ type: String, default:  "https://crunchbase.com"}
+})
+
 const CompanySchema = mongoose.Schema({
   companyNameEn: {
     type: String,
@@ -147,12 +156,12 @@ const CompanySchema = mongoose.Schema({
     default: ""
   },
   socialLinks: {
-    facebook: "",
-    instagram: "",
-    linkedIn: "",
-    twitter: "",
-    angelList: "",
-    crunchbase: ""
+    facebook: { type: String, default: "https://facebook.com"},
+    instagram: { type: String, default: "https://instagram.com"},
+    linkedIn: { type: String, default: "https://linkedin.com"},
+    twitter: { type: String, default: "https://twitter.com"},
+    angelList: { type: String, default: "https://angellist.com"},
+    crunchbase:{ type: String, default:  "https://crunchbase.com"}
   }
 })
 

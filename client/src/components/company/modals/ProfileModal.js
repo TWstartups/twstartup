@@ -8,20 +8,26 @@ import _ from 'lodash'
 class ProfileModal extends React.Component {
   onSubmit = (formValues) => {
     console.log('formValues', formValues)
-
+    const socialLinks = _.pick(formValues, ['facebook', 'instagram', 'linkedIn', 'twitter', 'angelList', 'crunchbase'])
     const bodyToSend = _.pick(formValues, ['companyNameEn', 'companyEmail', 'website'])
-    console.log('tosend', bodyToSend)
-    this.props.editComp(formValues._id, bodyToSend)
+    console.log('tosend', { ...bodyToSend, socialLinks })
+    this.props.editComp(this.props.company._id, { ...bodyToSend, socialLinks })
     this.props.hideModal()
+  }
+
+  getInitialValue = () => {
+    const inputs = _.pick(this.props.company, ['companyNameEn', 'introduction', 'companyEmail', 'website', 'socialLinks'])
+    const initialValues = { ...inputs, facebook: inputs.socialLinks.facebook, instagram: inputs.socialLinks.instagram, linkedin: inputs.socialLinks.linkedIn, twitter: inputs.socialLinks.twitter, angelList: inputs.socialLinks.angelList, crunchbase: inputs.socialLinks.crunchbase }
+    return initialValues
   }
 
   render () {
     return ReactDOM.createPortal(
       <div onClick={() => this.props.hideModal()} className="ui dimmer modals visible active">
         <div onClick={(e) => e.stopPropagation() } className="ui standard modal visible active">
-          <div className="header">Edit Profile</div>
+          <div className="header">Edit Basic Profile</div>
           <div className="content">
-            <ProfileForm onSubmit={this.onSubmit} initialValues={this.props.company} hideModal={this.props.hideModal}/></div>
+            <ProfileForm onSubmit={this.onSubmit} initialValues={this.getInitialValue()} hideModal={this.props.hideModal}/></div>
         </div>
       </div>,
       document.querySelector('#modal')
