@@ -28,11 +28,7 @@ class CompanyIntro extends React.Component {
 
   renderList = (keyPoints = []) => {
     if (keyPoints.length > 0) {
-      return (<div className="key-points">
-        <div className='session-header'>Key points</div>
-        {this.renderEditbtn()}
-        {keyPoints.map((k, i) => <div className='key-point-item' key={i}>{k}</div>)}
-      </div>)
+      return keyPoints.map((k, i) => <div className='key-point-item' key={i}>{k}</div>)
     } else {
       return <div></div>
     }
@@ -41,9 +37,12 @@ class CompanyIntro extends React.Component {
   render () {
     return (
       <div className="intro-container">
-        <ul className="bullet-list">
+        <div className="key-points">
+          <div className="session-header">key points</div>
+          {this.renderEditbtn()}
           {this.props.company && this.renderList(this.props.company.keyPoints)}
-        </ul>
+        </div>
+
         {this.state.showIntroModal && <KeyPointModal hideModal={this.hideModal}/>}
       </div>
     )

@@ -52,7 +52,7 @@ class TopProfile extends React.Component {
       <div className="top-profile-container">
         <div className="">
           <div className="session" style={{ textAlign: 'center' }}>
-            <ImageZone className="company-img circle" src={logo} editable={this.props.checkOwnership} query={{ companyId: _id, type: 'logo' }} dimension={{ height: '100', width: '100' }} style={{ width: '250px' }}/>
+            <ImageZone className="company-img circle" src={logo} editable={this.props.checkOwnership} query={{ companyId: _id, type: 'logo' }} dimension={{ height: '250', width: '250' }} style={{ width: '250px' }}/>
           </div>
           <div className="session company-info">
             <div className="companyNameEn">{companyNameEn}{this.props.company && this.renderEditbtn()}</div>
