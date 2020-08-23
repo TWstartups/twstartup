@@ -56,7 +56,7 @@ class Company extends React.Component {
         <CompanyIntro checkOwnership={this.checkOwnership()}/>
         {/* <KeyPoints keyPoints={this.props.company.keyPoints}/> */}
         <h2 className="session-header">Banner</h2>
-        <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }} dimension={{ width: 400, height: 1000 }} style={{ maxWidth: '1000px', width: '100%' }}/>
+        <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }} dimension={{ width: 1000, height: 600 }} style={{ maxWidth: '1000px', width: '100%', height: '600px' }}/>
         <Team checkOwnership={this.checkOwnership()}/>
         <Events checkOwnership={this.checkOwnership()}/>
       </div>

@@ -39,7 +39,7 @@ class Team extends React.Component {
               type="executive"
               editable={this.props.checkOwnership}
               query={{ type: 'executive', companyId: compnayId, exeIndex: id }}
-              dimension={{ width: '70%' }}
+              dimension={{ width: '200', height: '200' }}
             />
             <div className="exe-title">{exe.title}</div>
             <div className="exe-name">

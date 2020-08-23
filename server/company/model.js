@@ -61,11 +61,11 @@ const executiveSchema = new mongoose.Schema({
   },
   firstName: {
     type: String,
-    default: ""
+    default: "John"
   },
   lastName: {
     type: String,
-    default: ""
+    default: "Dow"
   },
   link: {
     type: String,
@@ -73,14 +73,14 @@ const executiveSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: 'https://i.imgur.com/6WUcB60.jpg'
+    default: 'https://i.imgur.com/DyEHkEe.png'
   }
 })
 
 const CompanySchema = mongoose.Schema({
   companyNameEn: {
     type: String,
-    default: ""
+    default: "[Company Name]"
   },
   companyNameChi: {
     type: String,
@@ -88,22 +88,28 @@ const CompanySchema = mongoose.Schema({
   },
   introduction: {
     type: String,
-    default: ""
+    default: "One liner goes here. (limit to 15 words)"
   },
   website: {
     type: String,
-    default: ""
+    default: "https://www.google.com/"
   },
   pitch_deck: {
     typs: String
   },
   companyEmail: {
     type: String,
-    default: ""
+    default: "mycompany@gmail.com"
   },
   keyPoints: [{
     type: String,
-    default: ""
+    default: "Here comes the key bullet points 1"
+  },{
+    type: String,
+    default: "Here comes the key bullet points 2"
+  },{
+    type: String,
+    default: "Here comes the key bullet points 3"
   }],
   funding_status: {
     type: String,
@@ -115,7 +121,7 @@ const CompanySchema = mongoose.Schema({
   }],
   logo: {
     type: String,
-    default: "https://i.imgur.com/m5kOMUt.png"
+    default: "https://i.imgur.com/afZKccr.png"
   },
   events: [eventSchema],
   news: [newsSchema],
@@ -134,7 +140,7 @@ const CompanySchema = mongoose.Schema({
   executives: [executiveSchema],
   bannerImg: {
     type: String,
-    default: ""
+    default: "https://i.imgur.com/dB33xAg.png"
   },
   videoLink: {
     type: String,
