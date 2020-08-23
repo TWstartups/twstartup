@@ -19,6 +19,7 @@ mongoose.connect(config.mongoose.uri, {
   .then(() => console.log('MongoDB connected...'))
   .catch((err) => console.log(`MongoDB connection error: ${err}`))
 
+
 const originList = ['http://localhost:3000', 'https://twstartup.com']
 const coresOptions = {
   origin: function (origin, callback) {

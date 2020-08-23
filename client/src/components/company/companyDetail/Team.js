@@ -20,7 +20,7 @@ class Team extends React.Component {
       return (
         <button
           onClick={() => this.setState({ showTeamModal: true })}
-          className="circular ui icon button"
+          className="circular ui icon button yellow"
         >
           <i className="edit outline icon"></i>
         </button>
@@ -32,26 +32,22 @@ class Team extends React.Component {
     if (exes && exes.length > 0) {
       return exes.map((exe, id) => {
         return (
-          <div className="exe" key={exe._id}>
+          <div className="exe col-sm-12 col-md-4" key={exe._id}>
             <ImageZone
-              className="executive"
+              className="executive circle"
               src={exe.image}
               type="executive"
               editable={this.props.checkOwnership}
               query={{ type: 'executive', companyId: compnayId, exeIndex: id }}
-              dimension={{ width: '300px', height: '300px' }}
+              dimension={{ width: '70%' }}
             />
             <div className="exe-title">{exe.title}</div>
             <div className="exe-name">
               {exe.firstName}{' '}
               {exe.lastName}
             </div>
-            <a href={exe.link}>
-              <img
-                alt="executive"
-                className="linkedin-logo"
-                src={require('../../../assets/images/linedin.png')}
-              ></img>
+            <a className='info-link' href={exe.link}>
+              <i className='fa fa-linkedin'/>
             </a>
             {this.state.showTeamModal && <TeamModal hideModal={this.hideModal}/>}
           </div>
@@ -64,8 +60,9 @@ class Team extends React.Component {
     const { _id, executives } = this.props.company
     return (
       <div className="team-container">
-        <h2 className="team-title">Executive Team{this.renderEditbtn()}</h2>
-        <div className="team-group">
+        <h2 className="session-header">Executive Team</h2>
+        {this.renderEditbtn()}
+        <div className="team-group row">
           {this.renderExecutive(executives, _id)}
         </div>
       </div>

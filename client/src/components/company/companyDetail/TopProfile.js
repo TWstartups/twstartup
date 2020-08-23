@@ -4,6 +4,14 @@ import ImageZone from '../imageZone'
 import ProfileModal from '../modals/ProfileModal'
 import { fetchComp } from '../../../actions'
 
+// const socialLinkIcons = {
+//   facebook: 'facebook',
+//   instagram: 'instagram',
+//   linkedIn: 'linkedin',
+//   twitter: 'twitter',
+//   angelList: 'angellist'
+// }
+
 class TopProfile extends React.Component {
   state = {
     showProfileModal: false
@@ -14,7 +22,7 @@ class TopProfile extends React.Component {
       return (
         <button
           onClick={() => this.setState({ showProfileModal: true })}
-          className="circular ui icon button"
+          className="circular ui icon button yellow"
         >
           <i className="edit outline icon"></i>
         </button>
@@ -30,47 +38,43 @@ class TopProfile extends React.Component {
 
   render () {
     const {
-      companyEmail,
       companyNameEn,
+      introduction,
+      companyEmail,
       website,
+      socialLinks,
       logo,
       _id
     } = this.props.company
+    const socialLinksArr = Object.keys(socialLinks || {})
+    console.log(socialLinksArr)
     return (
       <div className="top-profile-container">
-        <div className="top-profile">
-          <div className="" style={{ textAlign: 'center' }}>
-            <ImageZone className="company-img" src={logo} editable={this.props.checkOwnership} query={{ companyId: _id, type: 'logo' }} dimension={{ width: '200px', height: '200px' }}/>
+        <div className="">
+          <div className="session" style={{ textAlign: 'center' }}>
+            <ImageZone className="company-img circle" src={logo} editable={this.props.checkOwnership} query={{ companyId: _id, type: 'logo' }} dimension={{ height: '100', width: '100' }} style={{ width: '250px' }}/>
           </div>
-          <div className="company-info">
+          <div className="session company-info">
+            <div className="companyNameEn">{companyNameEn}{this.props.company && this.renderEditbtn()}</div>
+
+            <div className="introduction">{introduction}</div>
             <div>
-              {/* eslint-disable-next-line camelcase */}
-              <div className="name-group">
-                <div className="company-name">{companyNameEn}</div>
-                <div className="edit-btn">{this.props.company && this.renderEditbtn()}</div>
-              </div>
-              <div className="ui blue labels">
-                <div className="ui label">Happy</div>
-                <div className="ui label">Smart</div>
-                <div className="ui label">Insane</div>
-                <div className="ui label">Exciting</div>
-              </div>
-            </div>
-            <div className="btn-group">
-              <div
-                className="ui teal button"
-                onClick={() => window.open(`${website}`)}
-              >
+              <div className="info-link highlight" onClick={() => window.open(website)}>
+                <i className="fa fa-globe" aria-hidden="true" />
                 Website
               </div>
-              <a
-                className="ui yellow button"
-                // eslint-disable-next-line camelcase
-                href={`mailto:${companyEmail}`}
-              >
-                Contact
-              </a>
             </div>
+            {companyEmail && <a className="info-link" href={`mailto:${companyEmail}`} rel="noopener noreferrer" target='_blank'>
+              <i className="fa fa-envelope" aria-hidden="true"/>
+            </a>}
+            {socialLinksArr.map(s => (<span key={s}>
+              {socialLinks[s] &&
+                <a className="info-link" rel="noopener noreferrer" href={socialLinks[s]} target='_blank'>
+                  <i className={`fa fa-${s.toLowerCase()}`} aria-hidden="true"/>
+                </a>}
+            </span>)
+            )}
+            <div></div>
           </div>
         </div>
         {this.state.showProfileModal && <ProfileModal hideModal={this.hideModal} />}

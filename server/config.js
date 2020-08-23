@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
 export default {
   jwt_secret: process.env.JWT_SECRET || 'jwt_secret',
   mongoose: {
-    uri: process.env.MONGODB_URI || 'mongodb://localhost/twstartups'
+    uri: process.env.MONGODB_URI || 'mongodb://localhost/twstartup'
   },
   twilio: {
     sid: process.env.TWILIO_SID,

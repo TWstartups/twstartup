@@ -12,7 +12,7 @@ class CompanyIntro extends React.Component {
       return (
         <button
           onClick={() => this.setState({ showIntroModal: true })}
-          className="circular ui icon button"
+          className="circular ui icon button yellow"
         >
           <i className="edit outline icon"></i>
         </button>
@@ -26,21 +26,23 @@ class CompanyIntro extends React.Component {
     })
   }
 
-  renderList = (keyPoints) => {
-    return keyPoints.map(key => {
-      return <ul key={key}>{key}</ul>
-    })
+  renderList = (keyPoints = []) => {
+    if (keyPoints.length > 0) {
+      return (<div className="key-points">
+        <div className='session-header'>Key points</div>
+        {this.renderEditbtn()}
+        {keyPoints.map((k, i) => <div className='key-point-item' key={i}>{k}</div>)}
+      </div>)
+    } else {
+      return <div></div>
+    }
   }
 
   render () {
     return (
       <div className="intro-container">
-        <div>
-          <div className="one-liner">{this.props.company.introduction}</div>
-          {this.renderEditbtn()}
-        </div>
         <ul className="bullet-list">
-          {(this.props.company && this.props.company.keyPoints) && this.renderList(this.props.company.keyPoints)}
+          {this.props.company && this.renderList(this.props.company.keyPoints)}
         </ul>
         {this.state.showIntroModal && <KeyPointModal hideModal={this.hideModal}/>}
       </div>
