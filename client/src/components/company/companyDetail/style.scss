@@ -147,17 +147,39 @@
     .event-group {
       display: flex;
       flex-direction: column;
+      .event-add {
+        background-color: #f0f0f0;
+        padding:30px;
+        border-radius: 20px;
+        text-align: center;
+        font-weight: bold;
+        font-size:1.5rem;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        &:hover {
+          background-color: darken(#f0f0f0, 5);
+        }
+      }
+      .event {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        margin-bottom:20px;
+      }
       .event-card {
+        width: 100%;
         cursor: pointer;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        background-color: #FAFAFA;
+        background-color: #f0f0f0;
         padding:30px;
         border-radius: 20px;
         align-items: center;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
         &:hover {
-          box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+          background-color: darken(#f0f0f0, 5);
         }
         .location {
           font-size:24px;
@@ -219,6 +241,12 @@
         .event-note {
 
         }
+
+      }
+      .delete-btn {
+        position: relative;
+        margin-left: 10px;
+        cursor: pointer;
       }
     }
   }
@@ -226,3 +254,24 @@
 
 
 
+#modal {
+  .ui.dimmer.modals.visible.active {
+    position: fixed;
+    background-color: rgba(43,43,43,0.7);
+    backdrop-filter: blur(6px) !important;
+  }
+  .ui.standard.modal.visible.active {
+    margin: 20vh auto;
+    overflow-y: scroll;
+  }
+  .team-modal {
+    width: 600px;
+    max-width: 600px !important;
+    max-height:60vh;
+  }
+  .event-modal {
+    width: 600px;
+    max-width: 600px !important;
+    max-height:60vh;
+  }
+}

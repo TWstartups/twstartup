@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 import { fetchComp } from '../../../actions'
 import '../index.scss'
 import TopProfile from './TopProfile'
-import KeyPoints from './KeyPoints'
 import ImageZone from '../imageZone'
+import CompanyIntro from './CompanyIntro'
 import Team from './Team'
 import Events from './Events'
 import './style.scss'
 
 class Company extends React.Component {
   componentDidMount () {
-    console.log(this.props)
+    console.log('going to fetch comp')
     this.props.fetchComp(this.props.match.params.id)
   }
 
@@ -40,7 +40,6 @@ class Company extends React.Component {
 
   checkOwnership = () => {
     const { user, company } = this.props
-    console.log('check here', company.owners && (company.owners.indexOf(user._id) > -1))
     return user.type === 'super' || ((user._id && company.owners) && (company.owners.indexOf(user._id) > -1))
   }
 
@@ -51,15 +50,15 @@ class Company extends React.Component {
     }
     // eslint-disable-next-line camelcase
     const { bannerImg, _id } = this.props.company
-    console.log('in company detail index')
     return (
       <div className="component-details-component container">
         <TopProfile checkOwnership={this.checkOwnership()}/>
-        <KeyPoints keyPoints={this.props.company.key_point}/>
+        <CompanyIntro checkOwnership={this.checkOwnership()}/>
+        {/* <KeyPoints keyPoints={this.props.company.keyPoints}/> */}
         <h2 className="session-header">Banner</h2>
         <ImageZone className="banner-img" src={bannerImg} editable={this.checkOwnership()} query={{ companyId: _id, type: 'bannerImg' }} dimension={{ width: 400, height: 1000 }} style={{ maxWidth: '1000px', width: '100%' }}/>
         <Team checkOwnership={this.checkOwnership()}/>
-        <Events/>
+        <Events checkOwnership={this.checkOwnership()}/>
       </div>
     )
   }

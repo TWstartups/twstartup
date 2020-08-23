@@ -101,7 +101,10 @@ const CompanySchema = mongoose.Schema({
     type: String,
     default: ""
   },
-  key_point: [""],
+  keyPoints: [{
+    type: String,
+    default: ""
+  }],
   funding_status: {
     type: String,
     default: ""

@@ -1,4 +1,5 @@
 import Company from './model'
+import _ from 'lodash'
 
 export default {
   create: async (req, res) => {
@@ -9,7 +10,9 @@ export default {
     const toEdit = req.body
     console.log(toEdit)
     try {
+      console.log('helpoooo')
       const editedCompany = await Company.findByIdAndUpdate(req.params.id, toEdit, { new: true })
+      console.log('edit company', editedCompany)
       res.status(200).json({ company: editedCompany })
     } catch (err) {
       console.log(err)
@@ -57,6 +60,44 @@ export default {
     } catch (err) {
       res.status(500).json({ message: 'something went wrong when saving the image' })
     }
+  },
+  addEvent: async (req, res) => {
+    console.log('in add event')
+    const toEdit = req.body
+    console.log(toEdit)
+    try {
+      console.log('helpoooo')
+      const editedCompany = await Company.findById(req.params.id)
+      editedCompany.events.push(toEdit)
+      await editedCompany.save()
+      const updatedCompany = await Company.findById(req.params.id)
+      console.log('edit company', updatedCompany)
+      res.status(200).json({ company: updatedCompany })
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ message: 'Somthing went wrong when adding event' })
+    }
+  },
+  deleteEvent: async (req, res) => {
+    console.log('delete event')
+    try {
+      console.log('start')
+      const companyToUpdate = await Company.findById(req.params.compId)
+      const newEvents = companyToUpdate.events
+      for (let i = 0; i < newEvents.length; i++) {
+        const event = newEvents[i];
+        if (event._id == req.params.eventId) {
+          newEvents.splice(i,1)
+        }
+      }
+      console.log(newEvents)
+      companyToUpdate.events = newEvents
+      await companyToUpdate.save()
+      const updatedCompany = await Company.findById(req.params.compId)
+      res.status(200).json({ company: updatedCompany })
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ message: 'Somthing went wrong when deleting Event' })
+    }
   }
-
 }

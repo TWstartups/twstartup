@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS, APPROVE_CANDI, FETCH_COMPS, FETCH_COMP, EDIT_COMP } from './types'
+import { SIGN_UP, LOG_IN, LOG_OUT, ERR_MSG_RESET, FETCH_USER, CREATE_CANDI, FETCH_CANDI, FETCH_CANDIS, APPROVE_CANDI, FETCH_COMPS, FETCH_COMP, EDIT_COMP, ADD_EVENT, DELETE_EVENT } from './types'
 import privateAPI from '../apis/private'
 import publicAPI from '../apis/public'
 import history from '../history'
@@ -60,7 +60,7 @@ export const fetchUser = () => async dispatch => {
       payload: response.data
     })
   } catch (err) {
-    console.log(err.response.data.message)
+    console.log(err)
   }
 }
 
@@ -87,7 +87,6 @@ export const createCandi = formValues => async dispatch => {
 }
 
 export const fetchCandi = (candidateId) => async dispatch => {
-  console.log('candiId', candidateId)
   try {
     const response = await privateAPI.get(`/api/candidate/${candidateId}`)
     dispatch({
@@ -95,7 +94,7 @@ export const fetchCandi = (candidateId) => async dispatch => {
       payload: response.data
     })
   } catch (err) {
-    if (err.response.status === 403) {
+    if (err.response && err.response.status === 403) {
       window.location = '#/login'
     }
     dispatch({
@@ -155,10 +154,8 @@ export const fetchComps = () => async dispatch => {
 }
 
 export const fetchComp = (id) => async dispatch => {
-  console.log('company Id in fetch Comp', id)
   try {
     const response = await publicAPI.get(`/company/${id}`)
-    console.log('comapny', response.data)
     dispatch({
       type: FETCH_COMP,
       payload: response.data
@@ -172,19 +169,53 @@ export const fetchComp = (id) => async dispatch => {
   }
 }
 
-export const editComp = (id, formValues) => async dispatch => {
-  try {
-    const response = await privateAPI.put(`/api/company/edit/${id}`, formValues)
-    console.log(response.data)
-    dispatch({
-      type: EDIT_COMP,
-      payload: response.data
+export const editComp = (id, formValues) => (dispatch) => {
+  return privateAPI.put(`/api/company/edit/${id}`, formValues)
+    .then(res => {
+      dispatch({
+        type: EDIT_COMP,
+        payload: res.data
+      })
     })
-  } catch (err) {
-    console.log(err)
-    dispatch({
-      type: EDIT_COMP,
-      payload: { err: err.response.data.message }
+    .catch(err => {
+      console.log(err)
+      dispatch({
+        type: EDIT_COMP,
+        payload: { err: err.response.data.message }
+      })
     })
-  }
+}
+
+export const addEvent = (id, formValues) => (dispatch) => {
+  return privateAPI.put(`/api/company/addEvent/${id}`, formValues)
+    .then(res => {
+      dispatch({
+        type: ADD_EVENT,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      dispatch({
+        type: ADD_EVENT,
+        payload: { err: err.response.data.message }
+      })
+    })
+}
+
+export const deleteEvent = (compId, eventId) => (dispatch) => {
+  return privateAPI.delete(`/api/company/deleteEvent/${compId}/${eventId}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_EVENT,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      dispatch({
+        type: DELETE_EVENT,
+        payload: { err: err.response.data.message }
+      })
+    })
 }

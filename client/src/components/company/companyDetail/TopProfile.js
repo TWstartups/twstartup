@@ -14,29 +14,25 @@ import { fetchComp } from '../../../actions'
 
 class TopProfile extends React.Component {
   state = {
-    showProfielModal: false
-  }
-
-  componentDidMount () {
-    console.log('fetch in team')
-    console.log(this.props)
-    // this.props.fetchComp(this.props.match.params.id)
+    showProfileModal: false
   }
 
   renderEditbtn = () => {
-    if (this.props.checkOwnership()) {
+    if (this.props.checkOwnership) {
       return (
         <button
           onClick={() => this.setState({ showProfileModal: true })}
           className="circular ui icon button yellow"
-        ><i className="edit outline icon" /></button>
+        >
+          <i className="edit outline icon"></i>
+        </button>
       )
     }
   }
 
   hideModal = () => {
     this.setState({
-      showProfielModal: false
+      showProfileModal: false
     })
   }
 
@@ -59,7 +55,8 @@ class TopProfile extends React.Component {
             <ImageZone className="company-img circle" src={logo} editable={this.props.checkOwnership} query={{ companyId: _id, type: 'logo' }} dimension={{ height: '100', width: '100' }} style={{ width: '250px' }}/>
           </div>
           <div className="session company-info">
-            <div className="companyNameEn">{companyNameEn}</div>
+            <div className="companyNameEn">{companyNameEn}{this.props.company && this.renderEditbtn()}</div>
+
             <div className="introduction">{introduction}</div>
             <div>
               <div className="info-link highlight" onClick={() => window.open(website)}>
@@ -77,12 +74,10 @@ class TopProfile extends React.Component {
                 </a>}
             </span>)
             )}
-            <div>{this.props.company && this.renderProfileEditbtn()}</div>
+            <div></div>
           </div>
         </div>
-        {this.state.showProfileModal && (
-          <ProfileModal hideModal={this.hideModal} />
-        )}
+        {this.state.showProfileModal && <ProfileModal hideModal={this.hideModal} />}
       </div>
     )
   }
