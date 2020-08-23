@@ -19,7 +19,7 @@ class ProfileModal extends React.Component {
     return ReactDOM.createPortal(
       <div onClick={() => this.props.hideModal()} className="ui dimmer modals visible active">
         <div onClick={(e) => e.stopPropagation() } className="ui standard modal visible active">
-          <div className="header">Edit Profile</div>
+          <div className="header">Edit Basic Profile</div>
           <div className="content">
             <ProfileForm onSubmit={this.onSubmit} initialValues={this.props.company} hideModal={this.props.hideModal}/></div>
         </div>

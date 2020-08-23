@@ -22,6 +22,13 @@ class ProfileForm extends React.Component {
           type="text"
         />
         <Field
+          name="introduction"
+          component={this.renderInput}
+          label="One liner"
+          placeholder=""
+          type="text"
+        />
+        <Field
           name="companyEmail"
           component={this.renderInput}
           label="Contact Email"
