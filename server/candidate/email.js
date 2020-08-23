@@ -34,9 +34,9 @@ export default {
           Data: 'You are approved'
         }
       },
-      Source: 'twstartup.service@gmail.com', /* required */
+      Source: 'twstartups.service@gmail.com', /* required */
       ReplyToAddresses: [
-        'twstartup.service@gmail.com'
+        'twstartups.service@gmail.com'
         /* more items */
       ]
     }).promise()
