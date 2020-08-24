@@ -1,6 +1,6 @@
 
 export default {
-  getHTML: (username) => {
+  getHTML: (username, compId) => {
     return `<html>
     <head>
       <title></title>
