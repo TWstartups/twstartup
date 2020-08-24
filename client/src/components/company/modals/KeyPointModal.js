@@ -23,7 +23,7 @@ class KeyPointModal extends React.Component {
 
   render () {
     return ReactDOM.createPortal(
-      <div onClick={() => this.props.hideModal()} className="ui dimmer modals visible active">
+      <div className="ui dimmer modals visible active">
         <div onClick={(e) => e.stopPropagation() } className="ui standard modal visible active keyPoint-modal">
           <div className="header">Key Points</div>
           <div className="content">
