@@ -42,11 +42,12 @@ class Team extends React.Component {
               query={{ type: 'executive', companyId: compnayId, exeIndex: id }}
               dimension={{ width: '200', height: '200' }}
             />
-            <div className="exe-title">{exe.title}</div>
+
             <div className="exe-name">
               {exe.firstName}{' '}
               {exe.lastName}
             </div>
+            <div className="exe-title">{exe.title}</div>
             <a className='info-link' href={exe.link}>
               <i className='fa fa-linkedin'/>
             </a>

@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt'
 import User from './model'
 import JWT from './jwt'
-import SES from '../candidate/email'
 
 require('dotenv').config()
 
