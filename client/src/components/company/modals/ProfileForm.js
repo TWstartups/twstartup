@@ -42,7 +42,7 @@ class ProfileForm extends React.Component {
           placeholder=""
           type="text"
         />
-        <div className="ui small header">Social Links</div>
+        <div className="ui small header">Social<br/> Links</div>
         <Field
           name="facebook"
           component={this.renderInput}
