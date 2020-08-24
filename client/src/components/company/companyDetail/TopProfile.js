@@ -46,6 +46,7 @@ class TopProfile extends React.Component {
       logo,
       _id
     } = this.props.company
+    console.log('in top profile', introduction)
     const socialLinksArr = Object.keys(socialLinks || {})
     console.log(socialLinksArr)
     return (
