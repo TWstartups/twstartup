@@ -9,7 +9,7 @@ class ProfileModal extends React.Component {
   onSubmit = (formValues) => {
     console.log('formValues', formValues)
     const socialLinks = _.pick(formValues, ['facebook', 'instagram', 'linkedIn', 'twitter', 'angelList', 'crunchbase'])
-    const bodyToSend = _.pick(formValues, ['companyNameEn', 'companyEmail', 'website'])
+    const bodyToSend = _.pick(formValues, ['companyNameEn', 'companyEmail', 'website', 'introduction'])
     console.log('tosend', { ...bodyToSend, socialLinks })
     this.props.editComp(this.props.company._id, { ...bodyToSend, socialLinks })
     this.props.hideModal()
