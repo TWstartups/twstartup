@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import User from './model'
 import JWT from './jwt'
+import Email from '../candidate/email'
 
 require('dotenv').config()
 
@@ -49,6 +50,7 @@ export default {
         type,
         name
       }
+      await Email.send(email, name, 'noId')
       console.log('userToSend', userToSend)
       res.status(200).json({ token, user: userToSend })
     } catch (err) {

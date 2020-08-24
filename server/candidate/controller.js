@@ -78,9 +78,7 @@ export default {
 
       const sendToName = foundCandi.applicant.name
       const email = foundCandi.applicant.email
-      if (process.env.NODE_ENV === 'production') {
-        await Email.send(email, sendToName)
-      }
+     
       try {
         const updatedCandi = await Candidate.findByIdAndUpdate(req.params.id, { approve_status: true, approver: req.body.approverId }, { new: true })
         const allCandidate = await Candidate.find().populate('approver')
@@ -91,6 +89,10 @@ export default {
         createdComp.executives.push({}, {}, {})
         await createdComp.save()
         await User.findByIdAndUpdate(updatedCandi.applicant)
+        const compId = createdComp._id
+        if (process.env.NODE_ENV === 'production') {
+          await Email.send(email, sendToName, compId)
+        }
         try {
           console.log('applicantId', foundCandi.applicant._id)
           res.status(200).json({ candidates: allCandidate, candidate: updatedCandi })

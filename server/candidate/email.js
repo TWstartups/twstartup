@@ -9,8 +9,8 @@ AWS.config.update({
 })
 
 export default {
-  send: (toEmail, name) => {
-    const html = template.getHTML(name)
+  send: (toEmail, name, compId) => {
+    const html = template.getHTML(name,compId)
     return new AWS.SES({ apiVersion: '2010-12-01' }).sendEmail({
       Destination: { /* required */
         ToAddresses: [
