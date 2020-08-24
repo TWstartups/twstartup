@@ -1,6 +1,7 @@
 import Company from './model'
 import _ from 'lodash'
 
+
 export default {
   create: async (req, res) => {
     res.status(200)
